@@ -1,12 +1,18 @@
+import('people.pl').
 
-person(stasa).
 
 b12_check(stasa, deficient).
+b12_check(petar, normal).
+
+folic_acid_check(petar, deficient).
 folic_acid_check(stasa, normal).
-number_of_neutrophilis(stasa, decreased).
+
 blood_sugar_level(stasa, 200).
-genetics(stasa, [diabetes, cardio_disease]).
+blood_sugar_level(petar, 150).
+
+
 symptoms(person, list_of_symptoms).
+
 
 
 disease(anemia,[fatigue, weakness, pale_skin, breathing_difficulties]).
@@ -45,7 +51,7 @@ diagnosis(X, pernicious_anemia) :-
 
 
 diagnosis(X, diabetes) :-
-    blood_sugar_level(X,P1), P1 > 197;
+    blood_sugar_level(X,P1), P1 > 197,
     genetics(X, Y), member(diabetes, Y).
 
 
