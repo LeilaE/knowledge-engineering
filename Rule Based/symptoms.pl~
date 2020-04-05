@@ -41,8 +41,8 @@ additional_test(symptoms(X, S), blood_sugar_level) :-
 
 diagnosis(X, pernicious_anemia) :-
     b12_check(X, P1), P1 = deficient;
-    folic_acid_check(X, P2), P2 = deficient.
-
+    folic_acid_check(X, P2), P2 = deficient;
+    number_of_neutrophils(X, P3), P3 = decreased.
 
 diagnosis(X, diabetes) :-
     blood_sugar_level(X,P1), P1 > 197;
