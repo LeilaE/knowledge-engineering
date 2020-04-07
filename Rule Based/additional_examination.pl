@@ -1,7 +1,7 @@
 % Additional examination suggestions
 % Name of examination and a list of symptoms it is suggested for
 % additional_test(symptoms(person_name, symptom_list), test_name) -> test_name if symptom_list contained in disease
-% confirmed_diagnosis(person_name, X) X -> confirmed_disease_name based on tests
+% confirmed_diagnosis(symptoms(person_name, list_of_symptoms), X) X -> confirmed_disease_name based on tests
 % test_name(person_name, test_parameter).
 
 import('symptoms.pl').
@@ -23,7 +23,7 @@ additional_test(symptoms(X, S), folic_acid_check) :-
 
 additional_test(symptoms(X, S), number_of_neutrophils) :-
     disease(anemia, S2), contains(S2, S),  person(X).
-Gestational diabetes
+
 additional_test(symptoms(X, S), blood_sugar_level) :-
     disease(diabetes, S2), contains(S2, S), person(X) .
 
