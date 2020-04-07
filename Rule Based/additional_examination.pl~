@@ -23,7 +23,7 @@ additional_test(symptoms(X, S), folic_acid_check) :-
 
 additional_test(symptoms(X, S), number_of_neutrophils) :-
     disease(anemia, S2), contains(S2, S),  person(X).
-Gestational diabetes
+
 additional_test(symptoms(X, S), blood_sugar_level) :-
     disease(diabetes, S2), contains(S2, S), person(X) .
 
@@ -52,7 +52,7 @@ confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
     genetics(X, Y), member(diabetes, Y).
 
 
-confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
+confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
     disease(diabetes, S2), contains(S2, S), person(X),
     pregnant(X),
     blood_sugar_level(X,P1), P1  = high;
