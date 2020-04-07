@@ -1,9 +1,5 @@
 % Treatment suggestions
-% Name of the treatment and a list of diseases it is suggested for
-% treatment_for(disease_name, [tre1, tre2, tre3...])
-% treatment_for(disease_name, X) -> X is treatments
-
-
+% treatment_for([confirmed_disease_name], X) -> X = [tre1, tre2,...]
 
 treatment(iron_pills, [iron-deficiency_anemia]).
 treatment(diet, [iron-deficiency_anemia, diabetes_type_1, diabetes_type_2, gestational_diabetes]).
