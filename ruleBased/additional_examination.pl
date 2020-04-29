@@ -4,7 +4,7 @@
 % confirmed_diagnosis(symptoms(person_name, list_of_symptoms), X) X -> confirmed_disease_name based on tests
 % test_name(person_name, test_parameter).
 
-import('symptoms.pl').
+person(stasa).
 
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
