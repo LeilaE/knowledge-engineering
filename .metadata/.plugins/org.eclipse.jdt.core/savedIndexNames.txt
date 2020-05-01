@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\Stasa\Desktop\inzenjering znanja\projekat\knowledge-engineering\.metadata\.plugins\org.eclipse.jdt.core
+2971701134.index
+2264365920.index

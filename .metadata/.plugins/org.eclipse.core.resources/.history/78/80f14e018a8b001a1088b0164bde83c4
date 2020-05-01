@@ -1,0 +1,83 @@
+package windows;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class HomePage {
+
+	private JFrame frame;
+	private JTextField txtImePacijenta;
+	private JTextField txtPrezimePacijenta;
+	private JTextField txtDatumRodjenja;
+	private JTextField txtSimptomi;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					HomePage window = new HomePage();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public HomePage() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 773, 483);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		txtImePacijenta = new JTextField();
+		txtImePacijenta.setText("Ime pacijenta");
+		txtImePacijenta.setBounds(71, 58, 96, 19);
+		frame.getContentPane().add(txtImePacijenta);
+		txtImePacijenta.setColumns(10);
+		
+		txtPrezimePacijenta = new JTextField();
+		txtPrezimePacijenta.setText("Prezime pacijenta");
+		txtPrezimePacijenta.setBounds(71, 99, 96, 19);
+		frame.getContentPane().add(txtPrezimePacijenta);
+		txtPrezimePacijenta.setColumns(10);
+		
+		txtDatumRodjenja = new JTextField();
+		txtDatumRodjenja.setText("Datum rodjenja");
+		txtDatumRodjenja.setBounds(71, 142, 96, 19);
+		frame.getContentPane().add(txtDatumRodjenja);
+		txtDatumRodjenja.setColumns(10);
+		
+		JButton btnPronadjiDijagnozu = new JButton("Pronadji dijagnozu");
+		btnPronadjiDijagnozu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnPronadjiDijagnozu.setBounds(71, 246, 133, 56);
+		frame.getContentPane().add(btnPronadjiDijagnozu);
+		
+		txtSimptomi = new JTextField();
+		txtSimptomi.setText("simptomi");
+		txtSimptomi.setBounds(71, 188, 96, 19);
+		frame.getContentPane().add(txtSimptomi);
+		txtSimptomi.setColumns(10);
+	}
+}
