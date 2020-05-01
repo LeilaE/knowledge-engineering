@@ -71,19 +71,3 @@ genetics(srdjan, []).
 
 pregnant(ana).
 pregnant(masa).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
