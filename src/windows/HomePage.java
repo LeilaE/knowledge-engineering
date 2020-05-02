@@ -56,6 +56,7 @@ public class HomePage {
 	private JList deseasesList;
 	
 	private JButton btnAdditionalTests;
+	private JButton btnGetInitalDiagnosis;
 
 	/**
 	 * Launch the application.
@@ -118,6 +119,8 @@ public class HomePage {
 		showPatients();
 		
 		addSymptoms();
+		
+		initialDiagnosis();
 		
 		additionalTests();
 	}
@@ -210,7 +213,7 @@ public class HomePage {
 				      System.out.println(simptomi);
 				    }		
 				 
-				 initialDiagnosis();
+				 btnGetInitalDiagnosis.setVisible(true);
 				 
 			}
 
@@ -226,21 +229,28 @@ public class HomePage {
 		
     	
 		//Button 
-		JButton btnGetInitalDiagnosis = new JButton("Get Inital Diagnosis");
+		btnGetInitalDiagnosis = new JButton("Get Inital Diagnosis");
 		
 		btnGetInitalDiagnosis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelDeseases.setVisible(true);
+				//panelDeseases.setVisible(true);
 				btnAdditionalTests.setVisible(true);
+				
+				showDeseases();
 			}
 		});
 		
 		btnGetInitalDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnGetInitalDiagnosis.setBounds(125, 320, 200, 40);
 		panel_1.add(btnGetInitalDiagnosis);
+		btnGetInitalDiagnosis.setVisible(false);
 		
-		
-		//JLista 
+	   
+	}
+    
+    private void showDeseases() {
+    	//JLista 
+		System.out.println(person);
 		JIPQuery query = engine.openSynchronousQuery("suggest_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
 	    ArrayList<String> niz= new ArrayList<String>();
 		JIPTerm solution;
@@ -268,9 +278,8 @@ public class HomePage {
 		deseasesList.setLayoutOrientation(JList.VERTICAL);
 		panelDeseases.add(scrollPaneDeseases);
 	    panel_1.add(panelDeseases);
-	    panelDeseases.setVisible(false);
-	   
-	}
+	    //panelDeseases.setVisible(false);
+    }
     
     private void additionalTests() {
     	
