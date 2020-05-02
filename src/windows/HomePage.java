@@ -55,7 +55,17 @@ public class HomePage {
 	private JScrollPane scrollPaneDeseases = new JScrollPane();
 	private JList deseasesList;
 	
-	private JButton btnAdditionalTests;
+	private JPanel panelAdditionalTests = new JPanel();
+	private JScrollPane scrollPaneTests = new JScrollPane();
+	private JList testsList;
+	
+	private JButton btnAdditionalTests= new JButton();
+	private JButton btnGetInitalDiagnosis;
+	
+	private JLabel lblAdditionalTests= new JLabel();
+	
+	
+	
 
 	/**
 	 * Launch the application.
@@ -87,6 +97,7 @@ public class HomePage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+	
 		frmExamination = new JFrame();
 		frmExamination.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		frmExamination.setTitle("Expert System");
@@ -119,11 +130,15 @@ public class HomePage {
 		
 		addSymptoms();
 		
-		additionalTests();
+		initialDiagnosis();
+		
+		
 	}
 	
 	
 	
+	
+
 	private void showPatients() {
 		
 		JIPQuery query = engine.openSynchronousQuery("person(X)");
@@ -202,22 +217,30 @@ public class HomePage {
 								
 				 //uzmi selektovane simptome
 				 int[] selectedIx = symptomsList.getSelectedIndices();
-				
+			
 				 simptomi.clear(); 
 				 for (int i = 0; i < selectedIx.length; i++) {
 				      Object sel = symptomsList.getModel().getElementAt(selectedIx[i]);
 				      simptomi.add(sel.toString());
 				      System.out.println(simptomi);
-				    }		
+				    }	
 				 
-				 initialDiagnosis();
+				 btnGetInitalDiagnosis.setVisible(true);
 				 
+				
+			
+				 panelAdditionalTests.setVisible(false);
+				 btnAdditionalTests.setVisible(false);
+				 lblAdditionalTests.setVisible(false);
+				 panelDeseases.setVisible(false);
+			
 			}
 
 		});
 		
 		btnConfirmSimptoms.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnConfirmSimptoms.setBounds(125, 265, 200, 40);
+		btnConfirmSimptoms.setBounds(125, 271, 201, 40);
+		
 		panel_1.add(btnConfirmSimptoms);
 					
 	}
@@ -226,21 +249,26 @@ public class HomePage {
 		
     	
 		//Button 
-		JButton btnGetInitalDiagnosis = new JButton("Get Inital Diagnosis");
+		btnGetInitalDiagnosis = new JButton("Get Inital Diagnosis");
 		
 		btnGetInitalDiagnosis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelDeseases.setVisible(true);
-				btnAdditionalTests.setVisible(true);
+				
+				 additionalTests();
+				showDeseases();
+				
 			}
 		});
 		
 		btnGetInitalDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnGetInitalDiagnosis.setBounds(125, 320, 200, 40);
 		panel_1.add(btnGetInitalDiagnosis);
-		
-		
-		//JLista 
+		btnGetInitalDiagnosis.setVisible(false);
+    }
+    private void showDeseases() {
+    	//JLista 
+		System.out.println(person);
 		JIPQuery query = engine.openSynchronousQuery("suggest_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
 	    ArrayList<String> niz= new ArrayList<String>();
 		JIPTerm solution;
@@ -263,21 +291,89 @@ public class HomePage {
 	    
 	  	
 		//Panel i skroler
-        panelDeseases.setBounds(350, 20, 310, 100);
+	    
+        panelDeseases.setBounds(541, 20, 310, 100);
 		scrollPaneDeseases.setViewportView(deseasesList);
 		deseasesList.setLayoutOrientation(JList.VERTICAL);
 		panelDeseases.add(scrollPaneDeseases);
 	    panel_1.add(panelDeseases);
-	    panelDeseases.setVisible(false);
+	    
+	    
+	    
 	   
-	}
-    
+    }
+		
+		
     private void additionalTests() {
-    	
-    	btnAdditionalTests = new JButton("Additional tests");
-		btnAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnAdditionalTests.setBounds(650, 80, 180, 30);
-		panel_1.add(btnAdditionalTests);
-		btnAdditionalTests.setVisible(false);
+    
+		
+		
+		panelAdditionalTests.setVisible(true);
+		
+		
+		
+		
+		//Button 
+				btnAdditionalTests = new JButton("Suggest additional tests");
+				btnAdditionalTests.setVisible(true);
+
+				
+				btnAdditionalTests.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						panelAdditionalTests.setVisible(true);	
+						lblAdditionalTests.setVisible(true);
+
+						
+					}
+				});
+				
+				btnAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnAdditionalTests.setBounds(593, 171, 201, 40);
+				panel_1.add(btnAdditionalTests);
+					
+				
+
+				//JLista 
+				JIPQuery query = engine.openSynchronousQuery("additional_test(symptoms(" + person + "," + simptomi + "), B)");
+			    ArrayList<String> nizTests= new ArrayList<String>();
+				JIPTerm solution;
+				
+			
+				while ( (solution = query.nextSolution()) != null  ) {
+					//System.out.println("solution: " + solution);
+					for (JIPVariable var: solution.getVariables()) {
+						nizTests.add(var.getValue().toString());
+						System.out.println(var.getValue().toString());
+					}
+				}
+				
+				Vector items = new Vector(nizTests);
+			    testsList = new JList(items);
+			    testsList.setEnabled(false);
+			    testsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			    testsList.setFixedCellWidth(200);
+			    testsList.setFixedCellHeight(20);
+			    
+			  	
+				//Panel i skroler
+			   
+			    panelAdditionalTests.setBounds(562,229, 268,184);
+				scrollPaneTests.setViewportView(testsList);
+				testsList.setLayoutOrientation(JList.VERTICAL);
+				panelAdditionalTests.add(scrollPaneTests);
+				panel_1.add(panelAdditionalTests);
+				
+		
+				lblAdditionalTests = new JLabel("Additional Tests");
+				lblAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 20));
+				lblAdditionalTests.setBounds(416, 231, 200, 57); 
+				panel_1.add(lblAdditionalTests);
+				
+				panelAdditionalTests.setVisible(false);
+			   lblAdditionalTests.setVisible(false);
+
+			
+			    
+			  
     }
 }
