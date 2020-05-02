@@ -65,7 +65,6 @@ public class HomePage {
 	private JLabel lblAdditionalTests= new JLabel();
 	
 	
-	
 
 	/**
 	 * Launch the application.
@@ -131,7 +130,6 @@ public class HomePage {
 		addSymptoms();
 		
 		initialDiagnosis();
-		
 		
 	}
 	
@@ -253,6 +251,7 @@ public class HomePage {
 		
 		btnGetInitalDiagnosis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				panelDeseases.setVisible(true);
 				
 				 additionalTests();
@@ -265,7 +264,9 @@ public class HomePage {
 		btnGetInitalDiagnosis.setBounds(125, 320, 200, 40);
 		panel_1.add(btnGetInitalDiagnosis);
 		btnGetInitalDiagnosis.setVisible(false);
+
     }
+
     private void showDeseases() {
     	//JLista 
 		System.out.println(person);
@@ -297,13 +298,9 @@ public class HomePage {
 		deseasesList.setLayoutOrientation(JList.VERTICAL);
 		panelDeseases.add(scrollPaneDeseases);
 	    panel_1.add(panelDeseases);
-	    
-	    
-	    
-	   
+  
     }
-		
-		
+
     private void additionalTests() {
     
 		
