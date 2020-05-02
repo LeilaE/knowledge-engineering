@@ -17,3 +17,26 @@ contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
 suggest_diagnosis( symptoms(X, S), B) :- disease(B,S2), contains(S2,S), person(X).
+
+% symptoms
+symptom(fatigue).
+symptom(weakness).
+symptom(pale_skin).
+symptom(breathing_difficulties).
+symptom(bleeding).
+symptom(swelling).
+symptom(change_in_color).
+symptom(cramps).
+symptom(bruising).
+symptom(increased_thirst).
+symptom(headache).
+symptom(troube_concentrating).
+symptom(blurred_vision).
+symptom(frequent_peeing).
+symptom(weight_loss).
+symptom(irregular_heartbeat).
+symptom(pounding_in_the_neck).
+symptom(pounding_in_the_ears).
+symptom(vision_problems).
+symptom(headache).
+symptom(chest_pain).
