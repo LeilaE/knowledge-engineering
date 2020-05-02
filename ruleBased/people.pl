@@ -66,5 +66,5 @@ genetics(mihajlo, [high_blood_pressure]).
 genetics(nikola, []).
 genetics(srdjan, []).
 
-pregnant(ana).
-pregnant(masa).
+pregnant(ana, yes).
+pregnant(masa, yes).

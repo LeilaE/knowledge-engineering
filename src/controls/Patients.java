@@ -27,6 +27,17 @@ public class Patients {
 		return patients;
 	}
 	
+	/* TODO genetics */
+	public static void addNewPatient(String name, String age, String activity, boolean smoker, boolean pregnant) {
+		String strSmoker = smoker ? "yes" : "no";
+		String strPregnant = pregnant ? "yes" : "no";
+		PrologLogic.getInstance().assertTerm("person("+name+").");
+		PrologLogic.getInstance().assertTerm("age("+name+","+age+").");
+		PrologLogic.getInstance().assertTerm("activity("+name+","+activity+").");
+		PrologLogic.getInstance().assertTerm("smoker("+name+","+strSmoker+").");
+		PrologLogic.getInstance().assertTerm("pregnant("+name+","+strPregnant+").");
+	}
+	
 	public static Patient getPatientData(String name) {
 		String age = null;
 		String activity = null;

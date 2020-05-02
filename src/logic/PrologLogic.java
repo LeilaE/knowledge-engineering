@@ -2,6 +2,8 @@ package logic;
 
 import com.ugos.jiprolog.engine.JIPEngine;
 import com.ugos.jiprolog.engine.JIPQuery;
+import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
+import com.ugos.jiprolog.engine.JIPTerm;
 
 public class PrologLogic {
 	
@@ -10,7 +12,7 @@ public class PrologLogic {
 	private static JIPEngine engine = new JIPEngine();
 	
 	private PrologLogic() {
-		engine.consultFile("ruleBased/prolog.pl");
+		engine.consultFile(FilesUtils.openProlog());
 	}
 	
 	public static PrologLogic getInstance() { 
@@ -26,8 +28,15 @@ public class PrologLogic {
 	}
 	
 	/*Term example: "sledbenik(X,Y) :- X is Y+1." */
-	public boolean assertTerm(String termString) {
-		engine.assertz(engine.getTermParser().parseTerm(termString));
-		return true;
+	public void assertTerm(String termString) {
+		JIPTerm term = null;
+		try {
+			term = engine.getTermParser().parseTerm(termString);
+		}
+		catch(JIPSyntaxErrorException ex)
+		{
+			System.out.println("Syntax error in prolog term");
+		}
+		engine.assertz(term);
 	}
 }

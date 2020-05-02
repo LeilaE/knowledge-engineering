@@ -4,8 +4,6 @@
 % confirmed_diagnosis(symptoms(person_name, list_of_symptoms), X) X -> confirmed_disease_name based on tests
 % test_name(person_name, test_parameter).
 
-person(stasa).
-
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
@@ -57,4 +55,3 @@ confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
     pregnant(X),
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
-
