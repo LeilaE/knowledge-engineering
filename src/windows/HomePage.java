@@ -105,6 +105,7 @@ public class HomePage {
 	private JPanel panelTreatments = new JPanel();
 	private JScrollPane scrollPaneTreatments = new JScrollPane();
 	
+	private ArrayList<String> nizConfirmedDiagnosis= new ArrayList<String>();
 
 
 
@@ -439,7 +440,7 @@ public class HomePage {
 ///////////////////////////////////////////////IZLISTAVANJE TABELE TESTOVA U NOVOM TABU////////////////////////////////////////////////////////////
     private void showTestsTable(){
 		
-    	System.out.println("uso");
+    	
     	DefaultTableModel tableModelTests = new DefaultTableModel();
     	//inicijalizovanje tabele i ispisivanje testova u prvu kolonu, a change u drugu gde treba da dodje combo box
     	tableModelTests.setDataVector(new Object[][]
@@ -467,7 +468,7 @@ public class HomePage {
 		JComboBox comboBoxTest = new JComboBox<String>(items);
 		TableColumn col1 = testsTable.getColumnModel().getColumn(1);
 		col1.setCellEditor(new DefaultCellEditor(comboBoxTest));
-		System.out.println(col1);
+		
 			
 		JScrollPane scrollpane = new JScrollPane(testsTable);
 
@@ -487,7 +488,6 @@ public class HomePage {
 	            //dodajemo izabranu vrednost u listu ali ispred nje nalepimo broj reda kom ona pripada da bismo posle mogli da namapiramo na odgovarajuci test odgovarajui rez
 	            TableModel model = (TableModel)e.getSource();
 	            if(testsTable.getRowCount() != 0){
-	            	System.out.println("uso2");
 	            	String combo = rowS + (model.getValueAt(row, 1)).toString();
 	            	combos.add(combo);
 				}
@@ -544,9 +544,11 @@ public class HomePage {
 					
 					//ispisujemo nove testove ako ih ima
 					writeNewTests(term);
+					confirmedDiagnosis();
+					
 				}
 
-				confirmedDiagnosis();
+				
 
 			}
 		});			
@@ -638,7 +640,7 @@ public class HomePage {
     		pw.write(termNew);
     	}
     		
-    		
+    
     	}catch (Exception e){
     		e.printStackTrace();
     	} finally {
@@ -654,93 +656,105 @@ public class HomePage {
     
     private void confirmedDiagnosis() {
     	
-	    //new pop up window
-	    parent.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
-	    parent.setTitle("Confirmed Diagnosis");
-	    parent.setBounds(400, 200,450,400);
-	   // parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    parent.getContentPane().setLayout(null);
+	  
 	 
 	    //button
 	    btnConfirmedDiagnosis = new JButton("Show confirmed diagnosis");
 	    btnConfirmedDiagnosis.setVisible(true);
         panel_2.add(btnConfirmedDiagnosis);
         btnConfirmedDiagnosis.setBounds(555, 350, 300, 40); 
-    
-  
-        //JLista 
-		JIPQuery query = engine.openSynchronousQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
-		JIPTerm solution;
-		final ArrayList<String> nizConfirmedDiagnosis= new ArrayList<String>();
-	
-		System.out.println(nizConfirmedDiagnosis   + " stasa");
-		System.out.println(simptomi);
-		//System.out.println(nizConfirmedDiagnosis + " stasa" );
-		while ( (solution = query.nextSolution()) != null  ) {
-			//System.out.println("solution: " + solution);
-			nizConfirmedDiagnosis.clear();
-			for (JIPVariable var: solution.getVariables()) {
-				nizConfirmedDiagnosis.add(var.getValue().toString());
-				//System.out.println(var.getValue().toString());
-			}
-		}
-		
-		 Vector itemsCD = new Vector(nizConfirmedDiagnosis);
-		 System.out.println(itemsCD + " milica");
-		confirmedDiagnosisList = new JList(itemsCD);
-		confirmedDiagnosisList.setEnabled(false);
-		confirmedDiagnosisList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		confirmedDiagnosisList.setFixedCellWidth(200);
-		confirmedDiagnosisList.setFixedCellHeight(20);
-		
-	  	
-		//Panel i skroler
-		panelConfirmedDiagnosis.setBounds(80,20, 268,100);
-		scrollPaneConfirmDiagnosis.setViewportView(confirmedDiagnosisList);
-		confirmedDiagnosisList.setLayoutOrientation(JList.VERTICAL);
-		panelConfirmedDiagnosis.add(scrollPaneConfirmDiagnosis);
-		parent.add(panelConfirmedDiagnosis);
-		
-		//labela
-		lblConfirmedDiagnosis = new JLabel("");
-		lblConfirmedDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 18));
-	    lblConfirmedDiagnosis.setBounds(130, 10, 200, 57); 
-		parent.add(lblConfirmedDiagnosis);
-		
+        
+    	
 		//otvaranje novog prozora klikom na dugme
         btnConfirmedDiagnosis.addActionListener(new java.awt.event.ActionListener() {
 		@Override
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-        	parent.setVisible(true);
-        	panelConfirmedDiagnosis.setVisible(true);
-	        lblConfirmedDiagnosis.setVisible(true);
-	        btnShowTreatments.setVisible(true);
-	      // System.out.println(nizConfirmedDiagnosis);
+			
+			
+        
+			popupWindow();
+	       
+		    
+		   
          }
      });
-     
-     //button
-     btnShowTreatments = new JButton("Show treatments");
-     parent.add(btnShowTreatments);
-     btnShowTreatments.setBounds(140,140, 150,30); 
-   
-     //labela
-     lblTreatments = new JLabel("Treatments");
-		 lblTreatments.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		 lblTreatments.setVisible(false);
-		 lblTreatments.setBounds(10,180, 150,30); 
-		 parent.add(lblTreatments);
-     
-		 //prikaz treatments-a klikom na dugme
-     btnShowTreatments.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-          public void actionPerformed(java.awt.event.ActionEvent evt) {
-				lblTreatments.setVisible(true);
-				panelTreatments.setVisible(true);
-         	treatments(nizConfirmedDiagnosis);
-          }
-      }); 
+    
+  
+    
  }
+    
+private void popupWindow() {
+	 //new pop up window
+    parent.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
+    parent.setTitle("Confirmed Diagnosis");
+    parent.setBounds(400, 200,450,400);
+   // parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    parent.getContentPane().setLayout(null);
+    
+    //JLista 
+	JIPQuery query = engine.openSynchronousQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
+	JIPTerm solution;
+    
+	nizConfirmedDiagnosis.clear();
+	System.out.println(nizConfirmedDiagnosis + " stasa");
+	while ( (solution = query.nextSolution()) != null  ) {
+
+		for (JIPVariable var: solution.getVariables()) {
+			nizConfirmedDiagnosis.add(var.getValue().toString());
+		System.out.println(nizConfirmedDiagnosis + "milica");
+		}
+	}
+	
+	 Vector itemsCD = new Vector(nizConfirmedDiagnosis);
+	confirmedDiagnosisList = new JList(itemsCD);
+	confirmedDiagnosisList.setEnabled(false);
+	confirmedDiagnosisList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	confirmedDiagnosisList.setFixedCellWidth(200);
+	confirmedDiagnosisList.setFixedCellHeight(20);
+	
+  	
+	//Panel i skroler
+	panelConfirmedDiagnosis.setBounds(80,20, 268,100);
+	scrollPaneConfirmDiagnosis.setViewportView(confirmedDiagnosisList);
+	confirmedDiagnosisList.setLayoutOrientation(JList.VERTICAL);
+	panelConfirmedDiagnosis.add(scrollPaneConfirmDiagnosis);
+	parent.add(panelConfirmedDiagnosis);
+	
+	//labela
+	lblConfirmedDiagnosis = new JLabel("");
+	lblConfirmedDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    lblConfirmedDiagnosis.setBounds(130, 10, 200, 57); 
+	parent.add(lblConfirmedDiagnosis);
+
+ 
+ //button
+ btnShowTreatments = new JButton("Show treatments");
+ parent.add(btnShowTreatments);
+ btnShowTreatments.setBounds(140,140, 150,30); 
+
+ //labela
+ lblTreatments = new JLabel("Treatments");
+	 lblTreatments.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	 lblTreatments.setVisible(false);
+	 lblTreatments.setBounds(10,180, 150,30); 
+	 parent.add(lblTreatments);
+	 
+	 parent.setVisible(true);
+ 	panelConfirmedDiagnosis.setVisible(true);
+     lblConfirmedDiagnosis.setVisible(true);
+     btnShowTreatments.setVisible(true);
+ 
+	 //prikaz treatments-a klikom na dugme
+ btnShowTreatments.addActionListener(new java.awt.event.ActionListener() {
+		@Override
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+			lblTreatments.setVisible(true);
+			panelTreatments.setVisible(true);
+     	treatments(nizConfirmedDiagnosis);
+      }
+  }); 
+	
+}
 
 private void treatments(ArrayList<String> nizConfirmedDiagnosis) {
 
@@ -751,7 +765,6 @@ private void treatments(ArrayList<String> nizConfirmedDiagnosis) {
 			JIPTerm solution;
 			
 			while ( (solution = query.nextSolution()) != null  ) {
-				//System.out.println("solution: " + solution);
 				for (JIPVariable var: solution.getVariables()) {
 					nizTreatments.add(var.getValue().toString());
 				}
