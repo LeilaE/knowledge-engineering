@@ -223,7 +223,7 @@ public class HomePage {
         symptomsList.setFixedCellHeight(20);
 	
 	    //Panel i skroler
-		panelSymptoms.setBounds(92, 77, 281, 184);
+		panelSymptoms.setBounds(96, 77, 289, 184);
 	    scrollPaneSymptoms.setViewportView(symptomsList);
 	    symptomsList.setLayoutOrientation(JList.VERTICAL);
 	    panelSymptoms.add(scrollPaneSymptoms);
@@ -262,7 +262,7 @@ public class HomePage {
 		});
 		
 		btnConfirmSimptoms.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnConfirmSimptoms.setBounds(125, 271, 201, 40);
+		btnConfirmSimptoms.setBounds(131, 271, 195, 40);
 		panel_1.add(btnConfirmSimptoms);
 					
 	}
@@ -289,7 +289,7 @@ public class HomePage {
 		});
 		
 		btnGetInitalDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnGetInitalDiagnosis.setBounds(125, 320, 200, 40);
+		btnGetInitalDiagnosis.setBounds(131, 320, 194, 40);
 		panel_1.add(btnGetInitalDiagnosis);
 		btnGetInitalDiagnosis.setVisible(false);
 
@@ -312,6 +312,12 @@ public class HomePage {
 			
 			}
 		}
+		
+		//JLabel initial diagnosis
+		JLabel lblInitialDiagnosis = new JLabel("Initial Diagnosis");
+		lblInitialDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblInitialDiagnosis.setBounds(440, 20, 200, 57); 
+		panel_1.add(lblInitialDiagnosis);
 		
 		//JList bolesti
 		Vector items = new Vector(niz);
@@ -374,19 +380,20 @@ public class HomePage {
 		testsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		testsList.setFixedCellWidth(200);
 		testsList.setFixedCellHeight(20);		    
-			  	
+			
+		//JLabel additional tests
+		lblAdditionalTests = new JLabel("Additional Tests");
+		lblAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblAdditionalTests.setBounds(440, 231, 200, 57); 
+		panel_1.add(lblAdditionalTests);
+		
 		//Panel i skroler
 		panelAdditionalTests.setBounds(562,229, 268,184);
 		scrollPaneTests.setViewportView(testsList);
 		testsList.setLayoutOrientation(JList.VERTICAL);
 		panelAdditionalTests.add(scrollPaneTests);
 		panel_1.add(panelAdditionalTests);
-				
-		lblAdditionalTests = new JLabel("Additional Tests");
-		lblAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblAdditionalTests.setBounds(425, 231, 200, 57); 
-		panel_1.add(lblAdditionalTests);
-				
+							
 		panelAdditionalTests.setVisible(false);
 		lblAdditionalTests.setVisible(false);
 		
