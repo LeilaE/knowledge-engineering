@@ -6,6 +6,7 @@ import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
 
+import logic.FilesUtils;
 import logic.PrologLogic;
 import models.Patient;
 
@@ -31,11 +32,11 @@ public class Patients {
 	public static void addNewPatient(String name, String age, String activity, boolean smoker, boolean pregnant) {
 		String strSmoker = smoker ? "yes" : "no";
 		String strPregnant = pregnant ? "yes" : "no";
-		PrologLogic.getInstance().assertTerm("person("+name+").");
-		PrologLogic.getInstance().assertTerm("age("+name+","+age+").");
-		PrologLogic.getInstance().assertTerm("activity("+name+","+activity+").");
-		PrologLogic.getInstance().assertTerm("smoker("+name+","+strSmoker+").");
-		PrologLogic.getInstance().assertTerm("pregnant("+name+","+strPregnant+").");
+		FilesUtils.writeSingleProlog("person("+name+").");
+		FilesUtils.writeSingleProlog("age("+name+","+age+").");
+		FilesUtils.writeSingleProlog("activity("+name+","+activity+").");
+		FilesUtils.writeSingleProlog("smoker("+name+","+strSmoker+").");
+		FilesUtils.writeSingleProlog("pregnant("+name+","+strPregnant+").");
 	}
 	
 	public static Patient getPatientData(String name) {

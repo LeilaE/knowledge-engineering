@@ -27,7 +27,8 @@ public class PrologLogic {
 		return engine.openSynchronousQuery(queryString);
 	}
 	
-	/*Term example: "sledbenik(X,Y) :- X is Y+1." */
+	/*Term example: "sledbenik(X,Y) :- X is Y+1."
+	* Not working */
 	public void assertTerm(String termString) {
 		JIPTerm term = null;
 		try {

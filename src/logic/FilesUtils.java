@@ -1,14 +1,10 @@
 package logic;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class FilesUtils {
 	
@@ -16,7 +12,7 @@ public class FilesUtils {
 	private static String prologOutput = "ruleBased/prolog.pl";
 
 	public static String openProlog() {
-		
+
 		Path fileToDeletePath = Paths.get(prologOutput);
 		try {
 			Files.deleteIfExists(fileToDeletePath);
@@ -64,5 +60,116 @@ public class FilesUtils {
 		}
 	    
 	    return prologOutput;
+	}
+
+	// Extracted from "ISPISIVANJE NOVIH TESTOVA"
+	public static void writeProlog(ArrayList<String> terms) {
+		FileWriter file = null;
+		PrintWriter pw = null;
+
+		try {
+			file = new FileWriter(prologOutput, true);
+			pw = new PrintWriter(file);
+
+			for(String t: terms) {
+				pw.println(t);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	public static void writeSingleProlog(String term) {
+		FileWriter file = null;
+		PrintWriter pw = null;
+
+		try {
+			file = new FileWriter(prologOutput, true);
+			pw = new PrintWriter(file);
+
+			pw.println(term);
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	//Extracted from "CITAMO SVE IZ FAJLA I AKO NADJEMO NA TEST KOJI HOCEMO DA UPISEMO PRESKOCIMO GA, AKO NE NADJEMO VRACAMO FALSE"
+	public static void replaceInFile(String termReplace, String termNew){
+		FileReader fr = null;
+		BufferedReader br = null;
+		String line = null;
+
+		boolean retVal = false;
+
+		try {
+			fr = new FileReader(prologOutput);
+			br = new BufferedReader(fr);
+
+			ArrayList<String> lines = new ArrayList<>();
+			while ((line = br.readLine()) != null) {
+				if(!line.contains(termReplace)) {
+					lines.add(line);
+				}else{
+					retVal = true;
+				}
+			}
+
+			//pisemo ceo fajl ponovo, , ako test nije postojao napisacemo ga gore, ako je postojao nismo ga dodali u lines nego cemo napisati novu vrednost
+			writeAllValuesWithReplaced(lines, termNew, retVal);
+
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != fr)
+					fr.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	public static void writeAllValuesWithReplaced(ArrayList<String> lines, String termNew, boolean retVal) {
+		FileWriter file = null;
+		PrintWriter pw = null;
+
+		try {
+			file = new FileWriter(prologOutput);
+			pw = new PrintWriter(file);
+
+			for(String l: lines) {
+				pw.write(l + "\n");
+			}
+
+			//nova vrednost za postojeci test
+			if(retVal) {
+				pw.write(termNew);
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
 	}
 }

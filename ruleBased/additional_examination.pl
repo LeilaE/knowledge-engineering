@@ -4,9 +4,6 @@
 % confirmed_diagnosis(symptoms(person_name, list_of_symptoms), X) X -> confirmed_disease_name based on tests
 % test_name(person_name, test_parameter).
 
-contains(S,[]).
-contains(S,[H|T]) :- member(H,S), contains(S,T).
-
 additional_test(symptoms(X, S), hemoglobin_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
@@ -19,36 +16,30 @@ additional_test(symptoms(X, S), b12_check) :-
 additional_test(symptoms(X, S), folic_acid_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
-additional_test(symptoms(X, S), number_of_neutrophils) :-
-    disease(anemia, S2), contains(S2, S),  person(X).
-
 additional_test(symptoms(X, S), blood_sugar_level) :-
     disease(diabetes, S2), contains(S2, S), person(X) .
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
-    disease(anemia, S2), contains(S2, S), person(X),
-    b12_check(X, P1), P1 = deficient;
-    folic_acid_check(X, P2), P2 = deficient;
-    number_of_neutrophils(X, P3), P3 = deficient.
+     disease(anemia, S2), contains(S2, S),  person(X),
+    b12_check(X, P1), P1 = low;
+    folic_acid_check(X, P2), P2 = low.
 
-confirmed_diagnosis(symptoms(X, S), iron-deficiency_anemia) :-
-    disease(anemia, S2), contains(S2, S), person(X),
-    hemoglobin_check(X, P1), P1 = deficient;
-    iron_check(X, P2), P2 = deficient.
+confirmed_diagnosis(symptoms(X, S), iron_deficiency_anemia) :-
+    disease(D, [fatigue, weakness, pale_skin, breathing_difficulties]), person(X),
+    hemoglobin_check(X, P13), P13 = low;
+    iron_check(X, P22), P22 = low.
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_1) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-    age < 18,
+    age(X,P2), P2 < 18,
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
-
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-    age > 18,
+
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
-
 
 confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
     disease(diabetes, S2), contains(S2, S), person(X),
