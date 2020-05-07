@@ -35,14 +35,9 @@ person(srdjan).
 
 % additional test for anemia that confirmes pernicious anemia if
 % deficient(normal)
-b12_check(stasa, deficient).
-folic_acid_check(stasa, normal).
- number_of_neutrophils(stasa, deficent).
 
 % additional test for anemia that confirmes iron-deficinecy anemia if
 % decreased(normal)
-hemoglobin_check(stasa, normal).
-iron_check(stasa, normal).
 
 
 % additional test for diabetes that confirmes iron-deficinecy anemia if
@@ -194,3 +189,14 @@ treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes] ).
 % contains(S,[H|T]) :- member(H,S), contains(S,T).
 
 treatment_for(X, T) :- treatment(T, L), contains(L, X).
+
+hemoglobin_check(milica,high).
+iron_check(milica,high).
+b12_check(milica,high).
+folic_acid_check(milica,high).
+number_of_neutrophils(milica,high).
+hemoglobin_check(ana,low).
+iron_check(ana,low).
+b12_check(ana,low).
+folic_acid_check(ana,low).
+number_of_neutrophils(ana,low).
