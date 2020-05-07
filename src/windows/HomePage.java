@@ -76,15 +76,17 @@ public class HomePage {
 	private JPanel panelAdditionalTests = new JPanel();
 	private JScrollPane scrollPaneTests = new JScrollPane();
 	private JList testsList = new JList();
+
 	
 	private JButton btnAdditionalTests= new JButton();
 	private JButton btnGetInitalDiagnosis;
 	
 	private JLabel lblAdditionalTests= new JLabel();
 	
+
 	private JTable testsTable;
-	
 	private int flag;
+
 
 	private ArrayList<String> combos = new ArrayList<String>();
 	private ArrayList<String> lines = new ArrayList<String>();
@@ -119,7 +121,7 @@ public class HomePage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+    
 		frmExamination = new JFrame();
 		frmExamination.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		frmExamination.setTitle("Expert System");
@@ -158,11 +160,13 @@ public class HomePage {
 		
 		initialDiagnosis();
 		
+
 		//showTestsTable();
 		
 	}
 	
 //////////////////////////////////////////////////////////////////IZLISTAVA PACIJENTE U COMBOBOX////////////////////////////////////////////////////////
+
 	private void showPatients() {
 		
 		//uzmi osobe iz prologa
@@ -245,6 +249,7 @@ public class HomePage {
 				 simptomi.clear(); 
 				 for (int i = 0; i < selectedIx.length; i++) {
 				      Object sel = symptomsList.getModel().getElementAt(selectedIx[i]);
+
 				      simptomi.add(sel.toString());				      
 				  }	
 				
@@ -252,6 +257,12 @@ public class HomePage {
 				 btnGetInitalDiagnosis.setVisible(true);
 						
 				 //kad se opet klikne na dugme za potvrdu simptoma, dalji paneli opet postaju nevidljivi
+				      simptomi.add(sel.toString());
+				      System.out.println(simptomi);
+				    }	
+				 
+				 btnGetInitalDiagnosis.setVisible(true);
+				
 				 panelAdditionalTests.setVisible(false);
 				 btnAdditionalTests.setVisible(false);
 				 lblAdditionalTests.setVisible(false);
@@ -263,6 +274,8 @@ public class HomePage {
 		
 		btnConfirmSimptoms.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnConfirmSimptoms.setBounds(131, 271, 195, 40);
+
+
 		panel_1.add(btnConfirmSimptoms);
 					
 	}
@@ -284,7 +297,7 @@ public class HomePage {
 				 
 				 //funkcija za izlistavanje dodatnih testova, jer se i oni izlistavaju na osnovu osobe i simptoma
 				 additionalTests();
-								
+	
 			}
 		});
 		
@@ -295,8 +308,8 @@ public class HomePage {
 
     }
 
-    
 //////////////////////////////////////////////////////////IZLISTAVANJE BOLESTI KOJE SPADAJU U POCETNU DIJAGNOZU///////////////////////////////////////////    
+
     private void showDeseases() {
     	//JLista 
 	
@@ -329,13 +342,14 @@ public class HomePage {
 	    
 	  	
 		//Panel i skroler
-        panelDeseases.setBounds(541, 20, 310, 100);
+    panelDeseases.setBounds(541, 20, 310, 100);
 		scrollPaneDeseases.setViewportView(deseasesList);
 		deseasesList.setLayoutOrientation(JList.VERTICAL);
 		panelDeseases.add(scrollPaneDeseases);
 	    panel_1.add(panelDeseases);
   
     }
+
 
 ////////////////////////////////////////////////IZLISTAVANJE DODATNIH TESTOVA i POZIV TABELE SA TESTOVIMA///////////////////////////////////////////////////////////
     private void additionalTests() {
@@ -609,6 +623,6 @@ public class HomePage {
     			e2.printStackTrace();
     		}
     	}
-    
+   
     }
 }
