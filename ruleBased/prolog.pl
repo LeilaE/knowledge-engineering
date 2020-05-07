@@ -35,14 +35,9 @@ person(srdjan).
 
 % additional test for anemia that confirmes pernicious anemia if
 % deficient(normal)
-b12_check(stasa, deficient).
-folic_acid_check(stasa, normal).
- number_of_neutrophils(stasa, deficent).
 
 % additional test for anemia that confirmes iron-deficinecy anemia if
 % decreased(normal)
-hemoglobin_check(stasa, normal).
-iron_check(stasa, normal).
 
 
 % additional test for diabetes that confirmes iron-deficinecy anemia if
@@ -148,25 +143,25 @@ additional_test(symptoms(X, S), blood_sugar_level) :-
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
     disease(anemia, S2), contains(S2, S), person(X),
-    b12_check(X, P1), P1 = deficient;
-    folic_acid_check(X, P2), P2 = deficient;
-    number_of_neutrophils(X, P3), P3 = deficient.
+    b12_check(X, P1), P1 = low;
+    folic_acid_check(X, P2), P2 = low;
+    number_of_neutrophils(X, P3), P3 = low.
 
-confirmed_diagnosis(symptoms(X, S), iron-deficiency_anemia) :-
+confirmed_diagnosis(symptoms(X, S), iron_deficiency_anemia) :-
     disease(anemia, S2), contains(S2, S), person(X),
-    hemoglobin_check(X, P1), P1 = deficient;
-    iron_check(X, P2), P2 = deficient.
+    hemoglobin_check(X, P1), P1 = low;
+    iron_check(X, P2), P2 = low.
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_1) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-    age < 18,
+    age(X,P2), P2 < 18,
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
 
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-    age > 18,
+    
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
 
@@ -194,3 +189,22 @@ treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes] ).
 % contains(S,[H|T]) :- member(H,S), contains(S,T).
 
 treatment_for(X, T) :- treatment(T, L), contains(L, X).
+
+hemoglobin_check(stasa,low).
+iron_check(stasa,low).
+b12_check(stasa,low).
+folic_acid_check(stasa,low).
+number_of_neutrophils(stasa,low).
+blood_sugar_level(stasa,low).
+hemoglobin_check(milica,low).
+iron_check(milica,low).
+b12_check(milica,low).
+folic_acid_check(milica,low).
+number_of_neutrophils(milica,low).
+blood_sugar_level(milica,low).
+hemoglobin_check(ana,low).
+iron_check(ana,low).
+b12_check(ana,low).
+folic_acid_check(ana,low).
+number_of_neutrophils(ana,low).
+blood_sugar_level(ana,low).
