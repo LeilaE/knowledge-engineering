@@ -190,21 +190,3 @@ treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes] ).
 
 treatment_for(X, T) :- treatment(T, L), contains(L, X).
 
-hemoglobin_check(stasa,low).
-iron_check(stasa,low).
-b12_check(stasa,low).
-folic_acid_check(stasa,low).
-number_of_neutrophils(stasa,low).
-blood_sugar_level(stasa,low).
-hemoglobin_check(milica,low).
-iron_check(milica,low).
-b12_check(milica,low).
-folic_acid_check(milica,low).
-number_of_neutrophils(milica,low).
-blood_sugar_level(milica,low).
-hemoglobin_check(ana,low).
-iron_check(ana,low).
-b12_check(ana,low).
-folic_acid_check(ana,low).
-number_of_neutrophils(ana,low).
-blood_sugar_level(ana,low).

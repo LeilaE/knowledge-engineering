@@ -105,7 +105,9 @@ public class HomePage {
 	private JPanel panelTreatments = new JPanel();
 	private JScrollPane scrollPaneTreatments = new JScrollPane();
 	
-	
+
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -249,6 +251,7 @@ public class HomePage {
 	    panel_1.add(panelSymptoms);
 		
 		
+
 	  //Confirm simptoms button, kada se potvrde simptomi, pojavljuje se dugme za odredjivanje inicijalne dijagnoze
 	  		JButton btnConfirmSimptoms = new JButton("Confirm simptoms");
 	  		btnConfirmSimptoms.addActionListener(new ActionListener() {
@@ -304,7 +307,7 @@ public class HomePage {
 
 				panelDeseases.setVisible(true);
 				
-				
+
 				 //funkcija za izlistavanje bolesti koje spadaju u pocetnu dijagnozu
 				 showDeseases();
 				 
@@ -341,7 +344,9 @@ public class HomePage {
 		}
 		
 		//JLabel initial diagnosis
+
 		lblInitialDiagnosis = new JLabel("Initial Diagnosis");
+
 		lblInitialDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblInitialDiagnosis.setBounds(440, 20, 200, 57); 
 		panel_1.add(lblInitialDiagnosis);
@@ -379,7 +384,7 @@ public class HomePage {
 			public void actionPerformed(ActionEvent e) {
 					panelAdditionalTests.setVisible(true);	
 					lblAdditionalTests.setVisible(true);
-					
+
 			}
 		});
 				
@@ -465,8 +470,9 @@ public class HomePage {
 		System.out.println(col1);
 			
 		JScrollPane scrollpane = new JScrollPane(testsTable);
-		//92, 77, 281, 184
+
 		scrollpane.setBounds(12, 13, 875, 320);
+
 		panel_2.removeAll();
 		panel_2.add(scrollpane);
 		
@@ -490,7 +496,9 @@ public class HomePage {
 		});
 		
 		//na ovo dugme treba da se dodaju testovi i rezultati u prolog fajl, ne moze da se doda ako nisu svi testovi odradjeni
+
 		JButton btnGetDiagnosis = new JButton("Do tests");
+
 		btnGetDiagnosis.setBounds(35, 350, 300, 40);
 		panel_2.add(btnGetDiagnosis);
 		
@@ -537,7 +545,9 @@ public class HomePage {
 					//ispisujemo nove testove ako ih ima
 					writeNewTests(term);
 				}
+
 				confirmedDiagnosis();
+
 			}
 		});			
     }   
