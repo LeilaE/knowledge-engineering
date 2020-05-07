@@ -143,25 +143,25 @@ additional_test(symptoms(X, S), blood_sugar_level) :-
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
     disease(anemia, S2), contains(S2, S), person(X),
-    b12_check(X, P1), P1 = deficient;
-    folic_acid_check(X, P2), P2 = deficient;
-    number_of_neutrophils(X, P3), P3 = deficient.
+    b12_check(X, P1), P1 = low;
+    folic_acid_check(X, P2), P2 = low;
+    number_of_neutrophils(X, P3), P3 = low.
 
-confirmed_diagnosis(symptoms(X, S), iron-deficiency_anemia) :-
+confirmed_diagnosis(symptoms(X, S), iron_deficiency_anemia) :-
     disease(anemia, S2), contains(S2, S), person(X),
-    hemoglobin_check(X, P1), P1 = deficient;
-    iron_check(X, P2), P2 = deficient.
+    hemoglobin_check(X, P1), P1 = low;
+    iron_check(X, P2), P2 = low.
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_1) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-    age < 18,
+    age(X,P2), P2 < 18,
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
 
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-    age > 18,
+    
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
 
@@ -190,13 +190,3 @@ treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes] ).
 
 treatment_for(X, T) :- treatment(T, L), contains(L, X).
 
-hemoglobin_check(milica,high).
-iron_check(milica,high).
-b12_check(milica,high).
-folic_acid_check(milica,high).
-number_of_neutrophils(milica,high).
-hemoglobin_check(ana,low).
-iron_check(ana,low).
-b12_check(ana,low).
-folic_acid_check(ana,low).
-number_of_neutrophils(ana,low).
