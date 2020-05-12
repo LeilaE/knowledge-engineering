@@ -1,69 +1,27 @@
 package windows;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 
 import com.ugos.jiprolog.engine.JIPEngine;
-import com.ugos.jiprolog.engine.JIPQuery;
-import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
-import com.ugos.jiprolog.engine.JIPTerm;
-import com.ugos.jiprolog.engine.JIPVariable;
-
-import javax.swing.DefaultCellEditor;
 import controls.Patients;
 import controls.Query;
 import controls.Symptoms;
 import controls.Tests;
-import logic.FilesUtils;
-import logic.PrologLogic;
 import models.Patient;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JLabel;
-import javax.swing.JList;
 
-import java.awt.Font;
-import javax.swing.JPanel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 
 
 public class HomePage {
@@ -81,16 +39,11 @@ public class HomePage {
 	JCheckBox chckbxPregnant;
 	JButton btnAddPatient;
 
-	private JTable table;
 	private JPanel panel_1;
 	private JPanel panel_2;
 
-	private JIPEngine engine = new JIPEngine();
-
-	private JLabel lblPatient;
 	private JComboBox comboBoxPatient;
 
-	private JLabel lblAddSymptoms;
 	private JPanel panelSymptoms = new JPanel();
 	private JScrollPane scrollPaneSymptoms = new JScrollPane();
 	private JList symptomsList;
@@ -100,7 +53,6 @@ public class HomePage {
 
 	private JPanel panelDeseases = new JPanel();
 	private JScrollPane scrollPaneDeseases = new JScrollPane();
-	private JList deseasesList;
 
 	private JPanel panelAdditionalTests = new JPanel();
 	private JScrollPane scrollPaneTests = new JScrollPane();
@@ -111,30 +63,21 @@ public class HomePage {
 	private JButton btnGetInitalDiagnosis;
 
 	private JLabel lblAdditionalTests= new JLabel();
-	private JLabel lblInitialDiagnosis ;
 
 	private JTable testsTable;
 	private int flag;
 
-
 	private ArrayList<String> combos = new ArrayList<String>();
-	private ArrayList<String> lines = new ArrayList<String>();
 
-
-	private JLabel lblConfirmedDiagnosis= new JLabel();
-	private JList confirmedDiagnosisList;
 	private JPanel panelConfirmedDiagnosis = new JPanel();
 	private JScrollPane scrollPaneConfirmDiagnosis = new JScrollPane();
 	private JButton btnConfirmedDiagnosis = new JButton();
 
-	private JButton btnShowTreatments = new JButton();
 	private JLabel lblTreatments= new JLabel();
-	private JList treatmentsList;
 	private JPanel panelTreatments = new JPanel();
 	private JScrollPane scrollPaneTreatments = new JScrollPane();
 
 	DefaultTableModel tableModel = new DefaultTableModel() {
-
 		@Override
 		public boolean isCellEditable(int row, int column) {
 			return false;
@@ -195,7 +138,6 @@ public class HomePage {
 		tabbedPane.addTab("Additional testing", null, panel_2, null);
 		panel_2.setLayout(null);
 
-		engine.consultFile("ruleBased/prolog.pl");
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 900, 450);
 		frmExamination.getContentPane().add(tabbedPane);
@@ -269,8 +211,6 @@ public class HomePage {
 		addSymptoms();
 
 		initialDiagnosis();
-
-		//showTestsTable();
 	}
 
 	//Selected patient
@@ -352,7 +292,7 @@ public class HomePage {
 		ArrayList<Patient> patients = Patients.getPatients();
 
 		//labela pacijent
-		lblPatient = new JLabel("Patient");
+		JLabel lblPatient = new JLabel("Patient");
 		lblPatient.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPatient.setBounds(25, 10, 105, 57);
 		panel_1.add(lblPatient);
@@ -373,7 +313,7 @@ public class HomePage {
 	private void addSymptoms() {
 
 		//labela AddSymptoms
-		lblAddSymptoms = new JLabel("Symptoms");
+		JLabel lblAddSymptoms = new JLabel("Symptoms");
 		lblAddSymptoms.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblAddSymptoms.setBounds(25, 75, 140, 57);
 		panel_1.add(lblAddSymptoms);
@@ -463,14 +403,13 @@ public class HomePage {
 //////////////////////////////////////////////////////////IZLISTAVANJE BOLESTI KOJE SPADAJU U POCETNU DIJAGNOZU///////////////////////////////////////////
 
     private void showDeseases() {
-    	//JLista
 
     	//na osnovu osobe i simptoma salje se prolog upit za bolestima
 	    ArrayList<String> niz= Query.genericArrayQuery("suggest_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
 
 		//JLabel initial diagnosis
 
-		lblInitialDiagnosis = new JLabel("Initial Diagnosis");
+		JLabel lblInitialDiagnosis = new JLabel("Initial Diagnosis");
 
 		lblInitialDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblInitialDiagnosis.setBounds(440, 20, 200, 57);
@@ -478,7 +417,7 @@ public class HomePage {
 
 		//JList bolesti
 		Vector items = new Vector(niz);
-	    deseasesList = new JList(items);
+		JList deseasesList = new JList(items);
 	    deseasesList.setEnabled(false);
 	    deseasesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 	    deseasesList.setFixedCellWidth(200);
@@ -561,8 +500,7 @@ public class HomePage {
 
 		testsTable = new JTable(tableModelTests){
 			public boolean isCellEditable(int row,int column){
-				    if(column == 0) return false;//the 0th column is not editable
-				    return true;
+				return column != 0;//the 0th column is not editable
 			}
 		};
 
@@ -574,7 +512,6 @@ public class HomePage {
 		TableColumn col1 = testsTable.getColumnModel().getColumn(1);
 		col1.setCellEditor(new DefaultCellEditor(comboBoxTest));
 
-
 		JScrollPane scrollpane = new JScrollPane(testsTable);
 
 		scrollpane.setBounds(12, 13, 875, 320);
@@ -583,71 +520,65 @@ public class HomePage {
 		panel_2.add(scrollpane);
 
 		//listener koji slusa sta je u kom combo boxu izabrano za rezultat testa
-		tableModelTests.addTableModelListener(new TableModelListener() {
-			@Override
-			public void tableChanged(TableModelEvent e) {
+		tableModelTests.addTableModelListener(e -> {
 
-	            int row = e.getFirstRow();
-	            String rowS = Integer.toString(row);
+			int row = e.getFirstRow();
+			String rowS = Integer.toString(row);
 
-	            //dodajemo izabranu vrednost u listu ali ispred nje nalepimo broj reda kom ona pripada da bismo posle mogli da namapiramo na odgovarajuci test odgovarajui rez
-	            TableModel model = (TableModel)e.getSource();
-	            if(testsTable.getRowCount() != 0){
-	            	String combo = rowS + (model.getValueAt(row, 1)).toString();
-	            	combos.add(combo);
-				}
-
+			//dodajemo izabranu vrednost u listu ali ispred nje nalepimo broj reda kom ona pripada da bismo posle mogli da namapiramo na odgovarajuci test odgovarajui rez
+			TableModel model = (TableModel)e.getSource();
+			if(testsTable.getRowCount() != 0){
+				String combo = rowS + (model.getValueAt(row, 1)).toString();
+				combos.add(combo);
 			}
+
 		});
 
 		//na ovo dugme treba da se dodaju testovi i rezultati u prolog fajl, ne moze da se doda ako nisu svi testovi odradjeni
 
-		JButton btnGetDiagnosis = new JButton("Do tests");
+		JButton btnDoTests = new JButton("Do tests");
 
-		btnGetDiagnosis.setBounds(35, 350, 300, 40);
-		panel_2.add(btnGetDiagnosis);
+		btnDoTests.setBounds(35, 350, 300, 40);
+		panel_2.add(btnDoTests);
 
-		btnGetDiagnosis.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				flag = 0;
-				//ako negde nije dodeljen rezultat ne moze(to mozemo promeniti)
+		btnDoTests.addActionListener(e -> {
+			flag = 0;
+			//ako negde nije dodeljen rezultat ne moze(to mozemo promeniti)
+			for(int i = 0; i < testsTable.getRowCount(); i ++) {
+				 Object o = testsTable.getValueAt(i, 1);
+				 if(o.equals("Change...")) {
+					 flag = 1;
+					  break;
+				 }
+			}
+
+			String template = null;
+
+			if(flag == 0) {
+				ArrayList<String> newTestResults = new ArrayList<String>();
+				//za svaki red uzmi test i njegov rezultat
 				for(int i = 0; i < testsTable.getRowCount(); i ++) {
-					 Object o = testsTable.getValueAt(i, 1);
-					 if(o.equals("Change...")) {
-						 flag = 1;
-					 	 break;
-					 }
-				}
+					Object test = testsTable.getValueAt(i, 0);
+					Object result = new Object();
 
-				String template = null;
+					//mapiranje rezultata na test
+					for(String c: combos) {
+						String sub = c.substring(0, 1);
 
-				if(flag == 0) {
-					ArrayList<String> newTestResults = new ArrayList<String>();
-					//za svaki red uzmi test i njegov rezultat
-					for(int i = 0; i < testsTable.getRowCount(); i ++) {
-						Object test = testsTable.getValueAt(i, 0);
-						Object result = new Object();
-
-						//mapiranje rezultata na test
-						for(String c: combos) {
-							String sub = c.substring(0, 1);
-
-							if(Integer.parseInt(sub) == i) {
-								result = c.substring(1);
-							}
+						if(Integer.parseInt(sub) == i) {
+							result = c.substring(1);
 						}
-
-					   //ovo hocemo da upisemo ako ne postoji test za tu osobu
-					   String termin = (test + "(" + person + "," + result + ").");
-						template = test + "(" + person + "," + result + ").";
-					   //ako postoji test za tu osobu onda ga menjamo novim rezultatom
-					   newTestResults.add(termin);
 					}
 
-					//ispisujemo nove testove ako ih ima
-					Tests.updateTests(template, newTestResults);
-					confirmedDiagnosis();
+				   //ovo hocemo da upisemo ako ne postoji test za tu osobu
+					String termin = (test + "(" + person + "," + result + ").");
+					template = test + "(" + person + "," + result + ").";
+				   //ako postoji test za tu osobu onda ga menjamo novim rezultatom
+				   newTestResults.add(termin);
 				}
+				//ispisujemo nove testove ako ih ima
+				Tests.updateTests(template, newTestResults);
+				confirmedDiagnosis();
 			}
 		});
     }
@@ -659,15 +590,9 @@ public class HomePage {
         panel_2.add(btnConfirmedDiagnosis);
         btnConfirmedDiagnosis.setBounds(555, 350, 300, 40);
 
-
 		//otvaranje novog prozora klikom na dugme
-        btnConfirmedDiagnosis.addActionListener(new java.awt.event.ActionListener() {
-		@Override
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-			popupWindow();
-         }
-     });
- }
+        btnConfirmedDiagnosis.addActionListener(evt -> popupWindow());
+ 	}
 
 	private void popupWindow() {
 		//new pop up window
@@ -679,8 +604,9 @@ public class HomePage {
 
 		ArrayList<String> nizConfirmedDiagnosis = Query.genericArrayQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
 
-		Vector itemsCD = new Vector(nizConfirmedDiagnosis);
-		confirmedDiagnosisList = new JList(itemsCD);
+		Set<String> items = new HashSet<String>(nizConfirmedDiagnosis);
+		Vector itemsCD = new Vector(items);
+		JList confirmedDiagnosisList = new JList(itemsCD);
 		confirmedDiagnosisList.setEnabled(false);
 		confirmedDiagnosisList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		confirmedDiagnosisList.setFixedCellWidth(200);
@@ -694,13 +620,13 @@ public class HomePage {
 		parent.add(panelConfirmedDiagnosis);
 
 		//labela
-		lblConfirmedDiagnosis = new JLabel("");
+		JLabel lblConfirmedDiagnosis = new JLabel("");
 		lblConfirmedDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblConfirmedDiagnosis.setBounds(130, 10, 200, 57);
 		parent.add(lblConfirmedDiagnosis);
 
 	    //button
-	    btnShowTreatments = new JButton("Show treatments");
+		JButton btnShowTreatments = new JButton("Show treatments");
 	    parent.add(btnShowTreatments);
 	    btnShowTreatments.setBounds(140,140, 150,30);
 
@@ -717,29 +643,26 @@ public class HomePage {
 		btnShowTreatments.setVisible(true);
 
 		//prikaz treatments-a klikom na dugme
-	    btnShowTreatments.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-		  	public void actionPerformed(java.awt.event.ActionEvent evt) {
-				lblTreatments.setVisible(true);
-				panelTreatments.setVisible(true);
-				treatments(nizConfirmedDiagnosis);
-		  }
+	    btnShowTreatments.addActionListener(evt -> {
+			lblTreatments.setVisible(true);
+			panelTreatments.setVisible(true);
+			treatments(items);
 	  });
 
 	}
 
-	private void treatments(ArrayList<String> nizConfirmedDiagnosis) {
+	private void treatments(Set<String> nizConfirmedDiagnosis) {
 
 		//JLista
-
 		ArrayList<String> nizTreatments = new ArrayList<String>();
 
 		for(String diagnosis : nizConfirmedDiagnosis) {
 			nizTreatments.addAll(Query.genericArrayQuery("treatment_for((" + nizConfirmedDiagnosis + "), B)"));
 		}
 
-		Vector items = new Vector(nizTreatments);
-		treatmentsList = new JList(items);
+		Set<String> items = new HashSet<String>(nizTreatments);
+		Vector vec = new Vector(items);
+		JList treatmentsList = new JList(vec);
 		treatmentsList.setEnabled(false);
 		treatmentsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		treatmentsList.setFixedCellWidth(200);

@@ -121,7 +121,7 @@ additional_test(symptoms(X, S), blood_sugar_level) :-
     disease(diabetes, S2), contains(S2, S), person(X) .
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
-     disease(anemia, S2), contains(S2, S),  person(X),
+    disease(anemia, S2), contains(S2, S),  person(X),
     b12_check(X, P1), P1 = low;
     folic_acid_check(X, P2), P2 = low.
 
@@ -138,7 +138,6 @@ confirmed_diagnosis(symptoms(X, S),  diabetes_type_1) :-
 
 confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
     disease(diabetes, S2), contains(S2, S), person(X),
-
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y).
 
@@ -169,9 +168,4 @@ blood_sugar_level(stasa,high).
 hemoglobin_check(stasa,low).
 iron_check(stasa,low).
 b12_check(stasa,low).
-person(asdf).
-age(asdf,12).
-activity(asdf,inactive).
-smoker(asdf,no).
-pregnant(asdf,yes).
-hemoglobin_check(stasa,normal).
+folic_acid_check(stasa,low).
