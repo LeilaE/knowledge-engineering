@@ -136,15 +136,33 @@ additional_test(symptoms(X, S), blood_sugar_level) :-
     disease(diabetes, S2), contains(S2, S), person(X) .
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
-     disease(anemia, S2), contains(S2, S),  person(X),
-    b12_check(X, P1), P1 = low;
-    folic_acid_check(X, P2), P2 = low.
+    (disease(anemia, S2), contains(S2, S),  person(X)),
+    (b12_check(X, P1), P1 = low;
+    folic_acid_check(X, P2), P2 = low).
 
 confirmed_diagnosis(symptoms(X, S), iron_deficiency_anemia) :-
-    disease(D, [fatigue, weakness, pale_skin, breathing_difficulties]), person(X),
-    hemoglobin_check(X, P13), P13 = low;
-    iron_check(X, P22), P22 = low.
+    (disease(anemia, S2), contains(S2, S),  person(X)),
+    (hemoglobin_check(X, P13), P13 = low;
+    iron_check(X, P22), P22 = low).
 
+confirmed_diagnosis(symptoms(X, S),  diabetes_type_1) :-
+    (disease(diabetes, S2), contains(S2, S), person(X)),
+    (age(X,P2), P2 < 18,
+    blood_sugar_level(X,P1), P1  = high;
+    genetics(X, Y), member(diabetes, Y)).
+
+
+confirmed_diagnosis(symptoms(X, S),  diabetes_type_2) :-
+    (disease(diabetes, S2), contains(S2, S), person(X)),
+    (blood_sugar_level(X,P1), P1  = high;
+    genetics(X, Y), member(diabetes, Y)).
+
+
+confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
+    (disease(diabetes, S2), contains(S2, S), person(X)),
+    (pregnant(X),
+    blood_sugar_level(X,P1), P1  = high;
+    genetics(X, Y), member(diabetes, Y)).
 
 
 %END_OF_ADDITIONAL_EXAMINATION_FILE
@@ -160,16 +178,39 @@ treatment(insulin_injections, [diabetes_type_1, diabetes_type_2]).
 treatment(blood_sugar_monitoring, [diabetes_type_1, diabetes_type_2, gestational_diabetes]).
 treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes] ).
 
-% contains(S,[]).
-% contains(S,[H|T]) :- member(H,S), contains(S,T).
+contains(S,[]).
+contains(S,[H|T]) :- member(H,S); contains(S,T).
 
 treatment_for(X, T) :- treatment(T, L), contains(L, X).
 
+
+
+
+hemoglobin_check(petar,high).
+iron_check(petar,low).
+b12_check(petar,high).
+folic_acid_check(petar,high).
+hemoglobin_check(aleksandar,low).
+iron_check(aleksandar,high).
+b12_check(aleksandar,high).
+folic_acid_check(aleksandar,high).
+hemoglobin_check(masa,low).
+iron_check(masa,normal).
+b12_check(masa,normal).
+folic_acid_check(masa,low).
+
+hemoglobin_check(nikola,low).
+iron_check(nikola,high).
 b12_check(nikola,low).
-b12_check(ana,low).
-hemoglobin_check(ana,low).
+folic_acid_check(nikola,high).
+blood_sugar_level(nikola,high).
+blood_sugar_level(milica,high).
+hemoglobin_check(milica,low).
+iron_check(milica,low).
+b12_check(milica,low).
+folic_acid_check(milica,low).
+hemoglobin_check(ana,high).
 iron_check(ana,high).
+b12_check(ana,high).
+folic_acid_check(ana,high).
 blood_sugar_level(ana,low).
-folic_acid_check(ana,low).
-
-

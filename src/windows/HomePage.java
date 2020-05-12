@@ -1,6 +1,7 @@
 package windows;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -30,6 +31,8 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -105,8 +108,8 @@ public class HomePage {
 	private JPanel panelTreatments = new JPanel();
 	private JScrollPane scrollPaneTreatments = new JScrollPane();
 	
-	private ArrayList<String> nizConfirmedDiagnosis= new ArrayList<String>();
-
+	private ArrayList<String> nizConfirmedDiagnosis = new ArrayList<String>();
+	private ArrayList<String> nizTreatments = new ArrayList<String>();
 
 
 	/**
@@ -172,15 +175,16 @@ public class HomePage {
 		
 		engine.consultFile("ruleBased/prolog.pl");
 		
+		nizConfirmedDiagnosis.clear();
+		
 		showPatients();
 		
 		addSymptoms();
 		
 		initialDiagnosis();
 		
-
-		//showTestsTable();
 		
+
 	}
 	
 //////////////////////////////////////////////////////////////////IZLISTAVA PACIJENTE U COMBOBOX////////////////////////////////////////////////////////
@@ -193,7 +197,6 @@ public class HomePage {
 		JIPTerm solution;
 				
 		while ( (solution = query.nextSolution()) != null  ) {
-			//System.out.println("solution: " + solution);
 			for (JIPVariable var: solution.getVariables()) {
 				niz.add(var.getValue().toString());
 			}
@@ -231,7 +234,6 @@ public class HomePage {
 		JIPTerm solution;
 		
 		while ( (solution = query.nextSolution()) != null  ) {
-			//System.out.println("solution: " + solution);
 			for (JIPVariable var: solution.getVariables()) {
 				niz.add(var.getValue().toString());
 			}
@@ -275,6 +277,7 @@ public class HomePage {
 	  				 btnGetInitalDiagnosis.setVisible(true);
 	  						
 	  				 //kad se opet klikne na dugme za potvrdu simptoma, dalji paneli opet postaju nevidljivi
+	  				 nizConfirmedDiagnosis.clear();
 	  				 panelAdditionalTests.setVisible(false);
 	  				 btnAdditionalTests.setVisible(false);
 	  				 lblAdditionalTests.setVisible(false);
@@ -337,7 +340,6 @@ public class HomePage {
 		JIPTerm solution;
 			
 		while ( (solution = query.nextSolution()) != null  ) {
-			//System.out.println("solution: " + solution);
 			for (JIPVariable var: solution.getVariables()) {
 				niz.add(var.getValue().toString());
 			
@@ -362,7 +364,7 @@ public class HomePage {
 	    
 	  	
 		//Panel i skroler
-    panelDeseases.setBounds(541, 20, 310, 100);
+        panelDeseases.setBounds(541, 20, 310, 100);
 		scrollPaneDeseases.setViewportView(deseasesList);
 		deseasesList.setLayoutOrientation(JList.VERTICAL);
 		panelDeseases.add(scrollPaneDeseases);
@@ -401,7 +403,6 @@ public class HomePage {
 				
 			
 		while ( (solution = query.nextSolution()) != null  ) {
-			//System.out.println("solution: " + solution);
 			for (JIPVariable var: solution.getVariables()) {
 				nizTests.add(var.getValue().toString());
 				
@@ -497,12 +498,12 @@ public class HomePage {
 		
 		//na ovo dugme treba da se dodaju testovi i rezultati u prolog fajl, ne moze da se doda ako nisu svi testovi odradjeni
 
-		JButton btnGetDiagnosis = new JButton("Do tests");
+		JButton btnDoTests = new JButton("Do tests");
 
-		btnGetDiagnosis.setBounds(35, 350, 300, 40);
-		panel_2.add(btnGetDiagnosis);
+		btnDoTests.setBounds(35, 350, 300, 40);
+		panel_2.add(btnDoTests);
 		
-		btnGetDiagnosis.addActionListener(new ActionListener() {
+		btnDoTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				flag = 0;
 				//ako negde nije dodeljen rezultat ne moze(to mozemo promeniti)
@@ -544,15 +545,170 @@ public class HomePage {
 					
 					//ispisujemo nove testove ako ih ima
 					writeNewTests(term);
-					confirmedDiagnosis();
+					
 					
 				}
-
 				
-
+				engine.consultFile("ruleBased/prolog.pl");
+				confirmedDiagnosis();
 			}
 		});			
-    }   
+    }  
+    
+    
+ //////////////////////////////////////////////////DUGME NA KOJE SE KLIKNE DA BI ISKOCIO POPUP PROZOR SA DIJAGNOZAMA I TREATMENTSIMA//////////////////////////////   
+   private void confirmedDiagnosis() {
+		
+  		//Button 
+		btnConfirmedDiagnosis = new JButton("Show confirmed diagnosis");
+	    btnConfirmedDiagnosis.setVisible(true);
+        panel_2.add(btnConfirmedDiagnosis);
+        btnConfirmedDiagnosis.setBounds(555, 350, 300, 40); 
+        
+        btnConfirmedDiagnosis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				popupWindow();
+			}
+		});
+		
+		
+    }
+ 
+////////////////////////////////////////////POPUP SA DIJAGNOZAMA////////////////////////////////////////////////////////////////   
+   private void popupWindow() {
+		 //new pop up window
+	    parent.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
+	    parent.setTitle("Confirmed Diagnosis");
+	    parent.setBounds(400, 200,450,400);
+	   // parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    parent.getContentPane().setLayout(null);
+	    parent.addWindowListener(new WindowAdapter() {
+	        public void windowClosing(WindowEvent e) {
+	        	panelTreatments.setVisible(false);
+	            nizConfirmedDiagnosis.clear();
+	        }
+
+	    });
+	    
+	    //JLista 
+	    System.out.println(simptomi);
+		JIPQuery query = engine.openSynchronousQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), X)");
+		JIPTerm solution;
+	    		
+		while ( (solution = query.nextSolution()) != null  ) {
+			//nizConfirmedDiagnosis.clear();
+			for (JIPVariable var: solution.getVariables()) {
+				int zastava = 0;
+				for(String item: nizConfirmedDiagnosis) {
+					if(item.equals(var.getValue().toString())) {
+						zastava = 1;
+						break;
+					}
+				}
+				if(zastava == 0) {
+					nizConfirmedDiagnosis.add(var.getValue().toString());
+				}
+				
+			}
+		}
+		
+		Vector itemsCD = new Vector(nizConfirmedDiagnosis);
+		confirmedDiagnosisList = new JList(itemsCD);
+		confirmedDiagnosisList.setEnabled(false);
+		confirmedDiagnosisList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		confirmedDiagnosisList.setFixedCellWidth(200);
+		confirmedDiagnosisList.setFixedCellHeight(20);
+		
+	  	
+		//Panel i skroler
+		panelConfirmedDiagnosis.setBounds(80,20, 268,110);
+		scrollPaneConfirmDiagnosis.setViewportView(confirmedDiagnosisList);
+		confirmedDiagnosisList.setLayoutOrientation(JList.VERTICAL);
+		panelConfirmedDiagnosis.add(scrollPaneConfirmDiagnosis);
+		parent.add(panelConfirmedDiagnosis);
+	
+		
+		//labela
+		lblConfirmedDiagnosis = new JLabel("Confirmed diagnosis");
+		lblConfirmedDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    lblConfirmedDiagnosis.setBounds(10, 100, 150, 30); 
+		//parent.add(lblConfirmedDiagnosis);
+
+		 //button
+		 btnShowTreatments = new JButton("Show treatments");
+		 parent.add(btnShowTreatments);
+		 btnShowTreatments.setBounds(140,140, 150,30); 
+
+		 //labela
+		 lblTreatments = new JLabel("Treatments");
+		 lblTreatments.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		 lblTreatments.setVisible(false);
+		 lblTreatments.setBounds(10,180, 150,30); 
+		 parent.add(lblTreatments);
+			 
+		 parent.setVisible(true);
+		 panelConfirmedDiagnosis.setVisible(true);
+		 lblConfirmedDiagnosis.setVisible(true);
+		 btnShowTreatments.setVisible(true);
+		 
+
+		 //prikaz treatments-a klikom na dugme
+		 btnShowTreatments.addActionListener(new java.awt.event.ActionListener() {
+		 @Override
+	      public void actionPerformed(java.awt.event.ActionEvent evt) {
+			    engine.consultFile("ruleBased/prolog.pl");
+			    nizTreatments.clear();
+			 	lblTreatments.setVisible(true);
+				panelTreatments.setVisible(true);
+				treatments(nizConfirmedDiagnosis);
+	      }
+	  }); 
+	}
+   
+   
+ /////////////////////////////////////////////////////////////////TREATMENTS///////////////////////////////////////////  
+   private void treatments(ArrayList<String> nizConfirmedDiagnosis) {
+
+       //JLista 
+		JIPQuery query = engine.openSynchronousQuery("treatment_for((" + nizConfirmedDiagnosis + "), B)");
+													
+		JIPTerm solution;
+		
+		nizTreatments.clear();
+		System.out.println(nizConfirmedDiagnosis);
+		while ( (solution = query.nextSolution()) != null  ) {
+			for (JIPVariable var: solution.getVariables()) {
+				int zastava = 0;
+				for(String item: nizTreatments) {
+					if(item.equals(var.getValue().toString())) {
+						zastava = 1;
+						break;
+					}
+				}
+				if(zastava == 0) {
+					nizTreatments.add(var.getValue().toString());
+					System.out.println(nizTreatments);
+				}
+			}
+		}
+		
+		Vector items = new Vector(nizTreatments);
+	    treatmentsList = new JList(items);
+	    treatmentsList.setEnabled(false);
+	    treatmentsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	    treatmentsList.setFixedCellWidth(200);
+	    treatmentsList.setFixedCellHeight(20);
+	
+	    //Panel i skroler
+		panelTreatments.setBounds(80,180, 268,150);
+	    scrollPaneTreatments.setViewportView(treatmentsList);
+	    treatmentsList.setLayoutOrientation(JList.VERTICAL);
+	    panelTreatments.add(scrollPaneTreatments);
+	    parent.add(panelTreatments);
+
+	    
+}
     
 //////////////////////////////////////////////////////////////////ISPISIVANJE NOVIH TESTOVA////////////////////////////////////////////
     public void writeNewTests(ArrayList<String> term) {
@@ -650,141 +806,9 @@ public class HomePage {
     		}catch (Exception e2) {
     			e2.printStackTrace();
     		}
-    	}
-   
+    	}   
     }
     
-    private void confirmedDiagnosis() {
-    	
-	  
-	 
-	    //button
-	    btnConfirmedDiagnosis = new JButton("Show confirmed diagnosis");
-	    btnConfirmedDiagnosis.setVisible(true);
-        panel_2.add(btnConfirmedDiagnosis);
-        btnConfirmedDiagnosis.setBounds(555, 350, 300, 40); 
-        
-    	
-		//otvaranje novog prozora klikom na dugme
-        btnConfirmedDiagnosis.addActionListener(new java.awt.event.ActionListener() {
-		@Override
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-			
-			
-        
-			popupWindow();
-	       
-		    
-		   
-         }
-     });
-    
-  
-    
- }
-    
-private void popupWindow() {
-	 //new pop up window
-    parent.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
-    parent.setTitle("Confirmed Diagnosis");
-    parent.setBounds(400, 200,450,400);
-   // parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    parent.getContentPane().setLayout(null);
-    
-    //JLista 
-	JIPQuery query = engine.openSynchronousQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
-	JIPTerm solution;
-    
-	nizConfirmedDiagnosis.clear();
-	System.out.println(nizConfirmedDiagnosis + " stasa");
-	while ( (solution = query.nextSolution()) != null  ) {
 
-		for (JIPVariable var: solution.getVariables()) {
-			nizConfirmedDiagnosis.add(var.getValue().toString());
-		System.out.println(nizConfirmedDiagnosis + "milica");
-		}
-	}
-	
-	 Vector itemsCD = new Vector(nizConfirmedDiagnosis);
-	confirmedDiagnosisList = new JList(itemsCD);
-	confirmedDiagnosisList.setEnabled(false);
-	confirmedDiagnosisList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-	confirmedDiagnosisList.setFixedCellWidth(200);
-	confirmedDiagnosisList.setFixedCellHeight(20);
-	
-  	
-	//Panel i skroler
-	panelConfirmedDiagnosis.setBounds(80,20, 268,100);
-	scrollPaneConfirmDiagnosis.setViewportView(confirmedDiagnosisList);
-	confirmedDiagnosisList.setLayoutOrientation(JList.VERTICAL);
-	panelConfirmedDiagnosis.add(scrollPaneConfirmDiagnosis);
-	parent.add(panelConfirmedDiagnosis);
-	
-	//labela
-	lblConfirmedDiagnosis = new JLabel("");
-	lblConfirmedDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 18));
-    lblConfirmedDiagnosis.setBounds(130, 10, 200, 57); 
-	parent.add(lblConfirmedDiagnosis);
-
- 
- //button
- btnShowTreatments = new JButton("Show treatments");
- parent.add(btnShowTreatments);
- btnShowTreatments.setBounds(140,140, 150,30); 
-
- //labela
- lblTreatments = new JLabel("Treatments");
-	 lblTreatments.setFont(new Font("Tahoma", Font.PLAIN, 18));
-	 lblTreatments.setVisible(false);
-	 lblTreatments.setBounds(10,180, 150,30); 
-	 parent.add(lblTreatments);
-	 
-	 parent.setVisible(true);
- 	panelConfirmedDiagnosis.setVisible(true);
-     lblConfirmedDiagnosis.setVisible(true);
-     btnShowTreatments.setVisible(true);
- 
-	 //prikaz treatments-a klikom na dugme
- btnShowTreatments.addActionListener(new java.awt.event.ActionListener() {
-		@Override
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-			lblTreatments.setVisible(true);
-			panelTreatments.setVisible(true);
-     	treatments(nizConfirmedDiagnosis);
-      }
-  }); 
-	
-}
-
-private void treatments(ArrayList<String> nizConfirmedDiagnosis) {
-
-	        //JLista 
-			JIPQuery query = engine.openSynchronousQuery("treatment_for((" + nizConfirmedDiagnosis + "), B)");
-														
-			ArrayList<String> nizTreatments= new ArrayList<String>();
-			JIPTerm solution;
-			
-			while ( (solution = query.nextSolution()) != null  ) {
-				for (JIPVariable var: solution.getVariables()) {
-					nizTreatments.add(var.getValue().toString());
-				}
-			}
-			
-			Vector items = new Vector(nizTreatments);
-		    treatmentsList = new JList(items);
-		    treatmentsList.setEnabled(false);
-		    treatmentsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		    treatmentsList.setFixedCellWidth(200);
-		    treatmentsList.setFixedCellHeight(20);
-		
-		    //Panel i skroler
-			panelTreatments.setBounds(80,180, 268,150);
-		    scrollPaneTreatments.setViewportView(treatmentsList);
-		    treatmentsList.setLayoutOrientation(JList.VERTICAL);
-		    panelTreatments.add(scrollPaneTreatments);
-		    parent.add(panelTreatments);
-	
-		    
-}
     
 }
