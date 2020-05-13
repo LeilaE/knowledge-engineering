@@ -5,6 +5,7 @@ import controls.Patients;
 import controls.Query;
 import controls.Symptoms;
 import controls.Tests;
+import logic.PrologLogic;
 import models.Patient;
 
 import javax.swing.*;
@@ -578,6 +579,7 @@ public class HomePage {
 				}
 				//ispisujemo nove testove ako ih ima
 				Tests.updateTests(template, newTestResults);
+				PrologLogic.getInstance().reConsult();
 				confirmedDiagnosis();
 			}
 		});

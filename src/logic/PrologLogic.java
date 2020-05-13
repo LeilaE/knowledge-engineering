@@ -12,15 +12,18 @@ public class PrologLogic {
 	private static JIPEngine engine = new JIPEngine();
 	
 	private PrologLogic() {
-		engine.consultFile(FilesUtils.openProlog());
+		engine.consultFile(FilesUtils.initProlog());
 	}
 	
 	public static PrologLogic getInstance() { 
         if (instance == null) 
-        	instance = new PrologLogic(); 
-  
+        	instance = new PrologLogic();
         return instance; 
     }
+
+    public void reConsult() {
+		engine.consultFile(FilesUtils.openProlog());
+	}
 	
 	/* Query example: "prethodnik(3,X)" */
 	public JIPQuery doQuery(String queryString) {

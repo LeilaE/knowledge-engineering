@@ -12,6 +12,10 @@ public class FilesUtils {
 	private static String prologOutput = "ruleBased/prolog.pl";
 
 	public static String openProlog() {
+		return prologOutput;
+	}
+
+	public static String initProlog() {
 
 		Path fileToDeletePath = Paths.get(prologOutput);
 		try {

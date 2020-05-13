@@ -9,7 +9,9 @@ treatment(insulin_injections, [diabetes_type_1, diabetes_type_2]).
 treatment(blood_sugar_monitoring, [diabetes_type_1, diabetes_type_2, gestational_diabetes]).
 treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes] ).
 
-treatment_for(X, T) :- treatment(T, L), contains(L, X).
+containsTreatment(S,[H|T]) :- member(H,S); containsTreatment(S,T).
+
+treatment_for(X, T) :- treatment(T, L), containsTreatment(L, X).
 
 blood_sugar_level(ana,high).
 hemoglobin_check(ana,low).
