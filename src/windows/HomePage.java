@@ -5,6 +5,7 @@ import controls.Patients;
 import controls.Query;
 import controls.Symptoms;
 import controls.Tests;
+import logic.FilesUtils;
 import logic.PrologLogic;
 import models.Patient;
 
@@ -15,10 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -77,6 +75,7 @@ public class HomePage {
 	private JLabel lblTreatments= new JLabel();
 	private JPanel panelTreatments = new JPanel();
 	private JScrollPane scrollPaneTreatments = new JScrollPane();
+	private Set<String> items;
 
 	DefaultTableModel tableModel = new DefaultTableModel() {
 		@Override
@@ -573,15 +572,19 @@ public class HomePage {
 
 				   //ovo hocemo da upisemo ako ne postoji test za tu osobu
 					String termin = (test + "(" + person + "," + result + ").");
-					template = test + "(" + person + "," + result + ").";
+					template = test + "(" + person + ",";
 				   //ako postoji test za tu osobu onda ga menjamo novim rezultatom
-				   newTestResults.add(termin);
+					if(FilesUtils.replaceInFile(template, termin) == false){
+						newTestResults.add(termin);
+					}
 				}
+
 				//ispisujemo nove testove ako ih ima
-				Tests.updateTests(template, newTestResults);
-				PrologLogic.getInstance().reConsult();
-				confirmedDiagnosis();
+				FilesUtils.writeProlog(newTestResults);
 			}
+
+			PrologLogic.getInstance().reConsult();
+			confirmedDiagnosis();
 		});
     }
 
@@ -603,10 +606,17 @@ public class HomePage {
 		parent.setBounds(400, 200,450,400);
 	    // parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		parent.getContentPane().setLayout(null);
+		parent.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				panelTreatments.setVisible(false);
 
-		ArrayList<String> nizConfirmedDiagnosis = Query.genericArrayQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), B)");
+			}
 
-		Set<String> items = new HashSet<String>(nizConfirmedDiagnosis);
+		});
+
+		ArrayList<String> nizConfirmedDiagnosis = Query.genericArrayQuery("confirmed_diagnosis(symptoms(" + person + "," + simptomi + "), X)");
+
+		items = new HashSet<String>(nizConfirmedDiagnosis);
 		Vector itemsCD = new Vector(items);
 		JList confirmedDiagnosisList = new JList(itemsCD);
 		confirmedDiagnosisList.setEnabled(false);
@@ -659,7 +669,7 @@ public class HomePage {
 		ArrayList<String> nizTreatments = new ArrayList<String>();
 
 		for(String diagnosis : nizConfirmedDiagnosis) {
-			nizTreatments.addAll(Query.genericArrayQuery("treatment_for((" + nizConfirmedDiagnosis + "), B)"));
+			nizTreatments.addAll(Query.genericArrayQuery("treatment_for((" + nizConfirmedDiagnosis + "), X)"));
 		}
 
 		Set<String> items = new HashSet<String>(nizTreatments);

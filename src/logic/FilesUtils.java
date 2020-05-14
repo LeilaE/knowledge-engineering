@@ -112,7 +112,7 @@ public class FilesUtils {
 	}
 
 	//Extracted from "CITAMO SVE IZ FAJLA I AKO NADJEMO NA TEST KOJI HOCEMO DA UPISEMO PRESKOCIMO GA, AKO NE NADJEMO VRACAMO FALSE"
-	public static void replaceInFile(String termReplace, String termNew){
+	public static boolean replaceInFile(String termReplace, String termNew){
 		FileReader fr = null;
 		BufferedReader br = null;
 		String line = null;
@@ -145,6 +145,8 @@ public class FilesUtils {
 				e2.printStackTrace();
 			}
 		}
+
+		return retVal;
 	}
 
 	public static void writeAllValuesWithReplaced(ArrayList<String> lines, String termNew, boolean retVal) {
