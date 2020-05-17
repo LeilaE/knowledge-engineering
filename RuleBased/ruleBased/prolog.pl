@@ -173,9 +173,3 @@ hemoglobin_check(stasa,low).
 iron_check(stasa,low).
 b12_check(stasa,low).
 folic_acid_check(stasa,low).
-hemoglobin_check(milica,high).
-iron_check(milica,normal).
-b12_check(milica,normal).
-folic_acid_check(milica,low).
-blood_sugar_level(milica,normal).
-
