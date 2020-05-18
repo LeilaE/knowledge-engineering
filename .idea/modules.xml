@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/knowledge-engineering.iml" filepath="$PROJECT_DIR$/.idea/knowledge-engineering.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RuleBased/PrologExample.iml" filepath="$PROJECT_DIR$/RuleBased/PrologExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CaseBased/cbrExample.iml" filepath="$PROJECT_DIR$/CaseBased/cbrExample.iml" />
     </modules>
   </component>
 </project>
