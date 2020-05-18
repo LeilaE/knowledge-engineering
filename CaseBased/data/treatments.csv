@@ -17,3 +17,12 @@ diabetes_type_2;female;50;excercise
 diabetes_type_2;male;72;blood_sugar_monitoring
 diabetes_type_2;female;31;insulin_injections
 diabetes_type_2;male;14;diet,excercise
+gestational_diabetes;female;28;diet
+gestational_diabetes;female;40;diet,blood_sugar_monitoring
+gestational_diabetes;female;20;diet,blood_sugar_monitoring,excercise
+gestational_diabetes;female;25;diet,excercise
+pernicious_anemia;male;43;vitamin_b12_injections
+pernicious_anemia;female;23;vitamin_b12_injections,blood_transfusion
+pernicious_anemia;male;51;blood_transfusion
+pernicious_anemia;female;41;vitamin_b12_injections,blood_transfusion
+

@@ -1,4 +1,4 @@
-package cbr.treatmetns;
+package cbr.treatments;
 
 import java.util.Collection;
 
