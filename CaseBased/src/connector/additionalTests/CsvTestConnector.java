@@ -3,23 +3,26 @@ package connector.additionalTests;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import model.additionalTests.AdditionalTestsDescription;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
 import ucm.gaia.jcolibri.cbrcore.Connector;
 import ucm.gaia.jcolibri.exception.InitializingException;
 import ucm.gaia.jcolibri.util.FileIO;
+import model.additionalTests.AdditionalTestsDescription;
 
-public class CsvConnector implements Connector {
+public class CsvTestConnector implements Connector {
 	
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		LinkedList<CBRCase> cases = new LinkedList<CBRCase>();
 		
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("data/example.csv")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("data/additionalTests.csv")));
 			if (br == null)
 				throw new Exception("Error opening file");
 
@@ -31,11 +34,12 @@ public class CsvConnector implements Connector {
 
 				CBRCase cbrCase = new CBRCase();
 
-				//CaseDescription caseDescription = new CaseDescription();
-				
-				// TODO
-				
-				//cbrCase.setDescription(caseDescription);
+				AdditionalTestsDescription additionalTestsDescription = new AdditionalTestsDescription();
+				additionalTestsDescription.setSymptomsList(Arrays.asList(values[0].split(",")));
+				additionalTestsDescription.setInitialDiagnosisList(Arrays.asList(values[1].split(",")));
+				additionalTestsDescription.setAdditionalTestsList(Arrays.asList(values[2].split(",")));
+
+				cbrCase.setDescription(additionalTestsDescription);
 				cases.add(cbrCase);
 			}
 			br.close();
