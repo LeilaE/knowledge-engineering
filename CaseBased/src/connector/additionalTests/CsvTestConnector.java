@@ -36,8 +36,9 @@ public class CsvTestConnector implements Connector {
 
 				AdditionalTestsDescription additionalTestsDescription = new AdditionalTestsDescription();
 				additionalTestsDescription.setSymptomsList(Arrays.asList(values[0].split(",")));
-				additionalTestsDescription.setInitialDiagnosisList(Arrays.asList(values[1].split(",")));
-				additionalTestsDescription.setAdditionalTestsList(Arrays.asList(values[2].split(",")));
+				additionalTestsDescription.setGeneticsList(Arrays.asList(values[1].split(",")));
+				additionalTestsDescription.setInitialDiagnosisList(Arrays.asList(values[2].split(",")));
+				additionalTestsDescription.setAdditionalTestsList(Arrays.asList(values[3].split(",")));
 
 				cbrCase.setDescription(additionalTestsDescription);
 				cases.add(cbrCase);

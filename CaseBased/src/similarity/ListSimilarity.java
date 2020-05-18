@@ -12,20 +12,27 @@ public class ListSimilarity implements LocalSimilarityFunction {
 
 	@Override
 	public double compute(Object list1, Object list2) throws NoApplicableSimilarityFunctionException {
-		if (list1 == null ||  list2 == null)
+		if (list1 == null || list2 == null)
 			return 0;
-		int startSize = ((List) list1).size();
+		int startSize1 = ((List) list1).size();
+		int startSize2 = ((List) list2).size();
 		double counter = 0;
-		for(String element1: (List<String>) list1){
-			for(String element2: (List<String>) list2){
-				if(element1.equals(element2)){
+
+		for (String element1 : (List<String>) list1) {
+			for (String element2 : (List<String>) list2) {
+				if (element1.equals(element2)) {
 					counter = counter + 1;
 					break;
 				}
 			}
 		}
 
-		return counter/startSize;
+		if (startSize1 > startSize2) {
+			return counter / startSize1;
+		}else{
+			return counter / startSize2;
+		}
+
 	}
 
 	@Override

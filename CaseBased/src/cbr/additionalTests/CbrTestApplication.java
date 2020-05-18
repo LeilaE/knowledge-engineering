@@ -40,7 +40,7 @@ public class CbrTestApplication implements StandardCBRApplication {
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 
 		simConfig.addMapping(new Attribute("symptomsList", AdditionalTestsDescription.class), new ListSimilarity());
-		//simConfig.addMapping(new Attribute("initialDiagnosisList", AdditionalTestsDescription.class), new ListSimilarity());
+		simConfig.addMapping(new Attribute("geneticsList", AdditionalTestsDescription.class), new ListSimilarity());
 		//simConfig.addMapping(new Attribute("additionalTestsList", AdditionalTestsDescription.class), new ListSimilarity());
 
 
@@ -62,7 +62,7 @@ public class CbrTestApplication implements StandardCBRApplication {
 
 	public void cycle(CBRQuery query) throws ExecutionException {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-		eval = SelectCases.selectTopKRR(eval, 4);
+		eval = SelectCases.selectTopKRR(eval, 10);
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval)
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
@@ -97,9 +97,13 @@ public class CbrTestApplication implements StandardCBRApplication {
 			symptomsList.add("fatigue");
 			symptomsList.add("weakness");
 
+			ArrayList<String> geneticsList = new ArrayList<>();
+			geneticsList.add("iron_deficiency_anemia");
+			geneticsList.add("diabetes_type_1");
+
 			AdditionalTestsDescription additionalTestsDescription = new AdditionalTestsDescription();
 			additionalTestsDescription.setSymptomsList(symptomsList);
-
+			additionalTestsDescription.setGeneticsList(geneticsList);
 
 			// TODO
 

@@ -9,13 +9,24 @@ import ucm.gaia.jcolibri.cbrcore.CaseComponent;
 public class AdditionalTestsDescription implements CaseComponent {
 
 	private List<String> symptomsList;
+	private List<String> geneticsList;
 	private List<String> initialDiagnosisList;
 	private List<String> additionalTestsList;
+
+
+	public List<String> getGeneticsList() {
+		return geneticsList;
+	}
+
+	public void setGeneticsList(List<String> geneticsList) {
+		this.geneticsList = geneticsList;
+	}
 
 	@Override
 	public String toString() {
 		return "AdditionalTestsDescription{" +
 				"symptomsList=" + symptomsList +
+				", geneticsList=" + geneticsList +
 				", initialDiagnosisList=" + initialDiagnosisList +
 				", additionalTestsList=" + additionalTestsList +
 				'}';
