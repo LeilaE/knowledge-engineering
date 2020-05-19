@@ -1,36 +1,51 @@
 package cbr.diagnosis;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
-import connector.diagnosis.CsvConnector;
+import connector.diagnosis.CsvDiagnosisConnector;
+import model.diagnosis.DiagnosisDescription;
+import model.treatments.TreatmentsDescription;
+import similarity.ListSimilarity;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
-import ucm.gaia.jcolibri.cbrcore.CBRCase;
-import ucm.gaia.jcolibri.cbrcore.CBRCaseBase;
-import ucm.gaia.jcolibri.cbrcore.CBRQuery;
-import ucm.gaia.jcolibri.cbrcore.Connector;
+import ucm.gaia.jcolibri.cbrcore.*;
 import ucm.gaia.jcolibri.exception.ExecutionException;
+import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
+import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNConfig;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
 
-public class CbrApplication implements StandardCBRApplication {
-	
+public class CbrDiagnosisApplication implements StandardCBRApplication {
+
+	private static String initialDiagnosis;
 	Connector _connector;  /** Connector object */
 	CBRCaseBase _caseBase;  /** CaseBase object */
 
 	NNConfig simConfig;  /** KNN configuration */
 	
 	public void configure() throws ExecutionException {
-		_connector =  new CsvConnector();
+		_connector =  new CsvDiagnosisConnector();
 		
 		_caseBase = new LinealCaseBase();  // Create a Lineal case base for in-memory organization
 		
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
-		
+
+
+		//simConfig.addMapping(new Attribute("initaialDiagnosis", DiagnosisDescription.class), new Equal());
+		simConfig.addMapping(new Attribute("gender", DiagnosisDescription.class), new Equal());
+		simConfig.addMapping(new Attribute("age", DiagnosisDescription.class), new Interval(100));
+		simConfig.addMapping(new Attribute("active", DiagnosisDescription.class), new Equal());
+		simConfig.addMapping(new Attribute("smoker", DiagnosisDescription.class), new Equal());
+		simConfig.addMapping(new Attribute("pregnant", DiagnosisDescription.class), new Equal());
+		simConfig.addMapping(new Attribute("geneticsList", DiagnosisDescription.class), new ListSimilarity());
+		simConfig.addMapping(new Attribute("testsList", DiagnosisDescription.class), new ListSimilarity());
+		//simConfig.addMapping(new Attribute("confirmedDiagnosisList", DiagnosisDescription.class), new ListSimilarity());
+
 		// simConfig.addMapping(new Attribute("attribute", CaseDescription.class), new Interval(5));
 		// TODO
 
@@ -47,10 +62,20 @@ public class CbrApplication implements StandardCBRApplication {
 
 	public void cycle(CBRQuery query) throws ExecutionException {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-		eval = SelectCases.selectTopKRR(eval, 5);
+		//eval = SelectCases.selectTopKRR(eval, 6);
+
 		System.out.println("Retrieved cases:");
-		for (RetrievalResult nse : eval)
-			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+		for(RetrievalResult rr: eval){
+			String[] values = rr.get_case().getDescription().toString().split(",");
+			String[] values0 = values[0].toString().split("=");
+			String[] values1 = values0[1].toString().split("'");
+			String diagnosisVal = values1[1];
+
+			if(initialDiagnosis.equals(diagnosisVal)){
+				System.out.println(rr.get_case().getDescription() + " -> " + rr.getEval());
+			}
+		}
+
 	}
 
 	public void postCycle() throws ExecutionException {
@@ -66,18 +91,36 @@ public class CbrApplication implements StandardCBRApplication {
 	}
 
 	public static void main(String[] args) {
-		StandardCBRApplication recommender = new CbrApplication();
+		StandardCBRApplication recommender = new CbrDiagnosisApplication();
 		try {
 			recommender.configure();
 
 			recommender.preCycle();
 
 			CBRQuery query = new CBRQuery();
-			//CaseDescription caseDescription = new CaseDescription();
-			
-			// TODO
-			
-			//query.setDescription( caseDescription );
+
+
+			DiagnosisDescription diagnosisDescription = new DiagnosisDescription();
+			diagnosisDescription.setInitialDiagosis("anemia");
+			diagnosisDescription.setGender("male");
+			diagnosisDescription.setAge(60);
+			diagnosisDescription.setActive("active");
+			diagnosisDescription.setSmoker("non-smoker");
+			diagnosisDescription.setPregnant("non-pregnant");
+
+			ArrayList<String> geneticsList = new ArrayList<>();
+			geneticsList.add("iron_deficiency_anemia");
+			geneticsList.add("diabetes_type_1");
+			diagnosisDescription.setGeneticsList(geneticsList);
+
+			ArrayList<String> testsList = new ArrayList<>();
+			testsList.add("hemoglobin_check:low");
+			testsList.add("iron_check:normal");
+			diagnosisDescription.setTestsList(testsList);
+
+			initialDiagnosis = diagnosisDescription.getInitialDiagosis();
+
+			query.setDescription(diagnosisDescription);
 
 			recommender.cycle(query);
 

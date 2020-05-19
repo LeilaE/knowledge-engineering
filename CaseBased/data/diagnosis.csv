@@ -1,0 +1,17 @@
+#initialDiagnosis;gender;age;active;smoker;pregnant;geneticsList;testsList;confirmedDiagnosis
+
+anemia;female;30;active;non-smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:low,iron_check:normal;iron_deficiency_anemia
+anemia;female;55;active;smoker;non-pregnant;iron_deficiency_anemia,pernicious_anemia;hemoglobin_check:low,iron_check:normal,b12_check:low,folic_acid_check:high;iron_deficiency_anemia,pernicious_anemia
+anemia;male;41;non-active;smoker;non-pregnant;pernicious_anemia,diabetes_type_1;hemoglobin_check:low,iron_check:low,b12_check:low,folic_acid_check:low;iron_deficiency_anemia,pernicious_anemia
+anemia;female;27;non-active;non-smoker;pregnant;iron_deficiency_anemia,pernicious_anemia;hemoglobin_check:normal,iron_check:high,b12_check:low,folic_acid_check:normal;iron_deficiency_anemia,pernicious_anemia
+diabetes;male;41;non-active;smoker;non-pregnant;pernicious_anemia,diabetes_type_1;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:low;diabetes_type_1
+diabetes;female;52;active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1,gestational_diabetes
+diabetes;male;63;non-active;smoker;non-pregnant;diabetes_type_2;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_2
+anemia;female;38;active;smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:low,iron_check:high;iron_deficiency_anemia
+anemia;female;68;active;smoker;non-pregnant;iron_deficiency_anemia,pernicious_anemia;hemoglobin_check:low,iron_check:normal,b12_check:low,folic_acid_check:high;iron_deficiency_anemia,pernicious_anemia
+anemia;male;41;non-active;smoker;non-pregnant;pernicious_anemia,diabetes_type_1;hemoglobin_check:low,iron_check:low,b12_check:low,folic_acid_check:low;iron_deficiency_anemia,pernicious_anemia
+anemia;female;55;non-active;smoker;pregnant;iron_deficiency_anemia;hemoglobin_check:normal,iron_check:high,b12_check:low,folic_acid_check:normal;iron_deficiency_anemia,pernicious_anemia
+diabetes;male;23;active;non-smoker;non-pregnant;pernicious_anemia,diabetes_type_1;blood_sugar_level:high,glycated_hemoglobin:high,glucose_tolerance:low;diabetes_type_1
+diabetes;female;53;active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1,gestational_diabetes
+diabetes;male;44;non-active;smoker;non-pregnant;diabetes_type_2;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_2
+
