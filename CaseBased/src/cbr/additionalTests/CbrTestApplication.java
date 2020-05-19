@@ -2,11 +2,9 @@ package cbr.additionalTests;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import connector.additionalTests.CsvTestConnector;
 import model.additionalTests.AdditionalTestsDescription;
-import model.treatments.TreatmentsDescription;
 import similarity.ListSimilarity;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
@@ -20,8 +18,6 @@ import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNConfig;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
-import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
-import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
 
 public class CbrTestApplication implements StandardCBRApplication {
@@ -38,6 +34,7 @@ public class CbrTestApplication implements StandardCBRApplication {
 
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
+
 
 		simConfig.addMapping(new Attribute("symptomsList", AdditionalTestsDescription.class), new ListSimilarity());
 		simConfig.addMapping(new Attribute("geneticsList", AdditionalTestsDescription.class), new ListSimilarity());
@@ -61,14 +58,14 @@ public class CbrTestApplication implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery query) throws ExecutionException {
+
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-		eval = SelectCases.selectTopKRR(eval, 10);
+		eval = SelectCases.selectTopKRR(eval, 5);
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval)
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 
 	}
-
 	public void postCycle() throws ExecutionException {
 
 	}

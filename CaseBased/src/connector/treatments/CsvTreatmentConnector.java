@@ -7,10 +7,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import model.treatments.TreatmentsDescription;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
