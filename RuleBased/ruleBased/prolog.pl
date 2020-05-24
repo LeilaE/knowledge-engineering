@@ -169,7 +169,7 @@ iron_check(ana,low).
 b12_check(ana,low).
 folic_acid_check(ana,low).
 blood_sugar_level(stasa,high).
-hemoglobin_check(stasa,low).
+hemoglobin_check(stasa,normal).
 iron_check(stasa,low).
-b12_check(stasa,low).
-folic_acid_check(stasa,low).
+b12_check(stasa,high).
+folic_acid_check(stasa,high).

@@ -116,14 +116,14 @@ public class HomePage {
 	private void initialize() {
 		frmExamination = new JFrame();
 		frmExamination.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 20));
-		frmExamination.setTitle("Expert System");
+		frmExamination.setTitle("RuleBased Examination");
 		frmExamination.setBounds(100, 100, 920, 500);
 		frmExamination.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmExamination.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 900, 450);
-		frmExamination.getContentPane().add(tabbedPane);
+		//frmExamination.getContentPane().add(tabbedPane);
 
 		//Tabs
 		JPanel panel = new JPanel();
@@ -138,8 +138,8 @@ public class HomePage {
 		tabbedPane.addTab("Additional testing", null, panel_2, null);
 		panel_2.setLayout(null);
 
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 900, 450);
+		//tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		//tabbedPane.setBounds(0, 0, 900, 450);
 		frmExamination.getContentPane().add(tabbedPane);
 
 		//Patients table
@@ -193,11 +193,6 @@ public class HomePage {
 		btnAddPatient.setBounds(786, 382, 97, 25);
 		panel.add(btnAddPatient);
 
-		//Examination Tab
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Examination", null, panel_1, null);
-		panel_1.setLayout(null);
-
 		/* Initialize functions */
 
 		loadPatients();
@@ -227,7 +222,6 @@ public class HomePage {
 		boolean smoker = userData.get(3).equals("yes");
 		boolean pregnant = userData.get(4).equals("yes");
 		Patient selectedPatient = new Patient(name, age, activity, smoker, pregnant, null);
-		System.out.println(selectedPatient.getName());
 		this.selectedPatient = selectedPatient;
 	}
 
