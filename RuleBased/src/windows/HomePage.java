@@ -623,17 +623,17 @@ public class HomePage {
 		scrollPaneConfirmDiagnosis.setViewportView(confirmedDiagnosisList);
 		confirmedDiagnosisList.setLayoutOrientation(JList.VERTICAL);
 		panelConfirmedDiagnosis.add(scrollPaneConfirmDiagnosis);
-		parent.add(panelConfirmedDiagnosis);
+		parent.getContentPane().add(panelConfirmedDiagnosis);
 
 		//labela
 		JLabel lblConfirmedDiagnosis = new JLabel("");
 		lblConfirmedDiagnosis.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblConfirmedDiagnosis.setBounds(130, 10, 200, 57);
-		parent.add(lblConfirmedDiagnosis);
+		parent.getContentPane().add(lblConfirmedDiagnosis);
 
 	    //button
 		JButton btnShowTreatments = new JButton("Show treatments");
-	    parent.add(btnShowTreatments);
+	    parent.getContentPane().add(btnShowTreatments);
 	    btnShowTreatments.setBounds(140,140, 150,30);
 
 	    //labela
@@ -641,7 +641,7 @@ public class HomePage {
 	    lblTreatments.setFont(new Font("Tahoma", Font.PLAIN, 18));
 	    lblTreatments.setVisible(false);
 	    lblTreatments.setBounds(10,180, 150,30);
-	    parent.add(lblTreatments);
+	    parent.getContentPane().add(lblTreatments);
 
 	    parent.setVisible(true);
 		panelConfirmedDiagnosis.setVisible(true);
@@ -679,6 +679,6 @@ public class HomePage {
 		scrollPaneTreatments.setViewportView(treatmentsList);
 		treatmentsList.setLayoutOrientation(JList.VERTICAL);
 		panelTreatments.add(scrollPaneTreatments);
-		parent.add(panelTreatments);
+		parent.getContentPane().add(panelTreatments);
 	}
 }

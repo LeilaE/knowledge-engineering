@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 
 public class FileWriter {
 	
-	public final static String TEST_CSV = "";
-	public final static String DIAGNOSIS_CSV = "";
-	public final static String TREATMENT_CSV = "";
+	public final static String TEST_CSV = "data/additionalTests.csv";
+	public final static String DIAGNOSIS_CSV = "data/diagnosis.csv";
+	public final static String TREATMENT_CSV = "data/treatments.csv";
 	
 	private static String convertToCSV(String[] data) {
 	    return Stream.of(data)
