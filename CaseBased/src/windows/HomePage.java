@@ -1,26 +1,35 @@
 package windows;
 
-import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+
+import javax.swing.JTextField;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import base.Dictionary;
+
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -29,6 +38,9 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+
+import utils.CaseWriter;
+
 
 public class HomePage {
 
@@ -41,6 +53,7 @@ public class HomePage {
 	private JPanel panel_3;
 	
 	//Lists
+
 	DefaultListModel<String> model = new DefaultListModel<String>();
 	DefaultListModel<String> model_1 = new DefaultListModel<String>();
 	DefaultListModel<String> model_2 = new DefaultListModel<String>();
@@ -51,22 +64,18 @@ public class HomePage {
 	private ArrayList<String> combos = new ArrayList<String>();
 	ArrayList<String> tests;
 
-	
+
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HomePage window = new HomePage();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			HomePage window = new HomePage();
+			window.frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -126,43 +135,73 @@ public class HomePage {
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		
-		JList<String> list = new JList<String>(model);
+		JList<String> list = new JList<>(model);
 		list.setBounds(12, 13, 340, 304);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setFixedCellWidth(200);
 		list.setFixedCellHeight(20);
 		panel.add(list);
 		
-		JList<String> list_1 = new JList<String>(model_1);
+		JList<String> list_1 = new JList<>(model_1);
 		list_1.setBounds(615, 13, 340, 304);
 		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list_1.setFixedCellWidth(200);
 		list_1.setFixedCellHeight(20);
 		panel.add(list_1);
 		
+		JButton btnNewButton_3 = new JButton("Save case");
+		btnNewButton_3.setBounds(438, 218, 97, 25);
+		panel.add(btnNewButton_3);
+		
 		refreshLists();
 	
 		
 		btnNewButton.addActionListener(e ->
 		{
-			ArrayList<String> symptomsList = new ArrayList<String>();
+			ArrayList<String> symptomsList = new ArrayList<>();
 			int[] selectedIx = list.getSelectedIndices();
-			for (int i = 0; i < selectedIx.length; i++) {
-			      Object sel = list.getModel().getElementAt(selectedIx[i]);
-			      symptomsList.add(sel.toString());
+			for (int ix : selectedIx) {
+				Object sel = list.getModel().getElementAt(ix);
+				symptomsList.add(sel.toString());
 			}
 			
+
 			ArrayList<String> geneticsList = new ArrayList<String>();
 			int[] selectedIxG = list_1.getSelectedIndices();
 			for (int i = 0; i < selectedIxG.length; i++) {
 			      Object sel = list_1.getModel().getElementAt(selectedIxG[i]);
-			      geneticsList.add(sel.toString());
+			      geneticsList.add(sel.toString());	
+
 			}
 			
 			ArrayList<String> results = cbr.additionalTests.CbrTestApplication.doCbrApplication(symptomsList, geneticsList);
 			
 			textArea.setText("");
+			assert results != null;
 			results.stream().map(i -> i+"\n").forEach(textArea::append);
+		});
+		
+		btnNewButton_3.addActionListener(e ->
+		{
+			ArrayList<String> symptomsList = new ArrayList<>();
+			int[] selectedIx = list.getSelectedIndices();
+			for (int ix : selectedIx) {
+				Object sel = list.getModel().getElementAt(ix);
+				symptomsList.add(sel.toString());
+			}
+			
+			ArrayList<String> geneticsList = new ArrayList<>();
+			int[] selectedIxG = list_1.getSelectedIndices();
+			for (int value : selectedIxG) {
+				Object sel = list_1.getModel().getElementAt(value);
+				geneticsList.add(sel.toString());
+			}
+			
+			List<String> initialDiagnosisList = Arrays.asList("anemia"); // TODO Real values 
+			
+			List<String> additionalTestsList = Arrays.asList("iron_check", "b12_check"); // TODO Real values
+
+			System.out.println(CaseWriter.testsToCsv(symptomsList, geneticsList, initialDiagnosisList, additionalTestsList));
 		});
 		
 	}

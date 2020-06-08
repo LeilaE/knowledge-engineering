@@ -18,3 +18,4 @@ fatigue,weakness,pale_skin;iron_deficiency_anemia,pernicious_anemia;anemia;hemog
 fatigue,weakness;iron_deficiency_anemia,pernicious_anemia;anemia;hemoglobin_check,iron_check,b12_check,folic_acid_check
 fatigue,weakness;pernicious_anemia,diabetes_type_1,diabetes_type_2;anemia,diabetes;b12_check,folic_acid_check,blood_sugar_level,glycated_hemoglobin,glucose_tolerance
 fatigue,weakness;iron_deficiency_anemia,diabetes_type_1,gestational_diabetes;anemia,diabetes;b12_check,folic_acid_check,blood_sugar_level,glycated_hemoglobin,glucose_tolerance
+
