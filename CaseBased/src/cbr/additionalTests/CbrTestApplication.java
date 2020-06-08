@@ -26,6 +26,8 @@ public class CbrTestApplication implements StandardCBRApplication {
 	CBRCaseBase _caseBase;  /** CaseBase object */
 
 	NNConfig simConfig;  /** KNN configuration */
+	
+	private static ArrayList<String> results = new ArrayList<String>(); /** Result list*/
 
 	public void configure() throws ExecutionException {
 		_connector =  new CsvTestConnector();
@@ -58,12 +60,14 @@ public class CbrTestApplication implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery query) throws ExecutionException {
-
+		
+		results = new ArrayList<String>();
+		
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 		eval = SelectCases.selectTopKRR(eval, 5);
-		System.out.println("Retrieved cases:");
+		//System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval)
-			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			results.add(nse.get_case().getDescription() + " -> " + nse.getEval());
 
 	}
 	public void postCycle() throws ExecutionException {
@@ -73,15 +77,12 @@ public class CbrTestApplication implements StandardCBRApplication {
 	public CBRCaseBase preCycle() throws ExecutionException {
 		_caseBase.init(_connector);
 		java.util.Collection<CBRCase> cases = _caseBase.getCases();
-		for (CBRCase c: cases)
-			System.out.println(c.getDescription());
+		//for (CBRCase c: cases)
+		//	System.out.println(c.getDescription());
 		return _caseBase;
-
-
-
 	}
 
-	public static void main(String[] args) {
+	public static ArrayList<String> doCbrApplication(ArrayList<String> symptomsList, ArrayList<String> geneticsList) {
 		StandardCBRApplication recommender = new CbrTestApplication();
 		try {
 			recommender.configure();
@@ -90,28 +91,29 @@ public class CbrTestApplication implements StandardCBRApplication {
 
 			CBRQuery query = new CBRQuery();
 
-			ArrayList<String> symptomsList = new ArrayList<>();
-			symptomsList.add("fatigue");
-			symptomsList.add("weakness");
+			//ArrayList<String> symptomsList = new ArrayList<>();
+			//symptomsList.add("fatigue");
+			//symptomsList.add("weakness");
 
-			ArrayList<String> geneticsList = new ArrayList<>();
-			geneticsList.add("iron_deficiency_anemia");
-			geneticsList.add("diabetes_type_1");
+			//ArrayList<String> geneticsList = new ArrayList<>();
+			//geneticsList.add("iron_deficiency_anemia");
+			//geneticsList.add("diabetes_type_1");
 
 			AdditionalTestsDescription additionalTestsDescription = new AdditionalTestsDescription();
 			additionalTestsDescription.setSymptomsList(symptomsList);
 			additionalTestsDescription.setGeneticsList(geneticsList);
-
-			// TODO
 
 			query.setDescription( additionalTestsDescription );
 
 			recommender.cycle(query);
 
 			recommender.postCycle();
+			
+			return results;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 }
