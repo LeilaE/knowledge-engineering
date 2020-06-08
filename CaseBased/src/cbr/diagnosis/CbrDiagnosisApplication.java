@@ -27,6 +27,8 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 
 	NNConfig simConfig;  /** KNN configuration */
 	
+	private static ArrayList<String> results = new ArrayList<String>(); 
+	
 	public void configure() throws ExecutionException {
 		_connector =  new CsvDiagnosisConnector();
 		
@@ -63,6 +65,9 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 	public void cycle(CBRQuery query) throws ExecutionException {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 		//eval = SelectCases.selectTopKRR(eval, 6);
+		
+		results = new ArrayList<String>();
+		
 
 		System.out.println("Retrieved cases:");
 		for(RetrievalResult rr: eval){
@@ -72,7 +77,7 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 			String diagnosisVal = values1[1];
 
 			if(initialDiagnosis.equals(diagnosisVal)){
-				System.out.println(rr.get_case().getDescription() + " -> " + rr.getEval());
+				results.add(rr.get_case().getDescription() + " -> " + rr.getEval());
 			}
 		}
 
@@ -90,7 +95,18 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 		return _caseBase;
 	}
 
-	public static void main(String[] args) {
+	public static ArrayList<String> doCbrDiagnosisApplication(ArrayList<String> initialDiagnosisList, ArrayList<String> geneticsList, String smoker, String pregnant, String active, String gender, int age,  ArrayList<String> tests) {
+		System.out.println("mmilica");
+		System.out.println(initialDiagnosisList);
+		System.out.println(geneticsList);
+		System.out.println(pregnant);
+		System.out.println(smoker);
+		System.out.println(active);
+		System.out.println(gender);
+		System.out.println(age);
+		System.out.println(tests);
+		System.out.println("stasa");
+		
 		StandardCBRApplication recommender = new CbrDiagnosisApplication();
 		try {
 			recommender.configure();
@@ -101,22 +117,16 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 
 
 			DiagnosisDescription diagnosisDescription = new DiagnosisDescription();
-			diagnosisDescription.setInitialDiagosis("anemia");
-			diagnosisDescription.setGender("male");
-			diagnosisDescription.setAge(60);
-			diagnosisDescription.setActive("active");
-			diagnosisDescription.setSmoker("non-smoker");
-			diagnosisDescription.setPregnant("non-pregnant");
+			diagnosisDescription.setInitialDiagosis(initialDiagnosisList.get(0));
+			diagnosisDescription.setGender(gender);
+			diagnosisDescription.setAge(age);
+			diagnosisDescription.setActive(active);
+			diagnosisDescription.setSmoker(smoker);
+			diagnosisDescription.setPregnant(pregnant);
 
-			ArrayList<String> geneticsList = new ArrayList<>();
-			geneticsList.add("iron_deficiency_anemia");
-			geneticsList.add("diabetes_type_1");
+
 			diagnosisDescription.setGeneticsList(geneticsList);
-
-			ArrayList<String> testsList = new ArrayList<>();
-			testsList.add("hemoglobin_check:low");
-			testsList.add("iron_check:normal");
-			diagnosisDescription.setTestsList(testsList);
+			diagnosisDescription.setTestsList(tests);
 
 			initialDiagnosis = diagnosisDescription.getInitialDiagosis();
 
@@ -125,9 +135,12 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 			recommender.cycle(query);
 
 			recommender.postCycle();
+			
+			return results;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 }

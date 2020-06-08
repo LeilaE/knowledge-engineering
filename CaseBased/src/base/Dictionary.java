@@ -20,7 +20,20 @@ public class Dictionary {
 			"gestational_diabetes"
 	));
 	
+	private static Set<String> initialDiagnosis = new HashSet<String>(Arrays.asList(
+			"diabetes",
+			"anemia"
+			));
 	
+	private static Set<String> tests = new HashSet<String>(Arrays.asList(
+			"hemoglobin_check",
+			"b12_check",
+			"iron_check",
+			"folic_acid_check",
+			"blood_sugar_level",
+			"glycated_hemoglobin",
+			"glucose_tolerance"
+			));
 
 	public static void addSymptom(String symptom) {
 		Dictionary.symptoms.add(symptom);
@@ -30,6 +43,7 @@ public class Dictionary {
 		Dictionary.genetics.add(genetic);
 	}
 
+	
 	public static Set<String> getSymptoms() {
 		return symptoms;
 	}
@@ -45,6 +59,23 @@ public class Dictionary {
 	public static void setGenetics(Set<String> genetics) {
 		Dictionary.genetics = genetics;
 	}
+
+	public static Set<String> getInitialDiagnosis() {
+		return initialDiagnosis;
+	}
+
+	public static void setInitialDiagnosis(Set<String> initialDiagnosis) {
+		Dictionary.initialDiagnosis = initialDiagnosis;
+	}
+
+	public static Set<String> getTests() {
+		return tests;
+	}
+
+	public static void setTests(Set<String> tests) {
+		Dictionary.tests = tests;
+	}
+	
 	
 	
 }
