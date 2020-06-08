@@ -6,19 +6,19 @@ import java.util.Set;
 
 public class Dictionary {
 
-	private static Set<String> symptoms = new HashSet<String>(Arrays.asList(
+	private static Set<String> symptoms = new HashSet<>(Arrays.asList(
 			"fatigue",
 			"weakness",
 			"pale_skin"
-			));
+	));
 	
-	private static Set<String> genetics = new HashSet<String>(Arrays.asList(
+	private static Set<String> genetics = new HashSet<>(Arrays.asList(
 			"iron_deficiency_anemia",
 			"pernicious_anemia",
 			"diabetes_type_1",
 			"diabetes_type_2",
 			"gestational_diabetes"
-			));
+	));
 	
 	
 

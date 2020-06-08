@@ -1,6 +1,5 @@
 package model.additionalTests;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ucm.gaia.jcolibri.cbrcore.Attribute;
