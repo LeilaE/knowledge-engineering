@@ -96,17 +96,7 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 	}
 
 	public static ArrayList<String> doCbrDiagnosisApplication(ArrayList<String> initialDiagnosisList, ArrayList<String> geneticsList, String smoker, String pregnant, String active, String gender, int age,  ArrayList<String> tests) {
-		System.out.println("mmilica");
-		System.out.println(initialDiagnosisList);
-		System.out.println(geneticsList);
-		System.out.println(pregnant);
-		System.out.println(smoker);
-		System.out.println(active);
-		System.out.println(gender);
-		System.out.println(age);
-		System.out.println(tests);
-		System.out.println("stasa");
-		
+
 		StandardCBRApplication recommender = new CbrDiagnosisApplication();
 		try {
 			recommender.configure();

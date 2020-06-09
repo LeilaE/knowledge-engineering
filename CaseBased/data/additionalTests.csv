@@ -19,3 +19,4 @@ fatigue,weakness;iron_deficiency_anemia,pernicious_anemia;anemia;hemoglobin_chec
 fatigue,weakness;pernicious_anemia,diabetes_type_1,diabetes_type_2;anemia,diabetes;b12_check,folic_acid_check,blood_sugar_level,glycated_hemoglobin,glucose_tolerance
 fatigue,weakness;iron_deficiency_anemia,diabetes_type_1,gestational_diabetes;anemia,diabetes;b12_check,folic_acid_check,blood_sugar_level,glycated_hemoglobin,glucose_tolerance
 
+
