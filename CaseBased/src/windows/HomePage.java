@@ -13,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ButtonGroup;
@@ -58,6 +57,8 @@ public class HomePage {
 	DefaultListModel<String> model_1 = new DefaultListModel<String>();
 	DefaultListModel<String> model_2 = new DefaultListModel<String>();
 	DefaultListModel<String> model_3 = new DefaultListModel<String>();
+	DefaultListModel<String> model_4 = new DefaultListModel<String>();
+
 	private JTextField textField_2;
 	
 	private JTable testsTable;
@@ -393,7 +394,82 @@ public class HomePage {
 	
 	
 	private void initPanel2() {
+		
 		// TODO Auto-generated method stub
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 330, 943, 240);
+		panel_2.add(scrollPane);
+
+		JButton btnNewButton = new JButton("Do CBR");
+		btnNewButton.setBounds(520, 272, 97, 25);
+		panel_2.add(btnNewButton);
+
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		
+		JList<String> list_3 = new JList<String>(model_4);
+		list_3.setBounds(250, 25, 200, 290);
+		list_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list_3.setFixedCellWidth(200);
+		list_3.setFixedCellHeight(20);
+		panel_2.add(list_3);
+		
+		JLabel lblDiagnosis = new JLabel("Confirmed Diagnosis");
+		lblDiagnosis.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblDiagnosis.setForeground(Color.BLACK);
+		lblDiagnosis.setBounds(300, 10, 120, 13);
+		panel_2.add(lblDiagnosis);
+		
+
+		JRadioButton rdbtnMale = new JRadioButton("male");
+		rdbtnMale.setBounds(530, 98, 60, 21);
+		panel_2.add(rdbtnMale);
+		
+		JRadioButton rdbtnFemale = new JRadioButton("female");
+		rdbtnFemale.setBounds(530, 75, 103, 21);
+		panel_2.add(rdbtnFemale);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnMale);
+		group.add(rdbtnFemale);
+		
+
+		textField_2 = new JTextField();
+		textField_2.setBounds(530, 150, 60, 19);
+		panel_2.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblAge = new JLabel("Age:");
+		lblAge.setBounds(500, 151, 32, 21);
+		panel_2.add(lblAge);
+		
+		btnNewButton.addActionListener(e ->
+		{
+			ArrayList<String> diagnosis = new ArrayList<String>();
+			int[] selectedIx = list_3.getSelectedIndices();
+			for (int i = 0; i < selectedIx.length; i++) {
+			      Object sel = list_3.getModel().getElementAt(selectedIx[i]);
+			      diagnosis.add(sel.toString());
+			}
+			
+			
+			String gender;
+	
+			if(rdbtnMale.isSelected()) {
+				gender="male";
+			}else{
+				gender="female";
+			}
+			
+			
+			int age;
+			age=Integer.parseInt(textField_2.getText());
+			
+			ArrayList<String> results = cbr.treatments.CbrTreatmentApplication.doCbrTreatmentsApplication(diagnosis, gender, age);
+			
+			textArea.setText("");
+			results.stream().map(i -> i+"\n").forEach(textArea::append);
+		});
 		
 	}
 	
@@ -419,7 +495,7 @@ public class HomePage {
 		
 		JButton btnNewButton_2 = new JButton("Add genetics");
 		btnNewButton_2.addActionListener(e -> {
-			Dictionary.addGenetics(textField.getText());
+			Dictionary.addGenetics(textField_1.getText());
 			refreshLists();
 		});
 		btnNewButton_2.setBounds(140, 69, 116, 25);
@@ -439,5 +515,8 @@ public class HomePage {
 		
 		model_3.removeAllElements();
 		Dictionary.getTests().forEach(model_3::addElement);
+		
+		model_4.removeAllElements();
+		Dictionary.getDiagnosis().forEach(model_4::addElement);
 	}
 }

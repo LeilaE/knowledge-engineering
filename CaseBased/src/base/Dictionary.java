@@ -20,6 +20,14 @@ public class Dictionary {
 			"gestational_diabetes"
 	));
 	
+	private static Set<String> diagnosis = new HashSet<>(Arrays.asList(
+			"iron_deficiency_anemia",
+			"pernicious_anemia",
+			"diabetes_type_1",
+			"diabetes_type_2",
+			"gestational_diabetes"
+	));
+	
 	private static Set<String> initialDiagnosis = new HashSet<String>(Arrays.asList(
 			"diabetes",
 			"anemia"
@@ -34,6 +42,14 @@ public class Dictionary {
 			"glycated_hemoglobin",
 			"glucose_tolerance"
 			));
+
+	public static Set<String> getDiagnosis() {
+		return diagnosis;
+	}
+
+	public static void setDiagnosis(Set<String> diagnosis) {
+		Dictionary.diagnosis = diagnosis;
+	}
 
 	public static void addSymptom(String symptom) {
 		Dictionary.symptoms.add(symptom);

@@ -1,8 +1,11 @@
 package cbr.treatments;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
+import cbr.additionalTests.CbrTestApplication;
 import connector.treatments.CsvTreatmentConnector;
+import model.additionalTests.AdditionalTestsDescription;
 import model.treatments.TreatmentsDescription;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
@@ -26,6 +29,9 @@ public class CbrTreatmentApplication implements StandardCBRApplication {
 	CBRCaseBase _caseBase;  /** CaseBase object */
 
 	NNConfig simConfig;  /** KNN configuration */
+	
+	private static ArrayList<String> results = new ArrayList<String>(); 
+
 
 	public void configure() throws ExecutionException {
 		_connector =  new CsvTreatmentConnector();
@@ -60,8 +66,11 @@ public class CbrTreatmentApplication implements StandardCBRApplication {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 		eval = SelectCases.selectTopKRR(eval, 4);
 		System.out.println("Retrieved cases:");
+		
+		results = new ArrayList<String>();
+		
 		for (RetrievalResult nse : eval)
-			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			results.add(nse.get_case().getDescription() + " -> " + nse.getEval());
 
 	}
 
@@ -80,7 +89,8 @@ public class CbrTreatmentApplication implements StandardCBRApplication {
 
 	}
 
-	public static void main(String[] args) {
+	
+	public static ArrayList<String> doCbrTreatmentsApplication(ArrayList<String> diagnosisList, String gender, int age) {
 		StandardCBRApplication recommender = new CbrTreatmentApplication();
 		try {
 			recommender.configure();
@@ -89,22 +99,32 @@ public class CbrTreatmentApplication implements StandardCBRApplication {
 
 			CBRQuery query = new CBRQuery();
 
+			//ArrayList<String> symptomsList = new ArrayList<>();
+			//symptomsList.add("fatigue");
+			//symptomsList.add("weakness");
+
+			//ArrayList<String> geneticsList = new ArrayList<>();
+			//geneticsList.add("iron_deficiency_anemia");
+			//geneticsList.add("diabetes_type_1");
+
 			TreatmentsDescription trDescription = new TreatmentsDescription();
-			trDescription.setDiagnosis("diabetes_type_1");
-			trDescription.setGender("female");
-			trDescription.setAge(60);
-
-
-			// TODO
+			trDescription.setDiagnosis(diagnosisList.get(0));
+			trDescription.setGender(gender);
+			trDescription.setAge(age);
 
 			query.setDescription( trDescription );
 
 			recommender.cycle(query);
 
 			recommender.postCycle();
+			
+			return results;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
+
 
 }
