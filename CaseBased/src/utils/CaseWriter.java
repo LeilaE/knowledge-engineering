@@ -54,10 +54,12 @@ public class CaseWriter {
 		}
 	}
 	
-	public static boolean treatmentsToCsv(String diagnosis, String gender, int age, List<String> treatmentsList) {
+	public static boolean treatmentsToCsv(ArrayList<String> diagnosisList, String gender, int age, ArrayList<String> treatmentsList) {
 
 		String strAge = Integer.toString(age);
 
+		String diagnosis = String.join(",", diagnosisList);
+		
 		String treatments = String.join(",", treatmentsList);
 
 		ArrayList<String> data = new ArrayList<>(Arrays.asList(diagnosis, gender, strAge, treatments));
