@@ -29,10 +29,12 @@ public class CaseWriter {
 		}
 	}
 
-	public static boolean diagnosisToCsv(String initialDiagnosis, String gender, int age, String active, String smoker,
-			String pregnant, List<String> geneticsList, List<String> testsList, List<String> confirmedDiagnosisList) {
+	public static boolean diagnosisToCsv(ArrayList<String> initialDiagnosisList,  ArrayList<String> geneticsList, String smoker, String pregnant, String active, String gender, int age,  
+			 ArrayList<String> testsList, ArrayList<String> confirmedDiagnosisList) {
 
 		String strAge = Integer.toString(age);
+		
+		String initialDiagnosis = String.join(",", initialDiagnosisList);
 
 		String genetics = String.join(",", geneticsList);
 

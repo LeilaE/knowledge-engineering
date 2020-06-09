@@ -64,6 +64,10 @@ public class HomePage {
 	private JTable testsTable;
 	private ArrayList<String> combos = new ArrayList<String>();
 	ArrayList<String> tests;
+	
+	ArrayList<String> results;
+	ArrayList<String> resultsConfirmedDiagnosis;
+	private JTextField textField_3;
 
 
 
@@ -130,29 +134,40 @@ public class HomePage {
 		panel.add(scrollPane);
 		
 		JButton btnNewButton = new JButton("Do CBR");
-		btnNewButton.setBounds(438, 292, 97, 25);
+		btnNewButton.setBounds(425, 229, 97, 25);
 		panel.add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		
 		JList<String> list = new JList<>(model);
-		list.setBounds(12, 13, 340, 304);
+		list.setBounds(12, 45, 340, 272);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setFixedCellWidth(200);
 		list.setFixedCellHeight(20);
 		panel.add(list);
 		
 		JList<String> list_1 = new JList<>(model_1);
-		list_1.setBounds(615, 13, 340, 304);
+		list_1.setBounds(615, 45, 340, 272);
 		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list_1.setFixedCellWidth(200);
 		list_1.setFixedCellHeight(20);
 		panel.add(list_1);
 		
 		JButton btnNewButton_3 = new JButton("Save case");
-		btnNewButton_3.setBounds(438, 218, 97, 25);
+		btnNewButton_3.setBounds(425, 282, 97, 25);
+		btnNewButton_3.setVisible(false);
 		panel.add(btnNewButton_3);
+		
+		JLabel lblSymptoms = new JLabel("Symptoms:");
+		lblSymptoms.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblSymptoms.setBounds(131, 10, 76, 27);
+		panel.add(lblSymptoms);
+		
+		JLabel lblGeneticsList = new JLabel("Genetics list:");
+		lblGeneticsList.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblGeneticsList.setBounds(733, 13, 92, 20);
+		panel.add(lblGeneticsList);
 		
 		refreshLists();
 	
@@ -175,11 +190,14 @@ public class HomePage {
 
 			}
 			
-			ArrayList<String> results = cbr.additionalTests.CbrTestApplication.doCbrApplication(symptomsList, geneticsList);
+		    results = cbr.additionalTests.CbrTestApplication.doCbrApplication(symptomsList, geneticsList);
+		    System.out.println(results.get(0));
 			
 			textArea.setText("");
 			assert results != null;
 			results.stream().map(i -> i+"\n").forEach(textArea::append);
+			
+			btnNewButton_3.setVisible(true);
 		});
 		
 		btnNewButton_3.addActionListener(e ->
@@ -198,13 +216,53 @@ public class HomePage {
 				geneticsList.add(sel.toString());
 			}
 			
-			List<String> initialDiagnosisList = Arrays.asList("anemia"); // TODO Real values 
+			ArrayList<String> parsedInitialDiagnosis = parseInitialDiagnosis(results);
+			ArrayList<String> parsedTests = parseTests(results);
 			
-			List<String> additionalTestsList = Arrays.asList("iron_check", "b12_check"); // TODO Real values
-
-			System.out.println(CaseWriter.testsToCsv(symptomsList, geneticsList, initialDiagnosisList, additionalTestsList));
+	
+			System.out.println(CaseWriter.testsToCsv(symptomsList, geneticsList, parsedInitialDiagnosis, parsedTests));
 		});
 		
+	}
+	
+	ArrayList<String> parseInitialDiagnosis(ArrayList<String> results){
+		
+		
+	String[] parseTwo = results.get(0).split("initialDiagnosisList");
+		
+		String[] parseThree = parseTwo[1].split("\\[");
+		
+		String[] parseFour = parseThree[1].split("\\]");
+		
+		String[] parseFive = parseFour[0].split(",");
+		
+		ArrayList<String> parsedInitialDiagnosis = new ArrayList();
+		
+		for(String s: parseFive) {
+			parsedInitialDiagnosis.add(s);
+		}
+			
+		return parsedInitialDiagnosis;
+	}
+	
+	ArrayList<String> parseTests(ArrayList<String> results){
+		
+	
+		String[] parseTwo = results.get(0).split("additionalTestsList");
+		
+		String[] parseThree = parseTwo[1].split("\\[");
+		
+		String[] parseFour = parseThree[1].split("\\]");
+		
+		String[] parseFive = parseFour[0].split(",");
+		
+		ArrayList<String> parsedTests = new ArrayList();
+		
+		for(String s: parseFive) {
+			parsedTests.add(s);
+		}
+			
+		return parsedTests;
 	}
 	
 	
@@ -214,7 +272,7 @@ public class HomePage {
 		panel_1.add(scrollPane);
 
 		JButton btnNewButton = new JButton("Do CBR");
-		btnNewButton.setBounds(820, 292, 97, 25);
+		btnNewButton.setBounds(863, 276, 82, 21);
 		panel_1.add(btnNewButton);
 
 		JTextArea textArea = new JTextArea();
@@ -270,14 +328,19 @@ public class HomePage {
 		chckbxActive.setBounds(852, 199, 93, 21);
 		panel_1.add(chckbxActive);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(873, 236, 60, 19);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
-		
 		JLabel lblAge = new JLabel("Age:");
 		lblAge.setBounds(831, 235, 32, 21);
 		panel_1.add(lblAge);
+		
+		JButton btnSaveCase = new JButton("Save case");
+		btnSaveCase.setBounds(863, 307, 95, 21);
+		btnSaveCase.setVisible(false);
+		panel_1.add(btnSaveCase);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(863, 236, 60, 19);
+		panel_1.add(textField_3);
+		textField_3.setColumns(10);
 		
 		tests = getTests();
 		
@@ -331,15 +394,94 @@ public class HomePage {
 			
 			
 			int age;
-			age=Integer.parseInt(textField_2.getText());
+			age=Integer.parseInt(textField_3.getText());
 			
-			ArrayList<String> results = cbr.diagnosis.CbrDiagnosisApplication.doCbrDiagnosisApplication(initialDiagnosis, geneticsList, smoker, pregnant, active, gender, age, tests);
+			resultsConfirmedDiagnosis = cbr.diagnosis.CbrDiagnosisApplication.doCbrDiagnosisApplication(initialDiagnosis, geneticsList, smoker, pregnant, active, gender, age, tests);
 			
 			textArea.setText("");
-			results.stream().map(i -> i+"\n").forEach(textArea::append);
+			resultsConfirmedDiagnosis.stream().map(i -> i+"\n").forEach(textArea::append);
+			
+			btnSaveCase.setVisible(true);
+		});
+		
+		btnSaveCase.addActionListener(e ->
+		{
+			ArrayList<String> initialDiagnosis = new ArrayList<String>();
+			int[] selectedIx = list_2.getSelectedIndices();
+			for (int i = 0; i < selectedIx.length; i++) {
+			      Object sel = list_2.getModel().getElementAt(selectedIx[i]);
+			      initialDiagnosis.add(sel.toString());
+			}
+			
+			ArrayList<String> geneticsList = new ArrayList<String>();
+			int[] selectedIxG = list_1.getSelectedIndices();
+			for (int i = 0; i < selectedIxG.length; i++) {
+			      Object sel = list_1.getModel().getElementAt(selectedIxG[i]);
+			      geneticsList.add(sel.toString());
+			}
+			
+			String smoker;
+			if(chckbxSmoker.isSelected()) {
+				smoker="smoker";
+			}else
+			{
+				smoker="non-smoker";
+			}
+			
+			String pregnant;
+			if(chckbxPregnant.isSelected()) {
+				pregnant="pregnant";
+			}else
+			{
+				pregnant="non-pregnant";
+			}
+			
+			String active;
+			if(chckbxActive.isSelected()) {
+				active="active";
+			}else
+			{
+				active="non-active";
+			}
+			
+			String gender;
+	
+			if(rdbtnMale.isSelected()) {
+				gender="male";
+			}else{
+				gender="female";
+			}
+			
+			
+			int age;
+			age=Integer.parseInt(textField_3.getText());
+			
+			ArrayList<String> parsedConfirmedDiagnosis = parseConfirmedDiagnosis(resultsConfirmedDiagnosis);
+		
+			System.out.println(CaseWriter.diagnosisToCsv(initialDiagnosis, geneticsList, smoker, pregnant, active, gender, age, tests, parsedConfirmedDiagnosis));
 		});
 		
 		
+	}
+	
+	ArrayList<String> parseConfirmedDiagnosis(ArrayList<String> results){
+		
+		
+		String[] parseTwo = results.get(0).split("confirmedDiagnosisList");
+		
+		String[] parseThree = parseTwo[1].split("\\[");
+		
+		String[] parseFour = parseThree[1].split("\\]");
+		
+		String[] parseFive = parseFour[0].split(",");
+		
+		ArrayList<String> parsedConfirmedDiagnosis = new ArrayList();
+		
+		for(String s: parseFive) {
+			parsedConfirmedDiagnosis.add(s);
+		}
+			
+		return parsedConfirmedDiagnosis;
 	}
 	
 	ArrayList<String> getTests(){
