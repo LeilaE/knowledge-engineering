@@ -67,6 +67,7 @@ public class HomePage {
 	
 	ArrayList<String> results;
 	ArrayList<String> resultsConfirmedDiagnosis;
+	ArrayList<String> resultsTreatments;
 	private JTextField textField_3;
 
 
@@ -543,7 +544,7 @@ public class HomePage {
 		panel_2.add(scrollPane);
 
 		JButton btnNewButton = new JButton("Do CBR");
-		btnNewButton.setBounds(520, 272, 97, 25);
+		btnNewButton.setBounds(516, 241, 97, 25);
 		panel_2.add(btnNewButton);
 
 		JTextArea textArea = new JTextArea();
@@ -585,6 +586,11 @@ public class HomePage {
 		lblAge.setBounds(500, 151, 32, 21);
 		panel_2.add(lblAge);
 		
+		JButton btnSaveCase_1 = new JButton("Save case");
+		btnSaveCase_1.setBounds(516, 276, 97, 25);
+		btnSaveCase_1.setVisible(false);
+		panel_2.add(btnSaveCase_1);
+		
 		btnNewButton.addActionListener(e ->
 		{
 			ArrayList<String> diagnosis = new ArrayList<String>();
@@ -607,13 +613,63 @@ public class HomePage {
 			int age;
 			age=Integer.parseInt(textField_2.getText());
 			
-			ArrayList<String> results = cbr.treatments.CbrTreatmentApplication.doCbrTreatmentsApplication(diagnosis, gender, age);
+			resultsTreatments = cbr.treatments.CbrTreatmentApplication.doCbrTreatmentsApplication(diagnosis, gender, age);
 			
 			textArea.setText("");
-			results.stream().map(i -> i+"\n").forEach(textArea::append);
+			resultsTreatments.stream().map(i -> i+"\n").forEach(textArea::append);
+			
+			btnSaveCase_1.setVisible(true);
+		});
+		
+		btnSaveCase_1.addActionListener(e ->
+		{
+			ArrayList<String> diagnosis = new ArrayList<String>();
+			int[] selectedIx = list_3.getSelectedIndices();
+			for (int i = 0; i < selectedIx.length; i++) {
+			      Object sel = list_3.getModel().getElementAt(selectedIx[i]);
+			      diagnosis.add(sel.toString());
+			}
+			
+			
+			String gender;
+	
+			if(rdbtnMale.isSelected()) {
+				gender="male";
+			}else{
+				gender="female";
+			}
+			
+			
+			int age;
+			age=Integer.parseInt(textField_2.getText());
+			
+			ArrayList<String> parsedTreatments = parseTreatments(resultsTreatments);
+			
+			System.out.println(CaseWriter.treatmentsToCsv(diagnosis, gender, age, parsedTreatments));
 		});
 		
 	}
+	
+	ArrayList<String> parseTreatments(ArrayList<String> results){
+		
+		
+		String[] parseTwo = results.get(0).split("treatment");
+		
+		String[] parseThree = parseTwo[1].split("\\[");
+		
+		String[] parseFour = parseThree[1].split("\\]");
+		
+		String[] parseFive = parseFour[0].split(",");
+		
+		ArrayList<String> parsedTreatments = new ArrayList();
+		
+		for(String s: parseFive) {
+			parsedTreatments.add(s);
+		}
+			
+		return parsedTreatments;
+	}
+	
 	
 	private void initPanel3() {
 
