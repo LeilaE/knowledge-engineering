@@ -22,7 +22,7 @@ public class CSVWriter {
 	}
 	
 	public static void writeToDiagnosis(List<String> dataLines) throws IOException {
-		FileWriter csvOutputFile = new FileWriter(TEST_CSV, true);
+		FileWriter csvOutputFile = new FileWriter(DIAGNOSIS_CSV, true);
 	    try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
 	    	pw.println("\n");
 	        dataLines.stream().map(i -> i+";").forEach(pw::print);

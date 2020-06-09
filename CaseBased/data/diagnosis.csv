@@ -15,3 +15,6 @@ diabetes;male;23;active;non-smoker;non-pregnant;pernicious_anemia,diabetes_type_
 diabetes;female;53;active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1,gestational_diabetes
 diabetes;male;44;non-active;smoker;non-pregnant;diabetes_type_2;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_2
 
+
+
+anemia;male;60;active;non-smoker;non-pregnant;diabetes_type_1,iron_deficiency_anemia;hemoglobin_check:normal,iron_check:normal,hemoglobin_check:low;iron_deficiency_anemia;

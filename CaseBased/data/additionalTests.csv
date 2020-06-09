@@ -20,3 +20,14 @@ fatigue,weakness;pernicious_anemia,diabetes_type_1,diabetes_type_2;anemia,diabet
 fatigue,weakness;iron_deficiency_anemia,diabetes_type_1,gestational_diabetes;anemia,diabetes;b12_check,folic_acid_check,blood_sugar_level,glycated_hemoglobin,glucose_tolerance
 
 
+
+
+fatigue;diabetes_type_1,iron_deficiency_anemia;anemia, diabetes;hemoglobin_check, iron_check, b12_check, folic_acid_check, blood_sugar_level, glycated_hemoglobin, glucose_tolerance;
+
+weakness;iron_deficiency_anemia;anemia;hemoglobin_check, iron_check, b12_check, folic_acid_check;
+
+fatigue;diabetes_type_1,iron_deficiency_anemia;anemia,  diabetes;hemoglobin_check,  iron_check,  b12_check,  folic_acid_check,  blood_sugar_level,  glycated_hemoglobin,  glucose_tolerance;
+
+anemia;male;60;active;non-smoker;non-pregnant;diabetes_type_1,iron_deficiency_anemia;hemoglobin_check:normal,iron_check:low;iron_deficiency_anemia;
+
+anemia;male;60;active;non-smoker;non-pregnant;diabetes_type_1,iron_deficiency_anemia;iron_check:normal,hemoglobin_check:low;iron_deficiency_anemia;
