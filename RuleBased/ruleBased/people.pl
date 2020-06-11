@@ -48,15 +48,11 @@ smoker(mihajlo, yes).
 smoker(nikola, yes).
 smoker(srdjan, no).
 
-genetics(stasa, [high_blood_pressure]).
-genetics(milica, []).
-genetics(ana, [diabetes]).
-genetics(masa, [anemia]).
-genetics(aleksandar, []).
-genetics(petar, []).
-genetics(mihajlo, [high_blood_pressure]).
-genetics(nikola, []).
-genetics(srdjan, []).
+genetics(stasa, high_blood_pressure).
+genetics(stasa, diabetes).
+genetics(ana, diabetes).
+genetics(masa, anemia).
+genetics(mihajlo, high_blood_pressure).
 
 pregnant(ana).
 pregnant(masa).

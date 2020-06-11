@@ -48,15 +48,11 @@ smoker(mihajlo, yes).
 smoker(nikola, yes).
 smoker(srdjan, no).
 
-genetics(stasa, [high_blood_pressure]).
-genetics(milica, []).
-genetics(ana, [diabetes]).
-genetics(masa, [anemia]).
-genetics(aleksandar, []).
-genetics(petar, []).
-genetics(mihajlo, [high_blood_pressure]).
-genetics(nikola, []).
-genetics(srdjan, []).
+genetics(stasa, high_blood_pressure).
+genetics(stasa, diabetes).
+genetics(ana, diabetes).
+genetics(masa, anemia).
+genetics(mihajlo, high_blood_pressure).
 
 pregnant(ana).
 pregnant(masa).
@@ -99,6 +95,11 @@ symptom(pounding_in_the_ears).
 symptom(vision_problems).
 symptom(headache).
 symptom(chest_pain).
+
+% genetics
+genetic(high_blood_pressure).
+genetic(diabetes).
+genetic(anemia).
 % Additional examination suggestions
 % Name of examination and a list of symptoms it is suggested for
 % additional_test(symptoms(person_name, symptom_list), test_name) -> test_name if symptom_list contained in disease
@@ -168,8 +169,15 @@ hemoglobin_check(ana,low).
 iron_check(ana,low).
 b12_check(ana,low).
 folic_acid_check(ana,low).
-blood_sugar_level(stasa,high).
 hemoglobin_check(stasa,low).
-iron_check(stasa,low).
-b12_check(stasa,low).
+iron_check(stasa,normal).
+b12_check(stasa,high).
 folic_acid_check(stasa,low).
+blood_sugar_level(stasa,normal).
+person(kaca).
+age(kaca,21).
+activity(kaca,inactive).
+smoker(kaca,no).
+pregnant(kaca,no).
+genetics(kaca,high_blood_pressure).
+genetics(kaca,diabetes).

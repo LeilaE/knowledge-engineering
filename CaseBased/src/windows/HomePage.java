@@ -1,43 +1,31 @@
 package windows;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import base.Dictionary;
-
-
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-
 import utils.CaseWriter;
 
 
@@ -507,7 +495,7 @@ public class HomePage {
 	
 		//postavljanje combo boxa u celu prvu kolonu
 		String[] items = {"low","normal","high"};
-		JComboBox comboBoxTest = new JComboBox<String>(items);
+		JComboBox comboBoxTest = new JComboBox(items);
 		TableColumn col1 = testsTable.getColumnModel().getColumn(1);
 		col1.setCellEditor(new DefaultCellEditor(comboBoxTest));
 	

@@ -37,3 +37,8 @@ symptom(pounding_in_the_ears).
 symptom(vision_problems).
 symptom(headache).
 symptom(chest_pain).
+
+% genetics
+genetic(high_blood_pressure).
+genetic(diabetes).
+genetic(anemia).
