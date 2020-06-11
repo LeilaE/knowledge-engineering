@@ -10,6 +10,7 @@ public class FilesUtils {
 	
 	private static String[] files = {"ruleBased/people.pl", "ruleBased/symptoms.pl", "ruleBased/additional_examination.pl", "ruleBased/treatments.pl"};
 	private static String prologOutput = "ruleBased/prolog.pl";
+	private static String lastFile = "ruleBased/treatments.pl";
 
 	public static String openProlog() {
 		return prologOutput;
@@ -88,6 +89,24 @@ public class FilesUtils {
 				e2.printStackTrace();
 			}
 		}
+		
+		try {
+			file = new FileWriter(lastFile, true);
+			pw = new PrintWriter(file);
+
+			for(String t: terms) {
+				pw.println(t);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 
 	public static void writeSingleProlog(String term) {
@@ -96,6 +115,22 @@ public class FilesUtils {
 
 		try {
 			file = new FileWriter(prologOutput, true);
+			pw = new PrintWriter(file);
+
+			pw.println(term);
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		try {
+			file = new FileWriter(lastFile, true);
 			pw = new PrintWriter(file);
 
 			pw.println(term);
@@ -155,6 +190,30 @@ public class FilesUtils {
 
 		try {
 			file = new FileWriter(prologOutput);
+			pw = new PrintWriter(file);
+
+			for(String l: lines) {
+				pw.write(l + "\n");
+			}
+
+			//nova vrednost za postojeci test
+			if(retVal) {
+				pw.write(termNew);
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		try {
+			file = new FileWriter(lastFile);
 			pw = new PrintWriter(file);
 
 			for(String l: lines) {
