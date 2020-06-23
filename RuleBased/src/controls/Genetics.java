@@ -36,7 +36,7 @@ public class Genetics {
 				genetics.add(var.getValue().toString());
 			}
 		}
-
+		
         return genetics;
     }
 }

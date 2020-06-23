@@ -1,34 +1,51 @@
 package windows;
 
-import com.ugos.jiprolog.engine.JIPEngine;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
+
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import controls.Genetics;
 import controls.Patients;
 import controls.Query;
 import controls.Symptoms;
 import controls.Tests;
-import logic.FilesUtils;
 import logic.PrologLogic;
 import models.Patient;
-
-import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
 
 public class HomePage {
 
 	// Jframe
 	private JFrame frmExamination;
 	private JFrame parent = new JFrame();
+	
+	private JTabbedPane tabbedPane;
+	private PrologLogic prolog;
 
 	// Patients Tab
 	private JTable table_1;
@@ -82,6 +99,7 @@ public class HomePage {
 			return false;
 		}
 	};
+	
 
 	/**
 	 * Launch the application.
@@ -119,7 +137,7 @@ public class HomePage {
 		frmExamination.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmExamination.getContentPane().setLayout(null);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 900, 450);
 
 		// Tabs
@@ -136,6 +154,10 @@ public class HomePage {
 		panel_2.setLayout(null);
 
 		frmExamination.getContentPane().add(tabbedPane);
+		
+		tabbedPane.setEnabled(false);
+		
+		this.prolog = PrologLogic.getInstance();
 
 		/* Initialize functions */
 
@@ -239,6 +261,8 @@ public class HomePage {
 		ArrayList<String> genetics = Genetics.getPatientsGenetics(name);
 		Patient selectedPatient = new Patient(name, age, activity, smoker, pregnant, genetics);
 		this.selectedPatient = selectedPatient;
+		
+		this.tabbedPane.setEnabled(true);
 	}
 
 	private void addTableListener() {
@@ -285,7 +309,7 @@ public class HomePage {
 	}
 
 	private void addPatientToTable(String name, String age, String activity, boolean smoker, boolean pregnant, ArrayList<String> genetics) {
-		tableModel.addRow(new Object[] { name, age, activity, smoker, pregnant, genetics });
+		tableModel.addRow(new Object[] { name, age, activity, smoker, pregnant, genetics.toString().replace("[", "").replace("]", "").trim() });
 	}
 
 	private void loadPatients() {
@@ -300,7 +324,7 @@ public class HomePage {
 
 		for (Patient patient : patients) {
 			tableModel.addRow(new Object[] { patient.getName(), patient.getAge(), patient.getActivity(),
-					patient.isSmoker(), patient.isPregnant(), patient.getGenetics() });
+					patient.isSmoker(), patient.isPregnant(), patient.getGenetics().toString().replace("[", "").replace("]", "").trim() });
 		}
 	}
 
@@ -576,16 +600,11 @@ public class HomePage {
 					String termin = (test + "(" + selectedPatient.getName() + "," + result + ").");
 					template = test + "(" + selectedPatient.getName() + ",";
 					// ako postoji test za tu osobu onda ga menjamo novim rezultatom
-					if (FilesUtils.replaceInFile(template, termin) == false) {
-						newTestResults.add(termin);
-					}
+					Tests.updateTests(template, termin);
 				}
-
-				// ispisujemo nove testove ako ih ima
-				FilesUtils.writeProlog(newTestResults);
 			}
 
-			PrologLogic.getInstance().reConsult();
+			this.prolog.reConsult();
 			confirmedDiagnosis();
 		});
 	}

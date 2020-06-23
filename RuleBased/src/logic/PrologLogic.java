@@ -9,10 +9,10 @@ public class PrologLogic {
 	
 	private static PrologLogic instance = null;
 	
-	private static JIPEngine engine = new JIPEngine();
+	private JIPEngine engine = new JIPEngine();
 	
 	private PrologLogic() {
-		engine.consultFile(FilesUtils.initProlog());
+		engine.consultFile(FilesUtils.openProlog());
 	}
 	
 	public static PrologLogic getInstance() { 
@@ -22,7 +22,7 @@ public class PrologLogic {
     }
 
     public void reConsult() {
-		engine.consultFile(FilesUtils.openProlog());
+		instance.engine.consultFile(FilesUtils.openProlog());
 	}
 	
 	/* Query example: "prethodnik(3,X)" */
