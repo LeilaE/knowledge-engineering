@@ -1,6 +1,7 @@
 package controls;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPTerm;
@@ -28,8 +29,7 @@ public class Patients {
 		return patients;
 	}
 	
-	/* TODO genetics */
-	public static void addNewPatient(String name, String age, String activity, boolean smoker, boolean pregnant) {
+	public static void addNewPatient(String name, String age, String activity, boolean smoker, boolean pregnant, List<String> genetics) {
 		String strSmoker = smoker ? "yes" : "no";
 		String strPregnant = pregnant ? "yes" : "no";
 		FilesUtils.writeSingleProlog("person("+name+").");
@@ -37,6 +37,12 @@ public class Patients {
 		FilesUtils.writeSingleProlog("activity("+name+","+activity+").");
 		FilesUtils.writeSingleProlog("smoker("+name+","+strSmoker+").");
 		FilesUtils.writeSingleProlog("pregnant("+name+","+strPregnant+").");
+		
+		for (String genetic : genetics) {
+			FilesUtils.writeSingleProlog("genetics("+name+","+genetic+").");
+		}
+		
+		PrologLogic.getInstance().reConsult();
 	}
 	
 	public static Patient getPatientData(String name) {

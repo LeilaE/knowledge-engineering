@@ -18,8 +18,8 @@ hemoglobin_check(ana,low).
 iron_check(ana,low).
 b12_check(ana,low).
 folic_acid_check(ana,low).
-blood_sugar_level(stasa,high).
 hemoglobin_check(stasa,low).
-iron_check(stasa,low).
-b12_check(stasa,low).
+iron_check(stasa,normal).
+b12_check(stasa,high).
 folic_acid_check(stasa,low).
+blood_sugar_level(stasa,normal).
