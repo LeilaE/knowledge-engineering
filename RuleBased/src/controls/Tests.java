@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class Tests {
 
-    public static void updateTests(String testTemplate, ArrayList<String> newTestResults) {
+    public static void updateTests(String testTemplate, String newTestResults) {
 
-        for (String test : newTestResults) {
-            FilesUtils.replaceInFile(testTemplate, test);
+        if (!FilesUtils.replaceInFile(testTemplate, newTestResults)) {
+        	FilesUtils.writeSingleProlog(newTestResults);
         }
     }
 }
