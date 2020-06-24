@@ -64,10 +64,9 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 
 	public void cycle(CBRQuery query) throws ExecutionException {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-		//eval = SelectCases.selectTopKRR(eval, 6);
+		eval = SelectCases.selectTopKRR(eval, 10);
 		
 		results = new ArrayList<String>();
-		
 
 		System.out.println("Retrieved cases:");
 		for(RetrievalResult rr: eval){
@@ -75,11 +74,11 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 			String[] values0 = values[0].toString().split("=");
 			String[] values1 = values0[1].toString().split("'");
 			String diagnosisVal = values1[1];
-
 			if(initialDiagnosis.equals(diagnosisVal)){
 				results.add(rr.get_case().getDescription() + " -> " + rr.getEval());
 			}
 		}
+		
 
 	}
 

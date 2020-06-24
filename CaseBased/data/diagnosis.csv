@@ -2,7 +2,7 @@
 
 anemia;female;30;active;non-smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:low,iron_check:normal;iron_deficiency_anemia
 anemia;female;55;active;smoker;non-pregnant;iron_deficiency_anemia,pernicious_anemia;hemoglobin_check:low,iron_check:normal,b12_check:low,folic_acid_check:high;iron_deficiency_anemia,pernicious_anemia
-anemia;male;41;non-active;smoker;non-pregnant;pernicious_anemia,diabetes_type_1;hemoglobin_check:low,iron_check:low,b12_check:low,folic_acid_check:low;iron_deficiency_anemia,pernicious_anemia
+anemia;male;45;non-active;smoker;non-pregnant;pernicious_anemia,diabetes_type_1;hemoglobin_check:low,iron_check:low,b12_check:low,folic_acid_check:low;iron_deficiency_anemia,pernicious_anemia
 anemia;female;27;non-active;non-smoker;pregnant;iron_deficiency_anemia,pernicious_anemia;hemoglobin_check:normal,iron_check:high,b12_check:low,folic_acid_check:normal;iron_deficiency_anemia,pernicious_anemia
 diabetes;male;41;non-active;smoker;non-pregnant;pernicious_anemia,diabetes_type_1;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:low;diabetes_type_1
 diabetes;female;52;active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1,gestational_diabetes
@@ -14,4 +14,42 @@ anemia;female;55;non-active;smoker;pregnant;iron_deficiency_anemia;hemoglobin_ch
 diabetes;male;23;active;non-smoker;non-pregnant;pernicious_anemia,diabetes_type_1;blood_sugar_level:high,glycated_hemoglobin:high,glucose_tolerance:low;diabetes_type_1
 diabetes;female;53;active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1,gestational_diabetes
 diabetes;male;44;non-active;smoker;non-pregnant;diabetes_type_2;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_2
-
+anemia;female;19;active;non-smoker;non-pregnant;[];hemoglobin_check:low,iron_check:normal,b12_check:low,folic_acid_check:normal;iron_deficiency_anemia,pernicious_anemia
+anemia;female;33;non-active;smoker;pregnant;[];hemoglobin_check:low,iron_check:low,b12_check:normal,folic_acid_check:high;iron_deficiency_anemia
+anemia;male;44;non-active;non-smoker;non-pregnant;[];hemoglobin_check:high,iron_check:normal,b12_check:low,folic_acid_check:low;pernicious_anemia
+anemia;female;37;active;non-smoker;non-pregnant;[];hemoglobin_check:high,iron_check:low,b12_check:low,folic_acid_check:low;pernicious_anemia,iron_deficiency_anemia
+anemia;male;28;active;smoker;non-pregnant;pernicious_anemia,iron_deficiency_anemia;b12_check:high,iron_check:low;folic_acid_check:normal,hemoglobin_check:low;iron_deficiency_anemia
+anemia;male;82;non-active;non-smoker;non-pregnant;pernicious_anemia,iron_deficiency_anemia;b12_check:high,iron_check:low;folic_acid_check:normal,hemoglobin_check:normal;iron_deficiency_anemia
+anemia;female;38;active;smoker;non-pregnant;pernicious_anemia,iron_deficiency_anemia;b12_check:low,iron_check:high;folic_acid_check:normal,hemoglobin_check:high;pernicious_anemia
+anemia;female;72;non-active;non-smoker;non-pregnant;pernicious_anemia,iron_deficiency_anemia;b12_check:high,iron_check:normal;folic_acid_check:low,hemoglobin_check:normal;pernicious_anemia
+anemia;male;32;active;non-smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:normal,iron_check:low;iron_deficiency_anemia
+anemia;female;35;active;smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:low,iron_check:normal;iron_deficiency_anemia
+anemia;female;45;non-active;smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:low,iron_check:high;iron_deficiency_anemia
+anemia;male;52;non-active;smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:low,iron_check:low;iron_deficiency_anemia
+anemia;male;32;active;non-smoker;non-pregnant;pernicious_anemia;b12_check:normal,folic_acid_check:low;pernicious_anemia
+anemia;female;35;active;smoker;non-pregnant;pernicious_anemia;b12_check:low,folic_acid_check:low;pernicious_anemia
+anemia;female;45;non-active;smoker;non-pregnant;pernicious_anemia;b12_check:low,folic_acid_check:normal;pernicious_anemia
+anemia;male;31;active;non-smoker;non-pregnant;pernicious_anemia;b12_check:high,folic_acid_check:low;pernicious_anemia
+diabetes;male;24;non-active;non-smoker;non-pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1
+diabetes;male;11;active;non-smoker;non-pregnant;[];blood_sugar_level:normal,glycated_hemoglobin:normal,glucose_tolerance:high;diabetes_type_1
+diabetes;female;18;non-active;non-smoker;non-pregnant;[];blood_sugar_level:low,glycated_hemoglobin:high,glucose_tolerance:normal;diabetes_type_1
+diabetes;female;17;active;non-smoker;non-pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:high;diabetes_type_1
+diabetes;male;52;non-active;non-smoker;non-pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_2
+diabetes;male;67;active;smoker;non-pregnant;[];blood_sugar_level:normal,glycated_hemoglobin:normal,glucose_tolerance:high;diabetes_type_2
+diabetes;female;53;active;non-smoker;non-pregnant;[];blood_sugar_level:low,glycated_hemoglobin:high,glucose_tolerance:normal;diabetes_type_2
+diabetes;female;71;non-active;non-smoker;non-pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:high;diabetes_type_2
+diabetes;female;29;non-active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal; gestational_diabetes
+diabetes;female;27;active;smoker;pregnant;[];blood_sugar_level:normal,glycated_hemoglobin:normal,glucose_tolerance:high; gestational_diabetes
+diabetes;female;33;active;non-smoker;pregnant;[];blood_sugar_level:low,glycated_hemoglobin:high,glucose_tolerance:normal; gestational_diabetes
+diabetes;female;23;non-active;non-smoker;pregnant;[];blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:high; gestational_diabetes
+diabetes;female;24;active;non-smoker;pregnant;diabetes_type_1,diabetes_type_2,gestational_diabetes;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:high; gestational_diabetes
+diabetes;male;18;non-active;non-smoker;non-pregnant;diabetes_type_1,diabetes_type_2,gestational_diabetes;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1
+diabetes;male;48;non-active;smoker;non-pregnant;diabetes_type_1,diabetes_type_2,gestational_diabetes;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:high;diabetes_type_2
+diabetes;female;34;active;non-smoker;pregnant;diabetes_type_1,gestational_diabetes;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:high; gestational_diabetes
+diabetes;male;27;non-active;non-smoker;non-pregnant;diabetes_type_1,diabetes_type_2;blood_sugar_level:high,glycated_hemoglobin:normal,glucose_tolerance:normal;diabetes_type_1
+diabetes;female;89;non-active;non-smoker;non-pregnant;diabetes_type_2;blood_sugar_level:high,glycated_hemoglobin:high,glucose_tolerance:high;diabetes_type_2
+diabetes;female;89;non-active;non-smoker;non-pregnant;iron_deficiency_anemia;hemoglobin_check:high,iron_check:normal,b12_check:normal,folic_acid_check:high;blood_sugar_level:high,glycated_hemoglobin:high,glucose_tolerance:high;diabetes_type_2
+diabetes;male;23;active;non-smoker;non-pregnant;pernicious_anemia;hemoglobin_check:high,iron_check:normal,b12_check:normal,folic_acid_check:high;blood_sugar_level:low,glycated_hemoglobin:normal,glucose_tolerance:high;diabetes_type_1
+anemia;female;77;non-active;smoker;non-pregnant;diabetes_type_1;hemoglobin_check:high,iron_check:normal,b12_check:low,folic_acid_check:low;blood_sugar_level:normal,glycated_hemoglobin:noraml,glucose_tolerance:normal;pernicious_anemia
+anemia;male;43;active;non-smoker;non-pregnant;diabetes_type_2;hemoglobin_check:low,iron_check:low,b12_check:normal,folic_acid_check:high;blood_sugar_level:low,glycated_hemoglobin:normal,glucose_tolerance:normal;iron_deficiency_anemia
+anemia;female;54;active;smoker;non-pregnant;gestational_diabetes;hemoglobin_check:low,iron_check:normal,b12_check:low,folic_acid_check:low;blood_sugar_level:normal,glycated_hemoglobin:normal,glucose_tolerance:low;iron_deficiency_anemia,pernicious_anemia

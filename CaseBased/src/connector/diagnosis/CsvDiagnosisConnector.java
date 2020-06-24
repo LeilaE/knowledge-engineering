@@ -52,9 +52,6 @@ public class CsvDiagnosisConnector implements Connector {
 				diagnosisDescription.setConfirmedDiagnosisList(Arrays.asList(values[8].split(",")));
 
 				cbrCase.setDescription(diagnosisDescription);
-				cases.add(cbrCase);
-
-
 				//CaseDescription caseDescription = new CaseDescription();
 				
 				// TODO
