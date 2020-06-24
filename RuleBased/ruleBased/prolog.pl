@@ -64,9 +64,16 @@ pregnant(masa).
 symptoms(person, list_of_symptoms).
 
 disease(anemia,[fatigue, weakness, pale_skin, breathing_difficulties]).
-disease(blood_cloth,[bleeding, swelling, change_in_color, cramps, bruising]).
+disease(blood_clot,[bleeding, swelling, change_in_color, cramps, bruising]).
 disease(diabetes,[fatigue, increased_thirst, headache, troube_concentrating, blurred_vision, frequent_peeing, weight_loss]).
-disease(high_blood_pressure, [irregular_heartbeat, pounding_in_the_neck, pounding_in_the_ears, vision_problems, headache, chest_pain, breathing_difficulties]).
+disease(hypertension, [irregular_heartbeat, pounding_in_the_neck, pounding_in_the_ears, vision_problems, headache, chest_pain, breathing_difficulties]).
+disease(hypotension, [dizziness, lightheadedness, fatigue, vision_problems, nausea, lack_of_concentration]).
+disease(leukemia, [chills, fever, fatigue, weakness, swollen_lymph_nodes, enlarged_liver, weight_loss, nosebleeds, bone_pain, sweating]).
+disease(lymphoma, [fever, fatigue, sweating, shortness_of_breath, itchy_skin, weight_loss]).
+disease(hemophilia, [bruising, excessive_bleeding, bloody_urine, bloody_stool, nosebleeds, unexplained_irritability]).
+disease(thrombocytosis, [headache, dizziness, lightheadedness, weakness, numb_limbs]).
+disease(myeloma, [spine_pain, bone_pain, chest_pain, nausea, appetite_loss, fatigue, mental_confusion, weight_loss, numb_limbs, increased_thirst]).
+
 
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
@@ -95,6 +102,41 @@ symptom(pounding_in_the_ears).
 symptom(vision_problems).
 symptom(headache).
 symptom(chest_pain).
+symptom(dizziness).
+symptom(lightheadedness).
+symptom(vision_problems).
+symptom(nausea).
+symptom(lack_of_concentration).
+symptom(chills).
+symptom(fever).
+symptom(swollen_lymph_nodes).
+symptom(enlarged_liver).
+symptom(nosebleeds).
+symptom(bone_pain).
+symptom(sweating).
+symptom(shortness_of_breath).
+symptom(itchy_skin).
+symptom(excessive_bleeding).
+symptom(bloody_urine).
+symptom(bloody_stool).
+symptom(unexplained_irritability).
+symptom(numb_limbs).
+symptom(spine_pain).
+symptom(appetite_loss).
+symptom(mental_confusion).
+
+% genetics
+genetic(anemia).
+genetic(blood_cloth).
+genetic(diabetes).
+genetic(hypertension).
+genetic(hypotension).
+genetic(leukemia).
+genetic(lymphoma).
+genetic(hemophilia).
+genetic(thrombocytosis).
+genetic(myeloma).
+
 
 % genetics
 genetic(high_blood_pressure).
@@ -119,7 +161,84 @@ additional_test(symptoms(X, S), folic_acid_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
 additional_test(symptoms(X, S), blood_sugar_level) :-
-    disease(diabetes, S2), contains(S2, S), person(X) .
+    disease(diabetes, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), d_dimer_level) :-
+    disease(blood_clot, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), fibrin_degradation_fragment) :-
+    disease(blood_clot, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), blood_pressure) :-
+    disease(hypertension, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), doppler_ultrasound_blood_flow) :-
+    disease(hypertension, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), blood_pressure) :-
+    disease(hypotension, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), electrocardiogram_heart_rate) :-
+    disease(hypotension, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), echodiagram_heart_rytam) :-
+    disease(hypotension, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), white_cell_count) :-
+    disease(leukemia, S2), contains(S2, S), person(X).
+
+% low
+additional_test(symptoms(X, S), red_cell_count) :-
+    disease(leukemia, S2), contains(S2, S), person(X).
+
+% low
+additional_test(symptoms(X, S), platelets_count) :-
+    disease(leukemia, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), lymphoma_cells_level) :-
+    disease(lymphoma, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), PCR_chromosome_changes) :-
+    disease(lymphoma, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), red_cell_count) :-
+    disease(hemophilia, S2), contains(S2, S), person(X).
+
+% normal
+additional_test(symptoms(X, S), white_cell_count) :-
+    disease(hemophilia, S2), contains(S2, S), person(X).
+
+% normal
+additional_test(symptoms(X, S), platelets_count) :-
+    disease(hemophilia, S2), contains(S2, S), person(X).
+
+% low
+additional_test(symptoms(X, S), aptt_clothing_factor) :-
+    disease(hemophilia, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), iron_check) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+additional_test(symptoms(X, S), jak2_gene_presence) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), creatinine_level) :-
+    disease(myeloma, S2), contains(S2, S), person(X).
+
+% low
+additional_test(symptoms(X, S), calcium_level) :-
+    disease(myeloma, S2), contains(S2, S), person(X).
+
+ % low
+additional_test(symptoms(X, S), ldh_level) :-
+    disease(myeloma, S2), contains(S2, S), person(X).
+
+ % low
+additional_test(symptoms(X, S), albumin_level) :-
+    disease(myeloma, S2), contains(S2, S), person(X).
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
     (disease(anemia, S2), contains(S2, S),  person(X)),
@@ -181,7 +300,15 @@ smoker(pera,yes).
 pregnant(pera,no).
 genetics(pera,high_blood_pressure).
 genetics(pera,diabetes).
-hemoglobin_check(pera,low).
+hemoglobin_check(pera,normal).
 iron_check(pera,normal).
-b12_check(pera,high).
-folic_acid_check(pera,normal).
+b12_check(pera,low).
+folic_acid_check(pera,high).
+person(anica).
+age(anica,62).
+activity(anica,inactive).
+smoker(anica,yes).
+pregnant(anica,no).
+genetics(anica,diabetes).
+genetics(anica,anemia).
+blood_sugar_level(pera,normal).
