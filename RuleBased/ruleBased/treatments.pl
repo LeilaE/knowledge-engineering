@@ -42,11 +42,6 @@ pregnant(anica,no).
 genetics(anica,diabetes).
 genetics(anica,anemia).
 blood_sugar_level(pera,normal).
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 hemoglobin_check(aleksandar,high).
 iron_check(aleksandar,low).
 b12_check(aleksandar,normal).
@@ -66,11 +61,5 @@ creatinine_level(ana,low).
 calcium_level(ana,low).
 albumin_level(ana,low).
 ldh_level(ana,low).
-<<<<<<< HEAD
-creatinine_level(aleksandar,low).
-calcium_level(aleksandar,low).
-albumin_level(aleksandar,low).
-ldh_level(aleksandar,high).
->>>>>>> Stashed changes
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
+
+

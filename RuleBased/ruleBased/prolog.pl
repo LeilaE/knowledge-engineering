@@ -68,7 +68,6 @@ pregnant(masa).
 
 symptoms(person, list_of_symptoms).
 
-
 disease(anemia,[fatigue, weakness, pale_skin, breathing_difficulties]).
 disease(diabetes,[fatigue, weakness, increased_thirst, headache, trouble_concentrating, vision_problems, frequent_peeing, weight_loss]).
 disease(blood_clot,[excessive_bleeding, swelling, change_in_color, cramps, bruising]).
@@ -218,7 +217,8 @@ additional_test(symptoms(X, S), platelets_count) :-
 additional_test(symptoms(X, S), lymphoma_cells_level) :-
     disease(lymphoma, S2), contains(S2, S), person(X).
 
-%high
+
+% high
 additional_test(symptoms(X, S), pcr_chromosome_changes) :-
     disease(lymphoma, S2), contains(S2, S), person(X).
 
@@ -315,11 +315,6 @@ confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
     (pregnant(X),
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y)).
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 
 confirmed_diagnosis(symptoms(X, S), thrombus_blood_clot) :-
     (disease(blood_clot, S2), contains(S2, S), person(X)),
@@ -411,9 +406,8 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     bilirubin_level(X, P55), P55 = high;
     red_cell_count(X, P55), P55 = high).
 
-<<<<<<< HEAD
-confirmed_diagnosis(symptoms(X, S), myelodysplastic_syndromes) :-
-=======
+
+
 confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     ((age(X,P2), P2 > 40; active(X, P17), P17 = no),
@@ -421,8 +415,7 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     bilirubin_level(X, P55), P55 = high;
     red_cell_count(X, P55), P55 = high).
 
-confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
+confirmed_diagnosis(symptoms(X, S), myelodysplastic_syndromes) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     (active(X, P17), P17 = no,
     ((iron_check(X, P13), P13 = low, genetics(X, Y), member(thrombocytosis, Y)));
@@ -440,10 +433,9 @@ confirmed_diagnosis(symptoms(X, S), solitary_plasmacytoma) :-
     (creatinine_level(X, P13), P13 = high;
     albumin_level(X, P55), P55 = low)).
 
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
+
+
+
 % Treatment suggestions
 % treatment_for([confirmed_disease_name], X) -> X = [tre1, tre2,...]
 
@@ -488,11 +480,6 @@ pregnant(anica,no).
 genetics(anica,diabetes).
 genetics(anica,anemia).
 blood_sugar_level(pera,normal).
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 hemoglobin_check(aleksandar,high).
 iron_check(aleksandar,low).
 b12_check(aleksandar,normal).
@@ -501,7 +488,6 @@ white_cell_count(aleksandar,low).
 red_cell_count(aleksandar,high).
 platelets_count(aleksandar,low).
 aptt_clothing_factor(aleksandar,low).
-<<<<<<< HEAD
 d_dimer_level(petar,high).
 fibrin_degradation_fragment(petar,low).
 blood_pressure(ana,low).
@@ -509,17 +495,9 @@ electrocardiogram_heart_rate(ana,low).
 echodiagram_heart_rytam(ana,low).
 lymphoma_cells_level(ana,high).
 pcr_chromosome_changes(ana,high).
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 creatinine_level(ana,low).
 calcium_level(ana,low).
 albumin_level(ana,low).
 ldh_level(ana,low).
-<<<<<<< HEAD
-creatinine_level(aleksandar,low).
-calcium_level(aleksandar,low).
-albumin_level(aleksandar,low).
-ldh_level(aleksandar,high).
->>>>>>> Stashed changes
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
+
+

@@ -76,16 +76,9 @@ additional_test(symptoms(X, S), platelets_count) :-
 additional_test(symptoms(X, S), lymphoma_cells_level) :-
     disease(lymphoma, S2), contains(S2, S), person(X).
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-%high
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
-additional_test(symptoms(X, S), PCR_chromosome_changes) :-
-=======
-%high
+
+% high
 additional_test(symptoms(X, S), pcr_chromosome_changes) :-
->>>>>>> Stashed changes
     disease(lymphoma, S2), contains(S2, S), person(X).
 
 % high
@@ -181,11 +174,6 @@ confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
     (pregnant(X),
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y)).
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 
 confirmed_diagnosis(symptoms(X, S), thrombus_blood_clot) :-
     (disease(blood_clot, S2), contains(S2, S), person(X)),
@@ -241,11 +229,7 @@ confirmed_diagnosis(symptoms(X, S), hodgkin_lymphoma ) :-
 
 confirmed_diagnosis(symptoms(X, S), non_hodgkin_lymphoma ) :-
     (disease(lymphoma, S2), contains(S2, S),  person(X)),
-<<<<<<< HEAD
     (pcr_chromosome_changes(X, P13), P13 = high;
-=======
-    (PCR_chromosome_changes(X, P13), P13 = high;
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
     genetics(X, Y), member(lymphoma, Y)).
 
 confirmed_diagnosis(symptoms(X, S), hemophilia_type_A ) :-
@@ -281,9 +265,8 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     bilirubin_level(X, P55), P55 = high;
     red_cell_count(X, P55), P55 = high).
 
-<<<<<<< HEAD
-confirmed_diagnosis(symptoms(X, S), myelodysplastic_syndromes) :-
-=======
+
+
 confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     ((age(X,P2), P2 > 40; active(X, P17), P17 = no),
@@ -291,8 +274,7 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     bilirubin_level(X, P55), P55 = high;
     red_cell_count(X, P55), P55 = high).
 
-confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
+confirmed_diagnosis(symptoms(X, S), myelodysplastic_syndromes) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     (active(X, P17), P17 = no,
     ((iron_check(X, P13), P13 = low, genetics(X, Y), member(thrombocytosis, Y)));
@@ -300,26 +282,16 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
 
 confirmed_diagnosis(symptoms(X, S), light_chain_myeloma) :-
     (disease(myeloma, S2), contains(S2, S),  person(X)),
-<<<<<<< HEAD
     (pregnant(X, P17), P17 = yes),
     (calcium_level(X, P13), P13 = high,
-=======
-    (pregnant(X, P17), P17 = yes,
-    ((calcium_level(X, P13), P13 = high,
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
     ldh_level(X, P55), P55 = low).
 
 confirmed_diagnosis(symptoms(X, S), solitary_plasmacytoma) :-
     (disease(myeloma, S2), contains(S2, S),  person(X)),
-<<<<<<< HEAD
     (genetics(X, Y), member(myeloma, Y);
     (creatinine_level(X, P13), P13 = high;
     albumin_level(X, P55), P55 = low)).
 
->>>>>>> Stashed changes
-=======
-    (genetics(X, Y), member(myeloma, Y)),
-    ((creatinine_level(X, P13), P13 = high;
-    albumin_level(X, P55), P55 = low).
 
->>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
+
+
