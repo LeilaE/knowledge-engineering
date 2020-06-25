@@ -42,3 +42,29 @@ pregnant(anica,no).
 genetics(anica,diabetes).
 genetics(anica,anemia).
 blood_sugar_level(pera,normal).
+<<<<<<< Updated upstream
+=======
+hemoglobin_check(aleksandar,high).
+iron_check(aleksandar,low).
+b12_check(aleksandar,normal).
+folic_acid_check(aleksandar,low).
+white_cell_count(aleksandar,low).
+red_cell_count(aleksandar,high).
+platelets_count(aleksandar,low).
+aptt_clothing_factor(aleksandar,low).
+d_dimer_level(petar,high).
+fibrin_degradation_fragment(petar,low).
+blood_pressure(ana,low).
+electrocardiogram_heart_rate(ana,low).
+echodiagram_heart_rytam(ana,low).
+lymphoma_cells_level(ana,high).
+pcr_chromosome_changes(ana,high).
+creatinine_level(ana,low).
+calcium_level(ana,low).
+albumin_level(ana,low).
+ldh_level(ana,low).
+creatinine_level(aleksandar,low).
+calcium_level(aleksandar,low).
+albumin_level(aleksandar,low).
+ldh_level(aleksandar,high).
+>>>>>>> Stashed changes

@@ -12,7 +12,7 @@ public class PrologLogic {
 	private JIPEngine engine = new JIPEngine();
 	
 	private PrologLogic() {
-		engine.consultFile(FilesUtils.openProlog());
+		engine.consultFile(FilesUtils.initProlog());
 	}
 	
 	public static PrologLogic getInstance() { 
