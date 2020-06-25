@@ -268,18 +268,22 @@ public class HomePage {
 		scrollPane.setViewportView(textArea);
 
 		JList<String> list_2 = new JList<String>(model_2);
-		list_2.setBounds(12, 25, 200, 290);
 		list_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_2.setFixedCellWidth(200);
 		list_2.setFixedCellHeight(20);
-		panel_1.add(list_2);
+		
+		JScrollPane scrollPane1 = new JScrollPane(list_2);
+		scrollPane1.setBounds(12, 25, 200, 290);
+		panel_1.add(scrollPane1);
 
 		JList<String> list_1 = new JList<String>(model_1);
-		list_1.setBounds(250, 25, 200, 290);
 		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list_1.setFixedCellWidth(200);
 		list_1.setFixedCellHeight(20);
-		panel_1.add(list_1);
+		
+		JScrollPane scrollPane2 = new JScrollPane(list_1);
+		scrollPane2.setBounds(250, 25, 200, 290);
+		panel_1.add(scrollPane2);
 		
 		JLabel lblInitalDiagnosis = new JLabel("Inital diagnosis");
 		lblInitalDiagnosis.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -539,11 +543,13 @@ public class HomePage {
 		scrollPane.setViewportView(textArea);
 		
 		JList<String> list_3 = new JList<String>(model_4);
-		list_3.setBounds(250, 25, 200, 290);
 		list_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_3.setFixedCellWidth(200);
 		list_3.setFixedCellHeight(20);
-		panel_2.add(list_3);
+		
+		JScrollPane scrollPane1 = new JScrollPane(list_3);
+		scrollPane1.setBounds(250, 25, 200, 290);
+		panel_2.add(scrollPane1);
 		
 		JLabel lblDiagnosis = new JLabel("Confirmed Diagnosis");
 		lblDiagnosis.setFont(new Font("Tahoma", Font.BOLD, 10));

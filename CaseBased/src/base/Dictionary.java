@@ -25,7 +25,25 @@ public class Dictionary {
 			"pernicious_anemia",
 			"diabetes_type_1",
 			"diabetes_type_2",
-			"gestational_diabetes"
+			"gestational_diabetes",
+			"thrombus_blood_clot",
+			"embolus_blood_clot",
+			"isolated_systolic_hypertension",
+			"resistant_hypertension_hypertension",
+			"neurally_mediated_hypotension",
+			"postprandial_hypotension",
+			"lymphocytic_leukemia",
+			"myeloid_leukemia",
+			"hodgkin_lymphoma",
+			"non_hodgkin_lymphoma",
+			"hemophilia_type_A",
+			"hemophilia_type_B",
+			"hemophilia_type_C",
+			"polycythaemia_vera",
+			"primary_myelofibrosis",
+			"myelodysplastic_syndromes",
+			"light_chain_myeloma",
+			"solitary_plasmacytoma"
 	));
 	
 	private static Set<String> initialDiagnosis = new HashSet<String>(Arrays.asList(

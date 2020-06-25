@@ -34,7 +34,7 @@ public class CsvDiagnosisConnector implements Connector {
 
 			String line = "";
 			while ((line = br.readLine()) != null) {
-				if (line.startsWith("#") || (line.length() == 0))
+				if (line.startsWith("#") || (line.length() == 0) || line.startsWith(";"))
 					continue;
 				String[] values = line.split(";");
 
