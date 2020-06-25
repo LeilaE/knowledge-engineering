@@ -64,7 +64,7 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 
 	public void cycle(CBRQuery query) throws ExecutionException {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-		eval = SelectCases.selectTopKRR(eval, 10);
+		//eval = SelectCases.selectTopKRR(eval, 10);
 		
 		results = new ArrayList<String>();
 
