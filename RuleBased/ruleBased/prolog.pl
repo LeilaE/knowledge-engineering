@@ -53,6 +53,11 @@ genetics(stasa, diabetes).
 genetics(ana, diabetes).
 genetics(masa, anemia).
 genetics(mihajlo, high_blood_pressure).
+genetics(petar, blood_clot).
+genetics(srdjan, hypertension).
+genetics(nikola, leukemia).
+genetics(nikola, hemophilia).
+genetics(milica, thrombocytosis).
 
 pregnant(ana).
 pregnant(masa).
@@ -63,17 +68,17 @@ pregnant(masa).
 
 symptoms(person, list_of_symptoms).
 
+
 disease(anemia,[fatigue, weakness, pale_skin, breathing_difficulties]).
-disease(blood_clot,[bleeding, swelling, change_in_color, cramps, bruising]).
-disease(diabetes,[fatigue, increased_thirst, headache, troube_concentrating, blurred_vision, frequent_peeing, weight_loss]).
+disease(diabetes,[fatigue, weakness, increased_thirst, headache, trouble_concentrating, vision_problems, frequent_peeing, weight_loss]).
+disease(blood_clot,[excessive_bleeding, swelling, change_in_color, cramps, bruising]).
 disease(hypertension, [irregular_heartbeat, pounding_in_the_neck, pounding_in_the_ears, vision_problems, headache, chest_pain, breathing_difficulties]).
-disease(hypotension, [dizziness, lightheadedness, fatigue, vision_problems, nausea, lack_of_concentration]).
-disease(leukemia, [chills, fever, fatigue, weakness, swollen_lymph_nodes, enlarged_liver, weight_loss, nosebleeds, bone_pain, sweating]).
-disease(lymphoma, [fever, fatigue, sweating, shortness_of_breath, itchy_skin, weight_loss]).
+disease(hypotension, [dizziness, lightheadedness, fatigue, weakness, vision_problems, nausea, trouble_concentrating]).
+disease(leukemia, [chills, fever, fatigue, weakness, swollen_lymph_nodes, swelling, enlarged_liver, weight_loss, nosebleeds, bone_pain, sweating, pale_skin]).
+disease(lymphoma, [chills, fever, fatigue, weakness, sweating, breathing_difficulties, itchy_skin, weight_loss]).
 disease(hemophilia, [bruising, excessive_bleeding, bloody_urine, bloody_stool, nosebleeds, unexplained_irritability]).
 disease(thrombocytosis, [headache, dizziness, lightheadedness, weakness, numb_limbs]).
-disease(myeloma, [spine_pain, bone_pain, chest_pain, nausea, appetite_loss, fatigue, mental_confusion, weight_loss, numb_limbs, increased_thirst]).
-
+disease(myeloma, [spine_pain, bone_pain, chest_pain, nausea, appetite_loss, fatigue, weakness, mental_confusion, weight_loss, numb_limbs, increased_thirst]).
 
 
 
@@ -87,7 +92,6 @@ symptom(fatigue).
 symptom(weakness).
 symptom(pale_skin).
 symptom(breathing_difficulties).
-symptom(bleeding).
 symptom(swelling).
 symptom(change_in_color).
 symptom(cramps).
@@ -95,7 +99,6 @@ symptom(bruising).
 symptom(increased_thirst).
 symptom(headache).
 symptom(troube_concentrating).
-symptom(blurred_vision).
 symptom(frequent_peeing).
 symptom(weight_loss).
 symptom(irregular_heartbeat).
@@ -108,7 +111,6 @@ symptom(dizziness).
 symptom(lightheadedness).
 symptom(vision_problems).
 symptom(nausea).
-symptom(lack_of_concentration).
 symptom(chills).
 symptom(fever).
 symptom(swollen_lymph_nodes).
@@ -116,7 +118,6 @@ symptom(enlarged_liver).
 symptom(nosebleeds).
 symptom(bone_pain).
 symptom(sweating).
-symptom(shortness_of_breath).
 symptom(itchy_skin).
 symptom(excessive_bleeding).
 symptom(bloody_urine).
@@ -145,43 +146,63 @@ genetic(myeloma).
 % confirmed_diagnosis(symptoms(person_name, list_of_symptoms), X) X -> confirmed_disease_name based on tests
 % test_name(person_name, test_parameter).
 
+%low
 additional_test(symptoms(X, S), hemoglobin_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
+%low
 additional_test(symptoms(X, S), iron_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
+%low
 additional_test(symptoms(X, S), b12_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
+%low
 additional_test(symptoms(X, S), folic_acid_check) :-
     disease(anemia, S2), contains(S2, S),  person(X).
 
+%high
 additional_test(symptoms(X, S), blood_sugar_level) :-
     disease(diabetes, S2), contains(S2, S), person(X).
 
+%high
+additional_test(symptoms(X, S), glucose_tolerance) :-
+    disease(diabetes, S2), contains(S2, S), person(X).
+
+%high
+additional_test(symptoms(X, S), glycated_hemoglobin) :-
+    disease(diabetes, S2), contains(S2, S), person(X).
+
+%low
 additional_test(symptoms(X, S), d_dimer_level) :-
     disease(blood_clot, S2), contains(S2, S), person(X).
 
+%low
 additional_test(symptoms(X, S), fibrin_degradation_fragment) :-
     disease(blood_clot, S2), contains(S2, S), person(X).
 
+%high
 additional_test(symptoms(X, S), blood_pressure) :-
     disease(hypertension, S2), contains(S2, S), person(X).
 
+%high
 additional_test(symptoms(X, S), doppler_ultrasound_blood_flow) :-
     disease(hypertension, S2), contains(S2, S), person(X).
 
+%low
 additional_test(symptoms(X, S), blood_pressure) :-
     disease(hypotension, S2), contains(S2, S), person(X).
 
+%low
 additional_test(symptoms(X, S), electrocardiogram_heart_rate) :-
     disease(hypotension, S2), contains(S2, S), person(X).
 
+%ow
 additional_test(symptoms(X, S), echodiagram_heart_rytam) :-
     disease(hypotension, S2), contains(S2, S), person(X).
 
-% high
+ % high
 additional_test(symptoms(X, S), white_cell_count) :-
     disease(leukemia, S2), contains(S2, S), person(X).
 
@@ -193,10 +214,12 @@ additional_test(symptoms(X, S), red_cell_count) :-
 additional_test(symptoms(X, S), platelets_count) :-
     disease(leukemia, S2), contains(S2, S), person(X).
 
+% high
 additional_test(symptoms(X, S), lymphoma_cells_level) :-
     disease(lymphoma, S2), contains(S2, S), person(X).
 
-additional_test(symptoms(X, S), PCR_chromosome_changes) :-
+%high
+additional_test(symptoms(X, S), pcr_chromosome_changes) :-
     disease(lymphoma, S2), contains(S2, S), person(X).
 
 % high
@@ -215,10 +238,36 @@ additional_test(symptoms(X, S), platelets_count) :-
 additional_test(symptoms(X, S), aptt_clothing_factor) :-
     disease(hemophilia, S2), contains(S2, S), person(X).
 
+% high
+additional_test(symptoms(X, S), uric_acid_level) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), bilirubin_level) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% low
+additional_test(symptoms(X, S), erythropoietin_level) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), red_cell_count) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), hemoglobin_check) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), hematocrit_level) :-
+    disease(thrombocytosis, S2), contains(S2, S), person(X).
+
+% low
 additional_test(symptoms(X, S), iron_check) :-
     disease(thrombocytosis, S2), contains(S2, S), person(X).
 
-additional_test(symptoms(X, S), jak2_gene_presence) :-
+% low
+additional_test(symptoms(X, S), b12_check) :-
     disease(thrombocytosis, S2), contains(S2, S), person(X).
 
 % high
@@ -230,12 +279,13 @@ additional_test(symptoms(X, S), calcium_level) :-
     disease(myeloma, S2), contains(S2, S), person(X).
 
  % low
-additional_test(symptoms(X, S), ldh_level) :-
-    disease(myeloma, S2), contains(S2, S), person(X).
-
- % low
 additional_test(symptoms(X, S), albumin_level) :-
     disease(myeloma, S2), contains(S2, S), person(X).
+
+% high
+additional_test(symptoms(X, S), ldh_level) :-
+    disease(myeloma, S2), contains(S2, S), person(X) .
+
 
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
     (disease(anemia, S2), contains(S2, S),  person(X)),
@@ -265,8 +315,11 @@ confirmed_diagnosis(symptoms(X, S), gestational_diabetes) :-
     (pregnant(X),
     blood_sugar_level(X,P1), P1  = high;
     genetics(X, Y), member(diabetes, Y)).
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 
 confirmed_diagnosis(symptoms(X, S), thrombus_blood_clot) :-
     (disease(blood_clot, S2), contains(S2, S), person(X)),
@@ -358,7 +411,18 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     bilirubin_level(X, P55), P55 = high;
     red_cell_count(X, P55), P55 = high).
 
+<<<<<<< HEAD
 confirmed_diagnosis(symptoms(X, S), myelodysplastic_syndromes) :-
+=======
+confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
+    (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
+    ((age(X,P2), P2 > 40; active(X, P17), P17 = no),
+    ((uric_acid_level(X, P13), P13 = high, genetics(X, Y), member(thrombocytosis, Y)));
+    bilirubin_level(X, P55), P55 = high;
+    red_cell_count(X, P55), P55 = high).
+
+confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
+>>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     (active(X, P17), P17 = no,
     ((iron_check(X, P13), P13 = low, genetics(X, Y), member(thrombocytosis, Y)));
@@ -376,7 +440,10 @@ confirmed_diagnosis(symptoms(X, S), solitary_plasmacytoma) :-
     (creatinine_level(X, P13), P13 = high;
     albumin_level(X, P55), P55 = low)).
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 % Treatment suggestions
 % treatment_for([confirmed_disease_name], X) -> X = [tre1, tre2,...]
 
@@ -421,8 +488,11 @@ pregnant(anica,no).
 genetics(anica,diabetes).
 genetics(anica,anemia).
 blood_sugar_level(pera,normal).
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 hemoglobin_check(aleksandar,high).
 iron_check(aleksandar,low).
 b12_check(aleksandar,normal).
@@ -431,6 +501,7 @@ white_cell_count(aleksandar,low).
 red_cell_count(aleksandar,high).
 platelets_count(aleksandar,low).
 aptt_clothing_factor(aleksandar,low).
+<<<<<<< HEAD
 d_dimer_level(petar,high).
 fibrin_degradation_fragment(petar,low).
 blood_pressure(ana,low).
@@ -438,12 +509,17 @@ electrocardiogram_heart_rate(ana,low).
 echodiagram_heart_rytam(ana,low).
 lymphoma_cells_level(ana,high).
 pcr_chromosome_changes(ana,high).
+=======
+>>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
 creatinine_level(ana,low).
 calcium_level(ana,low).
 albumin_level(ana,low).
 ldh_level(ana,low).
+<<<<<<< HEAD
 creatinine_level(aleksandar,low).
 calcium_level(aleksandar,low).
 albumin_level(aleksandar,low).
 ldh_level(aleksandar,high).
 >>>>>>> Stashed changes
+=======
+>>>>>>> 5be3f4ff6d40b2dacd207530a4e4b3efc87b1ebf
