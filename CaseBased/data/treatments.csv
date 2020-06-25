@@ -1,5 +1,5 @@
 #diagnosis;gender;age;treatment
-
+;;;
 iron-deficiency_anemia;male;25;iron_pills,diet,blood_transfusion
 iron-deficiency_anemia;female;30;iron_pills,diet
 iron-deficiency_anemia;male;55;blood_transfusion
@@ -25,4 +25,26 @@ pernicious_anemia;male;43;vitamin_b12_injections
 pernicious_anemia;female;23;vitamin_b12_injections,blood_transfusion
 pernicious_anemia;male;51;blood_transfusion
 pernicious_anemia;female;41;vitamin_b12_injections,blood_transfusion
-
+thrombus_blood_clot;male;36;blood_thiners
+thrombus_blood_clot;female;49;surgery
+thrombus_blood_clot;male;58;blood_thiners,surgery
+thrombus_blood_clot;female;26;surgery
+embolus_blood_clot;male;34;surgery
+embolus_blood_clot;female;60;blood_thiners
+embolus_blood_clot;male;47;blood_thiners,surgery
+embolus_blood_clot;female;38;blood_thiners
+isolated_systolic_hypertension;male;67;blood_pressure_pills
+isolated_systolic_hypertension;female;54;blood_pressure_pills, excercise
+isolated_systolic_hypertension;male;58;blood_pressure_pills
+isolated_systolic_hypertension;female;39;excercise
+resistant_hypertension_hypertension;male;46;excercise
+resistant_hypertension_hypertension;female;58;blood_pressure_pills
+resistant_hypertension_hypertension;male;34;blood_pressure_pills, excercise
+resistant_hypertension_hypertension;female;69;blood_pressure_pills
+neurally_mediated_hypotension;male;67;diet
+neurally_mediated_hypotension;female;57;blood_pressure_pills
+neurally_mediated_hypotension;male;34;blood_pressure_pills, diet
+neurally_mediated_hypotension;female;43;blood_pressure_pills
+postprandial_hypotension;male;46;diet
+postprandial_hypotension;male;50;diet
+lymphocytic_leukemia;;;
