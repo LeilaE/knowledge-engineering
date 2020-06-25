@@ -265,15 +265,6 @@ confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     bilirubin_level(X, P55), P55 = high;
     red_cell_count(X, P55), P55 = high).
 
-
-
-confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
-    (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
-    ((age(X,P2), P2 > 40; active(X, P17), P17 = no),
-    ((uric_acid_level(X, P13), P13 = high, genetics(X, Y), member(thrombocytosis, Y)));
-    bilirubin_level(X, P55), P55 = high;
-    red_cell_count(X, P55), P55 = high).
-
 confirmed_diagnosis(symptoms(X, S), myelodysplastic_syndromes) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     (active(X, P17), P17 = no,
