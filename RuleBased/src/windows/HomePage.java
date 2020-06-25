@@ -174,6 +174,7 @@ public class HomePage {
 
 	private void initPatientsTab() {
 		table_1 = new JTable(tableModel);
+		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scrollpane = new JScrollPane(table_1);
 		scrollpane.setBounds(12, 13, 871, 281);
 		panel.add(scrollpane);
@@ -480,8 +481,9 @@ public class HomePage {
 				.genericArrayQuery("additional_test(symptoms(" + selectedPatient.getName() + "," + simptomi + "), B)");
 
 		// Jlista testova
-		Vector items = new Vector(nizTests);
-		testsList = new JList(items);
+		Set<String> testSet = new HashSet<String>(nizTests);
+		Vector testVector = new Vector(testSet);
+		testsList = new JList(testVector);
 		testsList.setEnabled(false);
 		testsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		testsList.setFixedCellWidth(200);

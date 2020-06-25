@@ -23,7 +23,10 @@ public class FilesUtils {
 
 		Path fileToDeletePath = Paths.get(prologOutput);
 		try {
-			Files.deleteIfExists(fileToDeletePath);
+			if (!Files.deleteIfExists(fileToDeletePath)) {
+				File myObj = new File(prologOutput);
+			    myObj.createNewFile();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
