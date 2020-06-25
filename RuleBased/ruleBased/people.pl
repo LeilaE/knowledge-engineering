@@ -53,6 +53,11 @@ genetics(stasa, diabetes).
 genetics(ana, diabetes).
 genetics(masa, anemia).
 genetics(mihajlo, high_blood_pressure).
+genetics(petar, blood_clot).
+genetics(srdjan, hypertension).
+genetics(nikola, leukemia).
+genetics(nikola, hemophilia).
+genetics(milica, thrombocytosis).
 
 pregnant(ana).
 pregnant(masa).
