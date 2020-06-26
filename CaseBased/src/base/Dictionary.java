@@ -149,6 +149,11 @@ public class Dictionary {
 	public static void addGenetics(String genetic) {
 		Dictionary.genetics.add(genetic);
 	}
+	
+	public static void addGenetics2(String genetic) {
+		Dictionary.genetics2.add(genetic);
+	}
+
 
 	
 	public static Set<String> getSymptoms() {

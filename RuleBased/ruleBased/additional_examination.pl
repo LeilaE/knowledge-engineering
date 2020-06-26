@@ -145,7 +145,6 @@ additional_test(symptoms(X, S), albumin_level) :-
 additional_test(symptoms(X, S), ldh_level) :-
     disease(myeloma, S2), contains(S2, S), person(X) .
 
-
 confirmed_diagnosis(symptoms(X, S), pernicious_anemia) :-
     (disease(anemia, S2), contains(S2, S),  person(X)),
     (b12_check(X, P1), P1 = low;
@@ -191,7 +190,7 @@ confirmed_diagnosis(symptoms(X, S), isolated_systolic_hypertension) :-
     blood_pressure(X,P1), P1  = high;
     genetics(X, Y), member(hypertension, Y)).
 
-confirmed_diagnosis(symptoms(X, S), resistant_hypertension) :-
+confirmed_diagnosis(symptoms(X, S), resistant_hypertension_hypertension) :-
     (disease(hypertension, S2), contains(S2, S),  person(X)),
     (doppler_ultrasound_blood_flow(X, P13), P13 = high;
     blood_pressure(X, P22), P22 = high).
@@ -250,7 +249,6 @@ confirmed_diagnosis(symptoms(X, S), hemophilia_type_C ) :-
     active(X,P3), P3 = no);
     genetics(X, Y), member(hemophilia, Y)).
 
-#hemoglobin_check,hematocrit_level,erythropoietin_level,red_cell_count
 confirmed_diagnosis(symptoms(X, S), polycythaemia_vera) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     (age(X,P2), P2 > 55,
@@ -278,7 +276,6 @@ confirmed_diagnosis(symptoms(X, S), light_chain_myeloma) :-
     (calcium_level(X, P13), P13 = high,
     ldh_level(X, P55), P55 = low).
 
-#creatinine_level,albumin_level
 confirmed_diagnosis(symptoms(X, S), solitary_plasmacytoma) :-
     (disease(myeloma, S2), contains(S2, S),  person(X)),
     (genetics(X, Y), member(myeloma, Y);

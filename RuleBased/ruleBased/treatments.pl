@@ -80,3 +80,13 @@ creatinine_level(nikola,low).
 calcium_level(nikola,low).
 albumin_level(nikola,low).
 ldh_level(nikola,low).
+person(vanja).
+age(vanja,56).
+activity(vanja,active).
+smoker(vanja,no).
+pregnant(vanja,no).
+genetics(vanja,hypotension).
+genetics(vanja,hemophilia).
+red_cell_count(vanja,low).
+platelets_count(vanja,low).
+white_cell_count(vanja,low).

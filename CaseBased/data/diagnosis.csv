@@ -96,3 +96,5 @@ lymphoma;female;45;active;non-smoker;non-pregnant;primary_myelofibrosis;red_cell
 hemophilia;male;52;non-active;smoker;non-pregnant;gestational_diabetes,diabetes_type_1;blood_sugar_level:low,white_cell_count:low,platelets_count:low,red_cell_count:high,aptt_clothing_factor:low;hemophilia_type_B,hemophilia_type_C
 thrombocytosis;female;38;non-active;smoker;non-pregnant;resistant_hypertension;doppler_ultrasound_blood_flow:high,blood_pressure:high,red_cell_count:high,hemoglobin_check:high,hematocrit_level:high,erythropoietin_level:low,uric_acid_level:high,bilirubin_level:high,iron_check:low,b12_check:high;primary_myelofibrosis,resistant_hypertension
 myeloma;male;24;active;smoker;non-pregnant;postprandial_hypotension,myeloid_leukemia;calcium_level:low,ldh_level:low,creatinine_level:high,albumin_level:low,platelets_count:normal,electrocardiogram_heart_rate:nomal,blood_pressure:high;solitary_plasmacytoma
+
+leukemia;male;35;active;non-smoker;non-pregnant;hemophilia_type_B,myeloid_leukemia;blood_pressure:normal,calcium_level:high,aptt_clothing_factor:low;lymphocytic_leukemia, myeloid_leukemia ;

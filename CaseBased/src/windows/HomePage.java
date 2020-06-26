@@ -744,6 +744,7 @@ public class HomePage {
 		JButton btnNewButton_2 = new JButton("Add genetics");
 		btnNewButton_2.addActionListener(e -> {
 			Dictionary.addGenetics(textField_1.getText());
+			Dictionary.addGenetics2(textField_1.getText());
 			refreshLists();
 		});
 		btnNewButton_2.setBounds(140, 69, 116, 25);
