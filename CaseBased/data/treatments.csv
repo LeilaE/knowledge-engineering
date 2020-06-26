@@ -73,7 +73,7 @@ hemophilia_type_B;male;34;replacement_therapy
 hemophilia_type_B;female;45;replacement_therapy
 hemophilia_type_C;male;43;desmopressin
 hemophilia_type_C;female;54;desmopressin
-hemophilia_type_C;male;25;desmopressin,hormone_therapy
+hemophilia_type_C;male;25;desmopressin,hormone_therapy 
 hemophilia_type_C;female;20;hormone_therapy
 polycythaemia_vera;male;56;phlebotomy
 polycythaemia_vera;female;67;hydroxyurea
@@ -91,7 +91,3 @@ solitary_plasmacytoma;female;37;chemotherapy,surgery
 solitary_plasmacytoma;male;29;chemotherapy,radiation,surgery
 solitary_plasmacytoma;female;49;chemotherapy
 
-
-myeloid_leukemia;male;35;chemotherapy, radiation;
-
-hemophilia_type_B;male;30;replacement_therapy;
