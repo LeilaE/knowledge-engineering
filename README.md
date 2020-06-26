@@ -6,6 +6,8 @@ It is developed as a two-part application consisting of the Rule Based and Case 
 
 #### Theme: Hematology
 
+#### Demo [video][video-link]
+
 #### Authors:
 - @MilicaCulibrk
 - @stanislavaskoric
@@ -42,3 +44,4 @@ After that, simply build and run.
 [java8]: https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 [eclipse]: https://www.eclipse.org/ide/
 [intellij]: https://www.jetbrains.com/idea/
+[video-link]: https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1rDZtm7UNiKs2F9a7AvuMGlxC4mrZCRL_%2Fview%3Fusp%3Dsharing%26fbclid%3DIwAR1MvsOYs6He2Qi1YCp7qeOJuK4ED4qcNjhCU9Qp_OxMIAf5eb_ypTrSCyw&h=AT1V7yRnoUyqX1_hUdnb3TA-Kl_QcF0INr6UtKZf4JxjVlHUB8hlmXHRehx7stL09_FgV-3A_p63QCbxRQNS-oBQqhXfjG8SMIgKGUqnkj5eVWlhzj_V3Te4jR2ujI6ma9EcRw
