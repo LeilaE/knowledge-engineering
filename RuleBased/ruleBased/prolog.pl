@@ -332,7 +332,7 @@ confirmed_diagnosis(symptoms(X, S), isolated_systolic_hypertension) :-
     blood_pressure(X,P1), P1  = high;
     genetics(X, Y), member(hypertension, Y)).
 
-confirmed_diagnosis(symptoms(X, S), resistant_hypertension_hypertension) :-
+confirmed_diagnosis(symptoms(X, S), resistant_hypertension) :-
     (disease(hypertension, S2), contains(S2, S),  person(X)),
     (doppler_ultrasound_blood_flow(X, P13), P13 = high;
     blood_pressure(X, P22), P22 = high).
@@ -398,15 +398,6 @@ confirmed_diagnosis(symptoms(X, S), polycythaemia_vera) :-
     hemoglobin_check(X, P55), P55 = high,
     hematocrit_level(X, P44), P44 = high);
     erythropoietin_level(X, P66), P66 = low).
-
-confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
-    (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
-    ((age(X,P2), P2 > 40; active(X, P17), P17 = no),
-    ((uric_acid_level(X, P13), P13 = high, genetics(X, Y), member(thrombocytosis, Y)));
-    bilirubin_level(X, P55), P55 = high;
-    red_cell_count(X, P55), P55 = high).
-
-
 
 confirmed_diagnosis(symptoms(X, S), primary_myelofibrosis) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
@@ -501,3 +492,7 @@ albumin_level(ana,low).
 ldh_level(ana,low).
 
 
+creatinine_level(nikola,low).
+calcium_level(nikola,low).
+albumin_level(nikola,low).
+ldh_level(nikola,low).
