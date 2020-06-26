@@ -16,8 +16,6 @@ disease(hemophilia, [bruising, excessive_bleeding, bloody_urine, bloody_stool, n
 disease(thrombocytosis, [headache, dizziness, lightheadedness, weakness, numb_limbs]).
 disease(myeloma, [spine_pain, bone_pain, chest_pain, nausea, appetite_loss, fatigue, weakness, mental_confusion, weight_loss, numb_limbs, increased_thirst]).
 
-
-
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
@@ -34,7 +32,7 @@ symptom(cramps).
 symptom(bruising).
 symptom(increased_thirst).
 symptom(headache).
-symptom(troube_concentrating).
+symptom(trouble_concentrating).
 symptom(frequent_peeing).
 symptom(weight_loss).
 symptom(irregular_heartbeat).
@@ -45,7 +43,6 @@ symptom(headache).
 symptom(chest_pain).
 symptom(dizziness).
 symptom(lightheadedness).
-symptom(vision_problems).
 symptom(nausea).
 symptom(chills).
 symptom(fever).
