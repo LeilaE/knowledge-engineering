@@ -269,14 +269,14 @@ public class HomePage {
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 
+		
+		
 		JList<String> list_2 = new JList<String>(model_2);
+		list_2.setBounds(12, 25, 200, 290);
 		list_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_2.setFixedCellWidth(200);
 		list_2.setFixedCellHeight(20);
-		
-		JScrollPane scrollPane1 = new JScrollPane(list_2);
-		scrollPane1.setBounds(12, 25, 200, 290);
-		panel_1.add(scrollPane1);
+		panel_1.add(list_2);
 
 		JPanel panelGenetics = new JPanel();
 		JScrollPane scrollPane1 = new JScrollPane();
@@ -294,7 +294,6 @@ public class HomePage {
 		list_1.setLayoutOrientation(JList.VERTICAL);
 		panelGenetics.add(scrollPane1);
 		panel_1.add(panelGenetics);
-		
 		
 		JLabel lblInitalDiagnosis = new JLabel("Inital diagnosis");
 		lblInitalDiagnosis.setFont(new Font("Tahoma", Font.BOLD, 10));
