@@ -184,6 +184,8 @@ public class HomePage {
 		
 		btnNewButton.addActionListener(e ->
 		{
+			if( list.getSelectedIndices().length!=0) {
+				
 			ArrayList<String> symptomsList = new ArrayList<>();
 			int[] selectedIx = list.getSelectedIndices();
 			for (int ix : selectedIx) {
@@ -208,6 +210,12 @@ public class HomePage {
 			results.stream().map(i -> i+"\n").forEach(textArea::append);
 			
 			btnNewButton_3.setVisible(true);
+			}
+			else {
+				textArea.setText("You have to select symptoms from symptoms list.");
+				
+				
+			}
 		});
 		
 		btnNewButton_3.addActionListener(e ->
@@ -627,6 +635,8 @@ public class HomePage {
 		
 		btnNewButton.addActionListener(e ->
 		{
+			if(!textField_2.getText().isEmpty() && (rdbtnFemale.isSelected() || rdbtnMale.isSelected()) &&  list_3.getSelectedIndices().length!=0) {
+				
 			ArrayList<String> diagnosis = new ArrayList<String>();
 			int[] selectedIx = list_3.getSelectedIndices();
 			for (int i = 0; i < selectedIx.length; i++) {
@@ -653,6 +663,12 @@ public class HomePage {
 			resultsTreatments.stream().map(i -> i+"\n").forEach(textArea::append);
 			
 			btnSaveCase_1.setVisible(true);
+			}
+			else {
+				textArea.setText("You have to select confirmed diagnosis, gender and fill the age field.");
+				
+				
+			}
 		});
 		
 		btnSaveCase_1.addActionListener(e ->
