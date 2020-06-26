@@ -64,7 +64,7 @@ public class CbrTestApplication implements StandardCBRApplication {
 		results = new ArrayList<String>();
 		
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
-		eval = SelectCases.selectTopKRR(eval, 5);
+		eval = SelectCases.selectTopKRR(eval, 3);
 		//System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval)
 			results.add(nse.get_case().getDescription() + " -> " + nse.getEval());

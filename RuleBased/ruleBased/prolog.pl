@@ -79,8 +79,6 @@ disease(hemophilia, [bruising, excessive_bleeding, bloody_urine, bloody_stool, n
 disease(thrombocytosis, [headache, dizziness, lightheadedness, weakness, numb_limbs]).
 disease(myeloma, [spine_pain, bone_pain, chest_pain, nausea, appetite_loss, fatigue, weakness, mental_confusion, weight_loss, numb_limbs, increased_thirst]).
 
-
-
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
@@ -97,7 +95,7 @@ symptom(cramps).
 symptom(bruising).
 symptom(increased_thirst).
 symptom(headache).
-symptom(troube_concentrating).
+symptom(trouble_concentrating).
 symptom(frequent_peeing).
 symptom(weight_loss).
 symptom(irregular_heartbeat).
@@ -108,7 +106,6 @@ symptom(headache).
 symptom(chest_pain).
 symptom(dizziness).
 symptom(lightheadedness).
-symptom(vision_problems).
 symptom(nausea).
 symptom(chills).
 symptom(fever).
@@ -391,6 +388,7 @@ confirmed_diagnosis(symptoms(X, S), hemophilia_type_C ) :-
     active(X,P3), P3 = no);
     genetics(X, Y), member(hemophilia, Y)).
 
+#hemoglobin_check,hematocrit_level,erythropoietin_level,red_cell_count
 confirmed_diagnosis(symptoms(X, S), polycythaemia_vera) :-
     (disease(thrombocytosis, S2), contains(S2, S),  person(X)),
     (age(X,P2), P2 > 55,
@@ -418,6 +416,7 @@ confirmed_diagnosis(symptoms(X, S), light_chain_myeloma) :-
     (calcium_level(X, P13), P13 = high,
     ldh_level(X, P55), P55 = low).
 
+#creatinine_level,albumin_level
 confirmed_diagnosis(symptoms(X, S), solitary_plasmacytoma) :-
     (disease(myeloma, S2), contains(S2, S),  person(X)),
     (genetics(X, Y), member(myeloma, Y);
@@ -437,8 +436,8 @@ treatment(vitamin_b12_injections, [pernicious_anemia]).
 treatment(insulin_injections, [diabetes_type_1, diabetes_type_2]).
 treatment(blood_sugar_monitoring, [diabetes_type_1, diabetes_type_2, gestational_diabetes]).
 treatment(excercise, [diabetes_type_1, diabetes_type_2, gestational_diabetes, isolated_systolic_hypertension, resistant_hypertension_hypertension] ).
-treatment(blood_thiners, [trombus_blood_clot, embolus_blood_clot]).
-treatment(surgery, [trombus_blood_clot, embolus_blood_clot, lymphocytic_leukemia, myeloid_leukemia, hodgkin_lymphoma, solitary_plasmacytoma]).
+treatment(blood_thiners, [thrombus_blood_clot, embolus_blood_clot]).
+treatment(surgery, [thrombus_blood_clot, embolus_blood_clot, lymphocytic_leukemia, myeloid_leukemia, hodgkin_lymphoma, solitary_plasmacytoma]).
 treatment(blood_pressure_pills, [isolated_systolic_hypertension, resistant_hypertension_hypertension, neurally_mediated_hypotension]).
 treatment(chemotherapy, [lymphocytic_leukemia, myeloid_leukemia, hodgkin_lymphoma, non_hodgkin_lymphoma, light_chain_myeloma, solitary_plasmacytoma]).
 treatment(radiation, [lymphocytic_leukemia, myeloid_leukemia, hodgkin_lymphoma, non_hodgkin_lymphoma, polycythaemia_vera, solitary_plasmacytoma]).
@@ -509,4 +508,3 @@ creatinine_level(nikola,low).
 calcium_level(nikola,low).
 albumin_level(nikola,low).
 ldh_level(nikola,low).
-

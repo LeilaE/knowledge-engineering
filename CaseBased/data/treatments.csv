@@ -1,5 +1,5 @@
-#diagnosis;gender;age;treatment
-;;;
+#diagnosis;gender;age;treatment;
+
 iron-deficiency_anemia;male;25;iron_pills,diet,blood_transfusion
 iron-deficiency_anemia;female;30;iron_pills,diet
 iron-deficiency_anemia;male;55;blood_transfusion
@@ -90,3 +90,6 @@ solitary_plasmacytoma;male;34;chemotherapy,radiation
 solitary_plasmacytoma;female;37;chemotherapy,surgery
 solitary_plasmacytoma;male;29;chemotherapy,radiation,surgery
 solitary_plasmacytoma;female;49;chemotherapy
+
+
+myeloid_leukemia;male;35;chemotherapy, radiation;

@@ -48,6 +48,7 @@ public class HomePage {
 	DefaultListModel<String> model_2 = new DefaultListModel<String>();
 	DefaultListModel<String> model_3 = new DefaultListModel<String>();
 	DefaultListModel<String> model_4 = new DefaultListModel<String>();
+	DefaultListModel<String> model_5 = new DefaultListModel<String>();
 
 	private JTextField textField_2;
 	
@@ -152,14 +153,14 @@ public class HomePage {
 		JScrollPane scrollPaneGenetics = new JScrollPane();
 		panel.add(scrollPaneGenetics);
 		
-		JList<String> list_1 = new JList<>(model_1);
-		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list_1.setFixedCellWidth(180);
-		list_1.setFixedCellHeight(32);
+		JList<String> list_5 = new JList<>(model_5);
+		list_5.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		list_5.setFixedCellWidth(180);
+		list_5.setFixedCellHeight(32);
 		
 		panelGenetics.setBounds(615, 45, 340, 272);
-		scrollPaneGenetics.setViewportView(list_1);
-		list_1.setLayoutOrientation(JList.VERTICAL);
+		scrollPaneGenetics.setViewportView(list_5);
+		list_5.setLayoutOrientation(JList.VERTICAL);
 		panelGenetics.add(scrollPaneGenetics);
 		panel.add(panelGenetics);
 		
@@ -192,9 +193,9 @@ public class HomePage {
 			
 
 			ArrayList<String> geneticsList = new ArrayList<String>();
-			int[] selectedIxG = list_1.getSelectedIndices();
+			int[] selectedIxG = list_5.getSelectedIndices();
 			for (int i = 0; i < selectedIxG.length; i++) {
-			      Object sel = list_1.getModel().getElementAt(selectedIxG[i]);
+			      Object sel = list_5.getModel().getElementAt(selectedIxG[i]);
 			      geneticsList.add(sel.toString());	
 
 			}
@@ -219,9 +220,9 @@ public class HomePage {
 			}
 			
 			ArrayList<String> geneticsList = new ArrayList<>();
-			int[] selectedIxG = list_1.getSelectedIndices();
+			int[] selectedIxG = list_5.getSelectedIndices();
 			for (int value : selectedIxG) {
-				Object sel = list_1.getModel().getElementAt(value);
+				Object sel = list_5.getModel().getElementAt(value);
 				geneticsList.add(sel.toString());
 			}
 			
@@ -749,5 +750,8 @@ public class HomePage {
 		
 		model_4.removeAllElements();
 		Dictionary.getDiagnosis().forEach(model_4::addElement);
+		
+		model_5.removeAllElements();
+		Dictionary.getGenetics2().forEach(model_5::addElement);
 	}
 }

@@ -9,43 +9,17 @@ public class Dictionary {
 	private static Set<String> symptoms = new HashSet<>(Arrays.asList(
 			"fatigue",
 			"weakness",
-			"pale_skin",
-			"breathing_difficulties",
 			"swelling",
-			"change_in_color",
-			"cramps",
 			"bruising",
 			"increased_thirst",
 			"headache",
-			"troube_concentrating",
-			"frequent_peeing",
+			"trouble_concentrating",
 			"weight_loss",
 			"irregular_heartbeat",
-			"pounding_in_the_neck",
-			"pounding_in_the_ears",
 			"vision_problems",
 			"headache",
 			"chest_pain",
-			"dizziness",
-			"lightheadedness",
-			"vision_problems",
-			"nausea",
-			"chills",
-			"fever",
-			"swollen_lymph_nodes",
-			"enlarged_liver",
-			"nosebleeds",
-			"bone_pain",
-			"sweating",
-			"itchy_skin",
-			"excessive_bleeding",
-			"bloody_urine",
-			"bloody_stool",
-			"unexplained_irritability",
-			"numb_limbs",
-			"spine_pain",
-			"appetite_loss",
-			"mental_confusion"
+			"nosebleeds"
 	));
 	
 	private static Set<String> genetics = new HashSet<>(Arrays.asList(
@@ -75,6 +49,19 @@ public class Dictionary {
 			
 			
 			
+	));
+	
+	private static Set<String> genetics2 = new HashSet<>(Arrays.asList(
+			"pernicious_anemia",
+			"diabetes_type_1",
+			"thrombus_blood_clot",
+			"isolated_systolic_hypertension",
+			"neurally_mediated_hypotension",
+			"lymphocytic_leukemia",
+			"hodgkin_lymphoma",
+			"hemophilia_type_A",
+			"polycythaemia_vera",
+			"light_chain_myeloma"
 	));
 	
 	private static Set<String> diagnosis = new HashSet<>(Arrays.asList(
@@ -194,6 +181,14 @@ public class Dictionary {
 
 	public static void setTests(Set<String> tests) {
 		Dictionary.tests = tests;
+	}
+
+	public static Set<String> getGenetics2() {
+		return genetics2;
+	}
+
+	public static void setGenetics2(Set<String> genetics2) {
+		Dictionary.genetics2 = genetics2;
 	}
 	
 	
