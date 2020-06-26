@@ -4,6 +4,8 @@
 This is a university project for the course Knowledge Engineering.
 It is developed as a two-part application consisting of the Rule Based and Case Based parts.
 
+#### Theme: Hematology
+
 #### Authors:
 - @MilicaCulibrk
 - @stanislavaskoric
