@@ -76,3 +76,7 @@ creatinine_level(ana,low).
 calcium_level(ana,low).
 albumin_level(ana,low).
 ldh_level(ana,low).
+creatinine_level(nikola,low).
+calcium_level(nikola,low).
+albumin_level(nikola,low).
+ldh_level(nikola,low).

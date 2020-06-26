@@ -17,7 +17,28 @@ public class Dictionary {
 			"pernicious_anemia",
 			"diabetes_type_1",
 			"diabetes_type_2",
-			"gestational_diabetes"
+			"gestational_diabetes",
+			"thrombus_blood_clot",
+			"embolus_blood_clot",
+			"isolated_systolic_hypertension",
+			"resistant_hypertension",
+			"neurally_mediated_hypotension",
+			"postprandial_hypotension",
+			"lymphocytic_leukemia",
+			"myeloid_leukemia",
+			"hodgkin_lymphoma",
+			"non_hodgkin_lymphoma",
+			"hemophilia_type_A",
+			"hemophilia_type_B",
+			"hemophilia_type_C",
+			"polycythaemia_vera",
+			"primary_myelofibrosis",
+			"myelodysplastic_syndromes",
+			"light_chain_myeloma",
+			"solitary_plasmacytoma"
+			
+			
+			
 	));
 	
 	private static Set<String> diagnosis = new HashSet<>(Arrays.asList(
@@ -29,7 +50,7 @@ public class Dictionary {
 			"thrombus_blood_clot",
 			"embolus_blood_clot",
 			"isolated_systolic_hypertension",
-			"resistant_hypertension_hypertension",
+			"resistant_hypertension",
 			"neurally_mediated_hypotension",
 			"postprandial_hypotension",
 			"lymphocytic_leukemia",
@@ -48,7 +69,15 @@ public class Dictionary {
 	
 	private static Set<String> initialDiagnosis = new HashSet<String>(Arrays.asList(
 			"diabetes",
-			"anemia"
+			"anemia",
+			"blood_clot",
+			"hypertension",
+			"hypotension",
+			"leukemia",
+			"lymphoma",
+			"hemophilia",
+			"thrombocytosis",
+			"myeloma"
 			));
 	
 	private static Set<String> tests = new HashSet<String>(Arrays.asList(
@@ -58,7 +87,28 @@ public class Dictionary {
 			"folic_acid_check",
 			"blood_sugar_level",
 			"glycated_hemoglobin",
-			"glucose_tolerance"
+			"glucose_tolerance",
+			"d_dimer_level",
+			"fibrin_degradation_fragment",
+			"blood_pressure",
+			"doppler_ultrasound_blood_flow",
+			"electrocardiogram_heart_rate",
+			"echodiagram_heart_rytam",
+			"white_cell_count",
+			"red_cell_count",
+			"platelets_count",
+			"lymphoma_cells_level",
+			"pcr_chromosome_changes",
+			"aptt_clothing_factor",
+			"uric_acid_level",
+			"bilirubin_level",
+			"erythropoietin_level",
+			"hematocrit_level",
+			"creatinine_level",
+			"calcium_level",
+			"albumin_level",
+			"ldh_level"
+			
 			));
 
 	public static Set<String> getDiagnosis() {

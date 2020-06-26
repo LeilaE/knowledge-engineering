@@ -3,6 +3,8 @@ package windows;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultCellEditor;
@@ -276,14 +278,23 @@ public class HomePage {
 		scrollPane1.setBounds(12, 25, 200, 290);
 		panel_1.add(scrollPane1);
 
-		JList<String> list_1 = new JList<String>(model_1);
-		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list_1.setFixedCellWidth(200);
-		list_1.setFixedCellHeight(20);
+		JPanel panelGenetics = new JPanel();
+		JScrollPane scrollPane1 = new JScrollPane();
+		panel_1.add(scrollPane1);
 		
-		JScrollPane scrollPane2 = new JScrollPane(list_1);
-		scrollPane2.setBounds(250, 25, 200, 290);
-		panel_1.add(scrollPane2);
+		
+		JList<String> list_1 = new JList<String>(model_1);
+		
+		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		list_1.setFixedCellWidth(180);
+		list_1.setFixedCellHeight(36);
+		
+		panelGenetics.setBounds(250, 25, 200, 500);
+		scrollPane1.setViewportView(list_1);
+		list_1.setLayoutOrientation(JList.VERTICAL);
+		panelGenetics.add(scrollPane1);
+		panel_1.add(panelGenetics);
+		
 		
 		JLabel lblInitalDiagnosis = new JLabel("Inital diagnosis");
 		lblInitalDiagnosis.setFont(new Font("Tahoma", Font.BOLD, 10));

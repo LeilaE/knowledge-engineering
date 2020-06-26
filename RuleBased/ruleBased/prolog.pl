@@ -332,7 +332,7 @@ confirmed_diagnosis(symptoms(X, S), isolated_systolic_hypertension) :-
     blood_pressure(X,P1), P1  = high;
     genetics(X, Y), member(hypertension, Y)).
 
-confirmed_diagnosis(symptoms(X, S), resistant_hypertension_hypertension) :-
+confirmed_diagnosis(symptoms(X, S), resistant_hypertension) :-
     (disease(hypertension, S2), contains(S2, S),  person(X)),
     (doppler_ultrasound_blood_flow(X, P13), P13 = high;
     blood_pressure(X, P22), P22 = high).
@@ -505,3 +505,8 @@ creatinine_level(ana,low).
 calcium_level(ana,low).
 albumin_level(ana,low).
 ldh_level(ana,low).
+creatinine_level(nikola,low).
+calcium_level(nikola,low).
+albumin_level(nikola,low).
+ldh_level(nikola,low).
+
