@@ -68,7 +68,6 @@ public class CbrDiagnosisApplication implements StandardCBRApplication {
 		
 		results = new ArrayList<String>();
 
-		System.out.println("Retrieved cases:");
 		for(RetrievalResult rr: eval){
 			String[] values = rr.get_case().getDescription().toString().split(",");
 			String[] values0 = values[0].toString().split("=");

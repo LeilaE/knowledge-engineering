@@ -130,20 +130,38 @@ public class HomePage {
 		
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
+
+		JPanel panelSymptoms = new JPanel();
+		JScrollPane scrollPaneSymptoms = new JScrollPane();
+		panel.add(scrollPaneSymptoms);
 		
 		JList<String> list = new JList<>(model);
-		list.setBounds(12, 45, 340, 272);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list.setFixedCellWidth(200);
-		list.setFixedCellHeight(20);
-		panel.add(list);
+		list.setFixedCellWidth(180);
+		list.setFixedCellHeight(32);
+		
+		
+		panelSymptoms.setBounds(12, 45, 340, 272);
+		scrollPaneSymptoms.setViewportView(list);
+		list.setLayoutOrientation(JList.VERTICAL);
+		panelSymptoms.add(scrollPaneSymptoms);
+		panel.add(panelSymptoms);
+
+	
+		JPanel panelGenetics = new JPanel();
+		JScrollPane scrollPaneGenetics = new JScrollPane();
+		panel.add(scrollPaneGenetics);
 		
 		JList<String> list_1 = new JList<>(model_1);
-		list_1.setBounds(615, 45, 340, 272);
 		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list_1.setFixedCellWidth(200);
-		list_1.setFixedCellHeight(20);
-		panel.add(list_1);
+		list_1.setFixedCellWidth(180);
+		list_1.setFixedCellHeight(32);
+		
+		panelGenetics.setBounds(615, 45, 340, 272);
+		scrollPaneGenetics.setViewportView(list_1);
+		list_1.setLayoutOrientation(JList.VERTICAL);
+		panelGenetics.add(scrollPaneGenetics);
+		panel.add(panelGenetics);
 		
 		JButton btnNewButton_3 = new JButton("Save case");
 		btnNewButton_3.setBounds(425, 282, 97, 25);
@@ -270,7 +288,6 @@ public class HomePage {
 		scrollPane.setViewportView(textArea);
 
 		
-		
 		JList<String> list_2 = new JList<String>(model_2);
 		list_2.setBounds(12, 25, 200, 290);
 		list_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -347,8 +364,12 @@ public class HomePage {
 		
 		tests = getTests();
 		
+	
+		
 		btnNewButton.addActionListener(e ->
 		{
+			if(!textField_3.getText().isEmpty() && (rdbtnFemale.isSelected() || rdbtnMale.isSelected()) &&  list_2.getSelectedIndices().length!=0) {
+		
 			ArrayList<String> initialDiagnosis = new ArrayList<String>();
 			int[] selectedIx = list_2.getSelectedIndices();
 			for (int i = 0; i < selectedIx.length; i++) {
@@ -396,8 +417,10 @@ public class HomePage {
 			}
 			
 			
-			int age;
-			age=Integer.parseInt(textField_3.getText());
+				
+				int age;
+				age=Integer.parseInt(textField_3.getText());
+				
 			
 			resultsConfirmedDiagnosis = cbr.diagnosis.CbrDiagnosisApplication.doCbrDiagnosisApplication(initialDiagnosis, geneticsList, smoker, pregnant, active, gender, age, tests);
 			
@@ -405,6 +428,12 @@ public class HomePage {
 			resultsConfirmedDiagnosis.stream().map(i -> i+"\n").forEach(textArea::append);
 			
 			btnSaveCase.setVisible(true);
+			}
+			else {
+				textArea.setText("You have to select intial diagnosis, gender and fill the age field.");
+				
+				
+			}
 		});
 		
 		btnSaveCase.addActionListener(e ->
